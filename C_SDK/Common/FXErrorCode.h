@@ -87,6 +87,10 @@ typedef enum
     FUNC_RET_INVALID_ROBOT_TYPE = -20,     ///< Invalid robot type to support
     FUNC_RET_INVALID_HAND_TYPE = -21,      ///< Invalid hand type to support
     FUNC_RET_LINK_REJECTED = -22,          ///< Controller has already linked by other client
+    FUNC_RET_INVALID_THREAD_ID = -23,      ///< Invalid thread ID for runtime APIs
+    FUNC_RET_TOO_MANY_USER_DATA_ITEM = -24,///< Too many sample data item registed
+    FUNC_RET_INVALID_USER_DATA_ITEM = -25, ///< Invalid sample data item 
+    FUNC_RET_INVALID_USER_DATA_LEN = -26,  ///< Invalid sample data length
 
     FUNC_RET_KINE_NOT_INITIALIZED = -1000,         ///< Kinematics context or arm environment is not initialized
     FUNC_RET_KINE_INIT_FAILED = -1001,             ///< Kinematics environment initialization failed

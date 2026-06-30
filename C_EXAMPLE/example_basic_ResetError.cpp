@@ -78,9 +78,7 @@ int main(int argc, char** argv)
         printf("Arm1 is not in error, press any key to trigger an emergency error\n");
         getchar();
 
-        if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-            FX_L1_Runtime_EmergencyStop(FX_OBJ_ARM1_FLAG) != FX_OBJ_ARM1_FLAG ||
-            FX_L1_Comm_SendAndWait(500) < 0)
+        if (FX_L1_Runtime_EmergencyStop(1, FX_OBJ_ARM1_FLAG) != FX_OBJ_ARM1_FLAG)
         {
             printf("Failed to trigger an emergency error for arm1\n");
             goto WAIT_EXIT;

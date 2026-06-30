@@ -21,7 +21,7 @@
 
 #define FX_SDK_MAJOR_VERSION 4UL /**< Major version number */
 #define FX_SDK_MINOR_VERSION 4UL /**< Minor version number */
-#define FX_SDK_PATCH_VERSION 1UL /**< Patch version number */
+#define FX_SDK_PATCH_VERSION 2UL /**< Patch version number */
 
 /**
  * @brief Construct a packed 32-bit SDK version value.
@@ -83,6 +83,8 @@ typedef enum
                          FX_OBJ_HEAD_FLAG | FX_OBJ_BODY_FLAG | \
                          FX_OBJ_LIFT_FLAG)
 
+#define FX_DEFAULT_THREAD_ID 0 /**< Default internal used thread ID */
+
 /** @} */
 
 /**
@@ -115,6 +117,25 @@ typedef enum
     FX_PARAM_TYPE_INT,  ///< Integer parameter
     FX_PARAM_TYPE_FLOAT ///< Floating-point parameter
 } FXParamType;
+
+/**
+ * @brief Sampling data types supported by the FX system.
+ */
+typedef enum
+{
+    FX_char  = 0,
+    FX_short = 1,
+    FX_int = 2,
+    FX_long = 3,
+    FX_long_long = 5,  
+    FX_unsigned_char = 6,
+    FX_unsigned_short = 7,
+    FX_unsigned_int = 8,
+    FX_unsigned_long = 9,
+    FX_unsigned_long_long = 10,
+    FX_float = 11,
+    FX_double = 12,    
+}FXUserDataType;
 
 /**
  * @brief Terminal type identifiers.
@@ -629,7 +650,7 @@ typedef struct
  */
 typedef struct
 {
-    FX_INT32 m_RT_FrameSerial;
+    FX_INT32 m_SG_FrameSerial;
     HEAD_SG m_HEAD;
     ARM_SG m_ARMS[2];
     HAND_SG m_HANDS[2];
@@ -651,3 +672,4 @@ typedef struct
 } DDSS;
 
 #endif
+

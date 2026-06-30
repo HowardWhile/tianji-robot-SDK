@@ -74,6 +74,8 @@ FX L1 Robot SDK 提供了一套高层 C API，用于控制、监控和编程 FX 
 
 | 版本    | 日期         | 说明 |
 |-------|------------|------|
+| 4.4.2 | 2026-06-16 | 增加用户数据采集接口：FX_L1_Fbk_GetUserData，FX_L1_Fbk_ResetUserDataSet，FX_L1_Fbk_RegisterUserDataSet，FX_L1_Fbk_CheckUserDataSet|
+| 4.4.2 | 2026-06-12 | FX_L1_Runtime_*接口支持多线程安全，最多7个线程同时调用|
 | 4.4.1 | 2026-06-05 | 修复接口：FX_L1_Runtime_StopTraj|
 | 4.4.0 | 2026-05-29 | 增加连接状态接口：FX_L1_System_GetLinkState|
 | 4.3.0 | 2026-05-28 | 增加PD控制接口：FX_L1_Config_SetPDCmdCycleTime，FX_L1_Config_GetPDCmdCycleTime，FX_L1_State_SwitchToPDMode，FX_L1_Runtime_SetJointPosPDCmd；增加数据打标接口：FX_L1_Runtime_SetTag；增加灵巧手控制接口：FX_L1_Runtime_SetHandAction，FX_L1_Runtime_SetHandPos，FX_L1_Runtime_SetHandP，FX_L1_Runtime_SetHandD，FX_L1_Runtime_SetHandMaxTor
@@ -190,11 +192,11 @@ SDK 支持三种使用方式：
 
 **方式一：直接调用源码（不编译库）**
 
-将你的 `main.cpp` 与 `C_SDK/` 下的所有 `.cpp` 文件一起编译。参考 [C_EXAMPLE/](C_EXAMPLE/)。
+将你的 `C_EXAMPLE/main.cpp` 与 `C_SDK/` 下的所有 `.cpp` 文件一起编译。参考 [C_EXAMPLE/](C_EXAMPLE/)。
 
 Windows：
 ```bash
-g++ -w main.cpp \
+g++ -w C_EXAMPLE/main.cpp \
   C_SDK/L0Control/*.cpp C_SDK/FileClient/*.cpp C_SDK/L1Robot/*.cpp \
   C_SDK/Kinematics/*.cpp C_SDK/Kinematics/ArmKinematics/*.cpp \
   C_SDK/Kinematics/BaseMath/*.cpp C_SDK/Kinematics/DynaIdent/*.cpp \
@@ -210,7 +212,7 @@ g++ -w main.cpp \
 
 Linux：
 ```bash
-g++ -w main.cpp \
+g++ -w C_EXAMPLE/main.cpp \
   C_SDK/L0Control/*.cpp C_SDK/FileClient/*.cpp C_SDK/L1Robot/*.cpp \
   C_SDK/Kinematics/*.cpp C_SDK/Kinematics/ArmKinematics/*.cpp \
   C_SDK/Kinematics/BaseMath/*.cpp C_SDK/Kinematics/DynaIdent/*.cpp \
@@ -244,7 +246,7 @@ g++ C_SDK/L0Control/*.cpp C_SDK/FileClient/*.cpp C_SDK/L1Robot/*.cpp \
   -Wall -O2 -shared -o libGentoSDK.dll -DL1_SDK_EXPORTS -DCMPL_WIN \
   -lws2_32 -lwinmm
 
-# 第二步：链接你的程序
+# 第二步：链接你的程序，注意实际路径，这里假设在 main.cpp在主目录下，与 C_SDK 在同一目录
 g++ main.cpp -I C_SDK/L1Robot -I C_SDK/Common \
   -L C_SDK/ -lGentoSDK -DCMPL_WIN -o main.exe
 ```
@@ -264,7 +266,7 @@ g++ C_SDK/L0Control/*.cpp C_SDK/FileClient/*.cpp C_SDK/L1Robot/*.cpp \
   -I C_SDK/FileClient -I C_SDK/L0Control -I C_SDK/L1Robot \
   -Wall -O2 -fPIC -shared -o libGentoSDK.so -lpthread -lrt -DCMPL_LIN
 
-# 第二步：链接你的程序
+# 第二步：链接你的程序，注意实际路径，这里假设在 main.cpp在主目录下，与 C_SDK 在同一目录
 g++ main.cpp -I C_SDK/L1Robot -I C_SDK/Common \
   -L C_SDK/ -lGentoSDK -Wl,-rpath,C_SDK/ -DCMPL_LIN -o main
 ```
@@ -276,17 +278,25 @@ g++ main.cpp -I C_SDK/L1Robot -I C_SDK/Common \
 
 Windows：
 ```bash
+# 第一步：编译 DLL（C/C++/python调用用）
 win_auto_compile.bat
-```
-- 编译 `libGentoSDKPY.dll`（Python 用，静态链接 libgcc）→ 复制到 [PYTHON_SDK/](PYTHON_SDK/)
-- 编译 `libGentoSDK.dll`（C/C++ 用）→ 复制到 [C_EXAMPLE_USE_DLL_SO/](C_EXAMPLE_USE_DLL_SO/)
+- 编译 `libGentoSDKPY.dll`（Python 用，静态链接 libgcc）→ 自动复制到 [PYTHON_SDK/](PYTHON_SDK/)
+- 编译 `libGentoSDK.dll`（C/C++ 用）→ 自动复制到 [C_EXAMPLE_USE_DLL_SO/](C_EXAMPLE_USE_DLL_SO/)
 
-Linux：
-```bash
-./linux_auto_compile.sh
+# 第二步：编译你的代码，注意实际路径，这里假设你的代码路径为 C_EXAMPLE_USE_DLL_SO\test_link.cpp
+./C_EXAMPLE_USE_DLL_SO.build_windows.bat
 ```
-- 编译 `libGentoSDK.so`（通用）→ 复制到 [C_EXAMPLE_USE_DLL_SO/](C_EXAMPLE_USE_DLL_SO/)
-- 编译 `libGentoSDKPY.so`（Python 用，兼容多 glibc 版本）→ 复制到 [PYTHON_SDK/](PYTHON_SDK/)
+Linux：
+
+```bash
+# 第一步：编译 SO（C/C++/python调用用）
+./linux_auto_compile.sh
+- 编译 `libGentoSDK.so`（通用）→ 自动复制到 [C_EXAMPLE_USE_DLL_SO/](C_EXAMPLE_USE_DLL_SO/)
+- 编译 `libGentoSDKPY.so`（Python 用，兼容多 glibc 版本）→ 自动复制到 [PYTHON_SDK/](PYTHON_SDK/)
+
+# 第二步：编译你的代码，注意实际路径，这里假设你的代码路径为 C_EXAMPLE_USE_DLL_SO\test_link.cpp
+./C_EXAMPLE_USE_DLL_SO/build_linux.sh
+```
 
 linux兼容编译:
 

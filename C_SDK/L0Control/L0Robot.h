@@ -156,33 +156,6 @@ extern "C"
   CONTROL_SDK_API void FX_L0_System_LocalLogOff(void);
 
   /* =========================================================
-   * Communication APIs
-   * ========================================================= */
-
-  /**
-   * @brief Clear internal communication buffers.
-   *
-   * @param timeout Maximum time to wait for clearing, in milliseconds.
-   * @return 0 on success, -1 on failure.
-   */
-  CONTROL_SDK_API int FX_L0_Communication_Clear(unsigned int timeout);
-
-  /**
-   * @brief Send prepared communication data.
-   *
-   * @return 0 on success, -1 on failure.
-   */
-  CONTROL_SDK_API int FX_L0_Communication_Send(void);
-
-  /**
-   * @brief Send data and wait for a response.
-   *
-   * @param time_out Maximum wait time for response, in milliseconds.
-   * @return >0 on success, -1 failed to send, -2 wait response timeout.
-   */
-  CONTROL_SDK_API int FX_L0_Communication_SendWaitResponse(unsigned int time_out);
-
-  /* =========================================================
    * Parameter Management APIs
    * ========================================================= */
 
@@ -778,689 +751,764 @@ extern "C"
   /**
    * @brief Trigger emergency stop for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_EmergencyStop(void);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_EmergencyStop(unsigned int thread_id);
 
   /**
    * @brief Set runtime state for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param state Target state identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetState(int state);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetState(unsigned int thread_id, int state);
 
   /**
    * @brief Set runtime user defined tag for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param tag User defined tag.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTag(int tag);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTag(unsigned int thread_id, int tag);
 
   /**
    * @brief Send joint position command to Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_pos Joint position command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointPosCmd(double joint_pos[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[7]);
 
   /**
    * @brief Send joint torque command to Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_tor Joint torque command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointTorCmd(double joint_tor[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointTorCmd(unsigned int thread_id, double joint_tor[7]);
 
   /**
    * @brief Apply force control parameters to Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param force_ctrl Force control definition array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetForceCtrl(double force_ctrl[5]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetForceCtrl(unsigned int thread_id, double force_ctrl[5]);
 
   /**
    * @brief Apply torque control parameters to Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param torque_ctrl Torque control definition array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTorqueCtrl(double torque_ctrl[5]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTorqueCtrl(unsigned int thread_id, double torque_ctrl[5]);
 
   /**
    * @brief Apply command serial for PD mode to Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param cmd_serial command serial for PD mode.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCmdPDSerial(int cmd_serial);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial);
 
   /**
    * @brief Set velocity scaling ratio for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param vel_ratio Velocity scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetVelRatio(double vel_ratio);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio);
 
   /**
    * @brief Set acceleration scaling ratio for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param acc_ratio Acceleration scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetAccRatio(double acc_ratio);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio);
 
   /**
    * @brief Set joint stiffness coefficients for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Joint stiffness array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointK(double k[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointK(unsigned int thread_id, double k[7]);
 
   /**
    * @brief Set joint damping coefficients for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Joint damping array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointD(double d[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetJointD(unsigned int thread_id, double d[7]);
 
   /**
    * @brief Set Cartesian stiffness coefficients for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Cartesian stiffness array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCartK(double k[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCartK(unsigned int thread_id, double k[7]);
 
   /**
    * @brief Set Cartesian damping coefficients for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Cartesian damping array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCartD(double d[7]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetCartD(unsigned int thread_id, double d[7]);
 
   /**
    * @brief Set tool kinematics parameters for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Tool kinematic parameters.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetToolK(double k[6]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetToolK(unsigned int thread_id, double k[6]);
 
   /**
    * @brief Set tool dynamics parameters for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Tool dynamic parameters.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetToolD(double d[10]);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetToolD(unsigned int thread_id, double d[10]);
 
   /**
    * @brief Set impedance control type for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param imp_type Impedance control type identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetImpType(int imp_type);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetImpType(unsigned int thread_id, int imp_type);
 
   /**
    * @brief Set drag teaching type for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param drag_type Drag teaching type identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetDragType(int drag_type);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetDragType(unsigned int thread_id, int drag_type);
 
   /**
    * @brief Initialize trajectory buffer for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param point_num Number of trajectory points.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_InitTraj(int point_num);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_InitTraj(unsigned int thread_id, int point_num);
 
   /**
    * @brief Set trajectory data for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param serial Trajectory segment serial number.
    * @param point_num Number of points in this segment.
    * @param point_data Pointer to trajectory point data.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTraj(int serial,
-                                                 int point_num,
-                                                 double *point_data);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data);
 
   /**
    * @brief Start trajectory execution for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_RunTraj(void);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_RunTraj(unsigned int thread_id);
 
   /**
    * @brief Stop trajectory execution for Arm0.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm0_Runtime_StopTraj(void);
+  CONTROL_SDK_API int FX_L0_Arm0_Runtime_StopTraj(unsigned int thread_id);
 
   /**
    * @brief Trigger emergency stop for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_EmergencyStop(void);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_EmergencyStop(unsigned int thread_id);
 
   /**
    * @brief Set runtime state for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param state Target state identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetState(int state);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetState(unsigned int thread_id, int state);
 
   /**
    * @brief Set runtime user defined tag for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param tag User defined tag.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTag(int tag);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTag(unsigned int thread_id, int tag);
 
   /**
    * @brief Send joint position command to Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_pos Joint position command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointPosCmd(double joint_pos[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[7]);
 
   /**
    * @brief Send joint torque command to Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_tor Joint torque command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointTorCmd(double joint_tor[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointTorCmd(unsigned int thread_id, double joint_tor[7]);
 
   /**
    * @brief Apply force control parameters to Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param force_ctrl Force control definition array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetForceCtrl(double force_ctrl[5]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetForceCtrl(unsigned int thread_id, double force_ctrl[5]);
 
   /**
    * @brief Apply torque control parameters to Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param torque_ctrl Torque control definition array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTorqueCtrl(double torque_ctrl[5]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTorqueCtrl(unsigned int thread_id, double torque_ctrl[5]);
 
   /**
    * @brief Apply command serial for PD mode to Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param cmd_serial command serial for PD mode.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCmdPDSerial(int cmd_serial);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial);
 
   /**
    * @brief Set velocity scaling ratio for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param vel_ratio Velocity scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetVelRatio(double vel_ratio);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio);
 
   /**
    * @brief Set acceleration scaling ratio for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param acc_ratio Acceleration scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetAccRatio(double acc_ratio);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio);
 
   /**
    * @brief Set joint stiffness coefficients for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Joint stiffness array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointK(double k[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointK(unsigned int thread_id, double k[7]);
 
   /**
    * @brief Set joint damping coefficients for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Joint damping array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointD(double d[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetJointD(unsigned int thread_id, double d[7]);
 
   /**
    * @brief Set Cartesian stiffness coefficients for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Cartesian stiffness array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCartK(double k[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCartK(unsigned int thread_id, double k[7]);
 
   /**
    * @brief Set Cartesian damping coefficients for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Cartesian damping array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCartD(double d[7]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetCartD(unsigned int thread_id, double d[7]);
 
   /**
    * @brief Set tool kinematics parameters for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param k Tool kinematic parameters.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetToolK(double k[6]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetToolK(unsigned int thread_id, double k[6]);
 
   /**
    * @brief Set tool dynamics parameters for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Tool dynamic parameters.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetToolD(double d[10]);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetToolD(unsigned int thread_id, double d[10]);
 
   /**
    * @brief Set impedance control type for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param imp_type Impedance control type identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetImpType(int imp_type);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetImpType(unsigned int thread_id, int imp_type);
 
   /**
    * @brief Set drag teaching type for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param drag_type Drag teaching type identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetDragType(int drag_type);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetDragType(unsigned int thread_id, int drag_type);
 
   /**
    * @brief Initialize trajectory buffer for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param point_num Number of trajectory points.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_InitTraj(int point_num);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_InitTraj(unsigned int thread_id, int point_num);
 
   /**
    * @brief Set trajectory data for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param serial Trajectory segment serial number.
    * @param point_num Number of points in this segment.
    * @param point_data Pointer to trajectory point data.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTraj(int serial,
-                                                 int point_num,
-                                                 double *point_data);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data);
 
   /**
    * @brief Start trajectory execution for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_RunTraj(void);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_RunTraj(unsigned int thread_id);
 
   /**
    * @brief Stop trajectory execution for Arm1.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Arm1_Runtime_StopTraj(void);
+  CONTROL_SDK_API int FX_L0_Arm1_Runtime_StopTraj(unsigned int thread_id);
 
   /**
    * @brief Trigger emergency stop for Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_EmergencyStop(void);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_EmergencyStop(unsigned int thread_id);
 
   /**
    * @brief Set runtime state for Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param state Target state identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_SetState(int state);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_SetState(unsigned int thread_id, int state);
 
   /**
    * @brief Set runtime user defined tag for Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param tag User defined tag.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_SetTag(int tag);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_SetTag(unsigned int thread_id, int tag);
 
   /**
    * @brief Send joint position command to Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_pos Joint position command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_SetJointPosCmd(double joint_pos[3]);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[3]);
 
   /**
    * @brief Set velocity scaling ratio for Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param vel_ratio Velocity scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_SetVelRatio(double vel_ratio);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio);
 
   /**
    * @brief Set acceleration scaling ratio for Head.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param acc_ratio Acceleration scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Head_Runtime_SetAccRatio(double acc_ratio);
+  CONTROL_SDK_API int FX_L0_Head_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio);
 
   /**
    * @brief Trigger emergency stop for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_EmergencyStop(void);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_EmergencyStop(unsigned int thread_id);
 
   /**
    * @brief Set runtime state for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param state Target state identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetState(int state);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetState(unsigned int thread_id, int state);
 
   /**
    * @brief Set runtime user defined tag for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param tag User defined tag.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetTag(int tag);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetTag(unsigned int thread_id, int tag);
 
   /**
    * @brief Send joint position command to Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_pos Joint position command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetJointPosCmd(double joint_pos[6]);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[6]);
 
   /**
    * @brief Set velocity scaling ratio for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param vel_ratio Velocity scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetVelRatio(double vel_ratio);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio);
 
   /**
    * @brief Set acceleration scaling ratio for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param acc_ratio Acceleration scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetAccRatio(double acc_ratio);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio);
 
   /**
    * @brief Set proportional gains for Body PD control.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param p Proportional gain array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetPDP(double p[6]);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetPDP(unsigned int thread_id, double p[6]);
 
   /**
    * @brief Apply command serial for PD mode to Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param cmd_serial command serial for PD mode.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetCmdPDSerial(int cmd_serial);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial);
 
   /**
    * @brief Set derivative gains for Body PD control.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param d Derivative gain array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetPDD(double d[6]);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetPDD(unsigned int thread_id, double d[6]);
 
   /**
    * @brief Initialize trajectory buffer for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param point_num Number of trajectory points.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_InitTraj(int point_num);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_InitTraj(unsigned int thread_id, int point_num);
 
   /**
    * @brief Set trajectory data for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param serial Trajectory segment serial number.
    * @param point_num Number of points in this segment.
    * @param point_data Pointer to trajectory point data.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_SetTraj(int serial,
-                                                 int point_num,
-                                                 double *point_data);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data);
 
   /**
    * @brief Start trajectory execution for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_RunTraj(void);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_RunTraj(unsigned int thread_id);
 
   /**
    * @brief Stop trajectory execution for Body.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Body_Runtime_StopTraj(void);
+  CONTROL_SDK_API int FX_L0_Body_Runtime_StopTraj(unsigned int thread_id);
 
   /**
    * @brief Trigger emergency stop for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_EmergencyStop(void);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_EmergencyStop(unsigned int thread_id);
 
   /**
    * @brief Set runtime state for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param state Target state identifier.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetState(int state);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetState(unsigned int thread_id, int state);
 
   /**
    * @brief Set runtime user defined tag for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param tag User defined tag.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetTag(int tag);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetTag(unsigned int thread_id, int tag);
 
   /**
    * @brief Send joint position command to Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param joint_pos Joint position command array.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetJointPosCmd(double joint_pos[2]);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[2]);
 
   /**
    * @brief Set velocity scaling ratio for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param vel_ratio Velocity scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetVelRatio(double vel_ratio);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio);
 
   /**
    * @brief Set acceleration scaling ratio for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param acc_ratio Acceleration scaling factor.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetAccRatio(double acc_ratio);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio);
 
   /**
    * @brief Initialize trajectory buffer for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param point_num Number of trajectory points.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_InitTraj(int point_num);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_InitTraj(unsigned int thread_id, int point_num);
 
   /**
    * @brief Set trajectory data for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @param serial Trajectory segment serial number.
    * @param point_num Number of points in this segment.
    * @param point_data Pointer to trajectory point data.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetTraj(int serial,
-                                                 int point_num,
-                                                 double *point_data);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data);
 
   /**
    * @brief Start trajectory execution for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_RunTraj(void);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_RunTraj(unsigned int thread_id);
 
   /**
    * @brief Stop trajectory execution for Lift.
    *
+   * @param thread_id Thread ID for this function call, range 0~7.
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Lift_Runtime_StopTraj(void);
+  CONTROL_SDK_API int FX_L0_Lift_Runtime_StopTraj(unsigned int thread_id);
 
   /**
    * @brief Set the runtime command action for Hand0.
    *
-   * @param[in] action_type Action to be applied to the hand module.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param[action_type Action to be applied to the hand module.
    *                      Refer to ::HandAction for valid values.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdAction(int action_type);
+  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdAction(unsigned int thread_id, int action_type);
 
   /**
    * @brief Set the target position command for Hand0.
    *
-   * @param[in] pos Target position array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param pos Target position array for each joint.
    *                Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdPos(int pos[24]);
+  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdPos(unsigned int thread_id, int pos[24]);
 
   /**
    * @brief Set the proportional gain (P) for Hand0 runtime control.
    *
-   * @param[in] p Proportional gain array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param p Proportional gain array for each joint.
    *              Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdP(int p[24]);
+  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdP(unsigned int thread_id, int p[24]);
 
   /**
    * @brief Set the derivative gain (D) for Hand0 runtime control.
    *
-   * @param[in] d Derivative gain array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param d Derivative gain array for each joint.
    *              Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdD(int d[24]);
+  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdD(unsigned int thread_id, int d[24]);
 
   /**
    * @brief Set the maximum torque limit for Hand0 runtime control.
    *
-   * @param[in] max_tor Maximum torque array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param max_tor Maximum torque array for each joint.
    *                   Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdMaxTor(int max_tor[24]);
+  CONTROL_SDK_API int FX_L0_Hand0_Runtime_SetCmdMaxTor(unsigned int thread_id, int max_tor[24]);
 
   /**
    * @brief Set the runtime command action for Hand1.
    *
-   * @param[in] action_type Action to be applied to the hand module.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param action_type Action to be applied to the hand module.
    *                      Refer to ::HandAction for valid values.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdAction(int action_type);
+  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdAction(unsigned int thread_id, int action_type);
 
   /**
    * @brief Set the target position command for Hand1.
    *
-   * @param[in] pos Target position array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param pos Target position array for each joint.
    *                Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdPos(int pos[24]);
+  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdPos(unsigned int thread_id, int pos[24]);
 
   /**
    * @brief Set the proportional gain (P) for Hand1 runtime control.
    *
-   * @param[in] p Proportional gain array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param p Proportional gain array for each joint.
    *              Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdP(int p[24]);
+  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdP(unsigned int thread_id, int p[24]);
 
   /**
    * @brief Set the derivative gain (D) for Hand1 runtime control.
    *
-   * @param[in] d Derivative gain array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param d Derivative gain array for each joint.
    *              Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdD(int d[24]);
+  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdD(unsigned int thread_id, int d[24]);
 
   /**
    * @brief Set the maximum torque limit for Hand1 runtime control.
    *
-   * @param[in] max_tor Maximum torque array for each joint.
+   * @param thread_id Thread ID for this function call, range 0~7.
+   * @param max_tor Maximum torque array for each joint.
    *                   Array length must be 24.
    *
    * @return 0 on success, -1 on failure.
    */
-  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdMaxTor(int max_tor[24]);
+  CONTROL_SDK_API int FX_L0_Hand1_Runtime_SetCmdMaxTor(unsigned int thread_id, int max_tor[24]);
 
   /**
    * @brief Retrieve fast-group robot feedback data.

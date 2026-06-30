@@ -30,18 +30,6 @@ public:
 	static FX_VOID OnLocalLogOff();
 
 	/*//////////////////////////////////////////////////////////////////////////////////////
-	组包协议
-		控制器会周期性向SDK发送状态数据，但是SDK向控制器发送数据是根据用户需求在需要的时候进行发送，
-		为了达成同一个操作目的，可能需要发送多个数据。为了提升数据通信效率设计了组包通信机制：
-	//////////////////////////////////////////////////////////////////////////////////////*/
-	//(1)	清除当前组包所有内容
-	static FX_BOOL ClearSend(FX_UINT32 timeout);
-	//(2)	发送当前组包所有内容
-	static FX_BOOL SetSend();
-	//(3)	发送当前组包所有内容，并等待本次发送数据返回，time_out为超时毫秒数，返回为经历的毫秒数，如果为负是发生错误。
-	static FX_INT32 WaitSend(FX_UINT32 timeout);
-
-	/*//////////////////////////////////////////////////////////////////////////////////////
 	系统操作
 	//////////////////////////////////////////////////////////////////////////////////////*/
 	static FX_INT32 System_GetControllerVersion();
@@ -159,98 +147,98 @@ public:
 		 设置关节刚度参数  设置关节阻尼参数 设置笛卡尔刚度参数 设置笛卡尔阻尼参数
 		 设置工具刚度参数  设置工具阻尼参数 设置扭矩阻抗类型 设置拖动类型
 		 初始化关节空间规划初始化  设置轨迹 轨迹运行  轨迹运行中断*/
-	static FX_BOOL Arm0_Runtime_EmergencyStop();
-	static FX_BOOL Arm0_Runtime_SetState(FX_INT32 state);
-	static FX_BOOL Arm0_Runtime_SetTag(FX_INT32 tag);
-	static FX_BOOL Arm0_Runtime_SetJointPosCmd(FX_DOUBLE joint_pos[7]);
-	static FX_BOOL Arm0_Runtime_SetJointTorCmd(FX_DOUBLE joint_tor[7]);
-	static FX_BOOL Arm0_Runtime_SetForceCtrl(FX_DOUBLE force_ctrl[5]);
-	static FX_BOOL Arm0_Runtime_SetTorqueCtrl(FX_DOUBLE torque_ctrl[5]);
-	static FX_BOOL Arm0_Runtime_SetVelRatio(FX_DOUBLE vel_ratio);
-	static FX_BOOL Arm0_Runtime_SetAccRatio(FX_DOUBLE acc_ratio);
-	static FX_BOOL Arm0_Runtime_SetJointK(FX_DOUBLE k[7]);
-	static FX_BOOL Arm0_Runtime_SetJointD(FX_DOUBLE d[7]);
-	static FX_BOOL Arm0_Runtime_SetCartK(FX_DOUBLE k[7]);
-	static FX_BOOL Arm0_Runtime_SetCartD(FX_DOUBLE d[7]);
-	static FX_BOOL Arm0_Runtime_SetToolK(FX_DOUBLE k[6]);
-	static FX_BOOL Arm0_Runtime_SetToolD(FX_DOUBLE d[10]);
-	static FX_BOOL Arm0_Runtime_SetImpType(FX_INT32 imp_type);
-	static FX_BOOL Arm0_Runtime_SetDragType(FX_INT16 drag_type);
-	static FX_BOOL Arm0_Runtime_SetCmdPDSerial(FX_INT16 serial);
-	static FX_BOOL Arm0_Runtime_InitTraj(FX_INT32 point_num);
-	static FX_BOOL Arm0_Runtime_SetTraj(FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
-	static FX_BOOL Arm0_Runtime_RunTraj();
-	static FX_BOOL Arm0_Runtime_StopTraj();
+	static FX_BOOL Arm0_Runtime_EmergencyStop(FX_UINT32 thread_id);
+	static FX_BOOL Arm0_Runtime_SetState(FX_UINT32 thread_id, FX_INT32 state);
+	static FX_BOOL Arm0_Runtime_SetTag(FX_UINT32 thread_id, FX_INT32 tag);
+	static FX_BOOL Arm0_Runtime_SetJointPosCmd(FX_UINT32 thread_id, FX_DOUBLE joint_pos[7]);
+	static FX_BOOL Arm0_Runtime_SetJointTorCmd(FX_UINT32 thread_id, FX_DOUBLE joint_tor[7]);
+	static FX_BOOL Arm0_Runtime_SetForceCtrl(FX_UINT32 thread_id, FX_DOUBLE force_ctrl[5]);
+	static FX_BOOL Arm0_Runtime_SetTorqueCtrl(FX_UINT32 thread_id, FX_DOUBLE torque_ctrl[5]);
+	static FX_BOOL Arm0_Runtime_SetVelRatio(FX_UINT32 thread_id, FX_DOUBLE vel_ratio);
+	static FX_BOOL Arm0_Runtime_SetAccRatio(FX_UINT32 thread_id, FX_DOUBLE acc_ratio);
+	static FX_BOOL Arm0_Runtime_SetJointK(FX_UINT32 thread_id, FX_DOUBLE k[7]);
+	static FX_BOOL Arm0_Runtime_SetJointD(FX_UINT32 thread_id, FX_DOUBLE d[7]);
+	static FX_BOOL Arm0_Runtime_SetCartK(FX_UINT32 thread_id, FX_DOUBLE k[7]);
+	static FX_BOOL Arm0_Runtime_SetCartD(FX_UINT32 thread_id, FX_DOUBLE d[7]);
+	static FX_BOOL Arm0_Runtime_SetToolK(FX_UINT32 thread_id, FX_DOUBLE k[6]);
+	static FX_BOOL Arm0_Runtime_SetToolD(FX_UINT32 thread_id, FX_DOUBLE d[10]);
+	static FX_BOOL Arm0_Runtime_SetImpType(FX_UINT32 thread_id, FX_INT32 imp_type);
+	static FX_BOOL Arm0_Runtime_SetDragType(FX_UINT32 thread_id, FX_INT16 drag_type);
+	static FX_BOOL Arm0_Runtime_SetCmdPDSerial(FX_UINT32 thread_id, FX_INT16 serial);
+	static FX_BOOL Arm0_Runtime_InitTraj(FX_UINT32 thread_id, FX_INT32 point_num);
+	static FX_BOOL Arm0_Runtime_SetTraj(FX_UINT32 thread_id, FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
+	static FX_BOOL Arm0_Runtime_RunTraj(FX_UINT32 thread_id);
+	static FX_BOOL Arm0_Runtime_StopTraj(FX_UINT32 thread_id);
 	/*(2) ARM1 设置目标关节位置  设置目标扭矩 设置速度 设置加速度
 		 设置关节刚度参数  设置关节阻尼参数 设置笛卡尔刚度参数 设置笛卡尔阻尼参数
 		 设置工具刚度参数  设置工具阻尼参数 设置扭矩阻抗类型 设置拖动类型
 		 初始化关节空间规划初始化  设置轨迹 轨迹运行  轨迹运行中断*/
-	static FX_BOOL Arm1_Runtime_EmergencyStop();
-	static FX_BOOL Arm1_Runtime_SetState(FX_INT32 state);
-	static FX_BOOL Arm1_Runtime_SetTag(FX_INT32 tag);
-	static FX_BOOL Arm1_Runtime_SetJointPosCmd(FX_DOUBLE joint_pos[7]);
-	static FX_BOOL Arm1_Runtime_SetJointTorCmd(FX_DOUBLE joint_tor[7]);
-	static FX_BOOL Arm1_Runtime_SetForceCtrl(FX_DOUBLE force_ctrl[5]);
-	static FX_BOOL Arm1_Runtime_SetTorqueCtrl(FX_DOUBLE torque_ctrl[5]);
-	static FX_BOOL Arm1_Runtime_SetVelRatio(FX_DOUBLE vel_ratio);
-	static FX_BOOL Arm1_Runtime_SetAccRatio(FX_DOUBLE acc_ratio);
-	static FX_BOOL Arm1_Runtime_SetJointK(FX_DOUBLE k[7]);
-	static FX_BOOL Arm1_Runtime_SetJointD(FX_DOUBLE d[7]);
-	static FX_BOOL Arm1_Runtime_SetCartK(FX_DOUBLE k[7]);
-	static FX_BOOL Arm1_Runtime_SetCartD(FX_DOUBLE d[7]);
-	static FX_BOOL Arm1_Runtime_SetToolK(FX_DOUBLE k[6]);
-	static FX_BOOL Arm1_Runtime_SetToolD(FX_DOUBLE d[10]);
-	static FX_BOOL Arm1_Runtime_SetImpType(FX_INT32 imp_type);
-	static FX_BOOL Arm1_Runtime_SetDragType(FX_INT16 drag_type);
-	static FX_BOOL Arm1_Runtime_SetCmdPDSerial(FX_INT16 serial);
-	static FX_BOOL Arm1_Runtime_InitTraj(FX_INT32 point_num);
-	static FX_BOOL Arm1_Runtime_SetTraj(FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
-	static FX_BOOL Arm1_Runtime_RunTraj();
-	static FX_BOOL Arm1_Runtime_StopTraj();
+	static FX_BOOL Arm1_Runtime_EmergencyStop(FX_UINT32 thread_id);
+	static FX_BOOL Arm1_Runtime_SetState(FX_UINT32 thread_id, FX_INT32 state);
+	static FX_BOOL Arm1_Runtime_SetTag(FX_UINT32 thread_id, FX_INT32 tag);
+	static FX_BOOL Arm1_Runtime_SetJointPosCmd(FX_UINT32 thread_id, FX_DOUBLE joint_pos[7]);
+	static FX_BOOL Arm1_Runtime_SetJointTorCmd(FX_UINT32 thread_id, FX_DOUBLE joint_tor[7]);
+	static FX_BOOL Arm1_Runtime_SetForceCtrl(FX_UINT32 thread_id, FX_DOUBLE force_ctrl[5]);
+	static FX_BOOL Arm1_Runtime_SetTorqueCtrl(FX_UINT32 thread_id, FX_DOUBLE torque_ctrl[5]);
+	static FX_BOOL Arm1_Runtime_SetVelRatio(FX_UINT32 thread_id, FX_DOUBLE vel_ratio);
+	static FX_BOOL Arm1_Runtime_SetAccRatio(FX_UINT32 thread_id, FX_DOUBLE acc_ratio);
+	static FX_BOOL Arm1_Runtime_SetJointK(FX_UINT32 thread_id, FX_DOUBLE k[7]);
+	static FX_BOOL Arm1_Runtime_SetJointD(FX_UINT32 thread_id, FX_DOUBLE d[7]);
+	static FX_BOOL Arm1_Runtime_SetCartK(FX_UINT32 thread_id, FX_DOUBLE k[7]);
+	static FX_BOOL Arm1_Runtime_SetCartD(FX_UINT32 thread_id, FX_DOUBLE d[7]);
+	static FX_BOOL Arm1_Runtime_SetToolK(FX_UINT32 thread_id, FX_DOUBLE k[6]);
+	static FX_BOOL Arm1_Runtime_SetToolD(FX_UINT32 thread_id, FX_DOUBLE d[10]);
+	static FX_BOOL Arm1_Runtime_SetImpType(FX_UINT32 thread_id, FX_INT32 imp_type);
+	static FX_BOOL Arm1_Runtime_SetDragType(FX_UINT32 thread_id, FX_INT16 drag_type);
+	static FX_BOOL Arm1_Runtime_SetCmdPDSerial(FX_UINT32 thread_id, FX_INT16 serial);
+	static FX_BOOL Arm1_Runtime_InitTraj(FX_UINT32 thread_id, FX_INT32 point_num);
+	static FX_BOOL Arm1_Runtime_SetTraj(FX_UINT32 thread_id, FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
+	static FX_BOOL Arm1_Runtime_RunTraj(FX_UINT32 thread_id);
+	static FX_BOOL Arm1_Runtime_StopTraj(FX_UINT32 thread_id);
 	/*(3) HEAD 设置目标关节位置  设置速度 设置加速度*/
-	static FX_BOOL Head_Runtime_EmergencyStop();
-	static FX_BOOL Head_Runtime_SetState(FX_INT32 state);
-	static FX_BOOL Head_Runtime_SetTag(FX_INT32 tag);
-	static FX_BOOL Head_Runtime_SetJointPosCmd(FX_DOUBLE joint_pos[3]);
-	static FX_BOOL Head_Runtime_SetVelRatio(FX_DOUBLE vel_ratio);
-	static FX_BOOL Head_Runtime_SetAccRatio(FX_DOUBLE acc_ratio);
+	static FX_BOOL Head_Runtime_EmergencyStop(FX_UINT32 thread_id);
+	static FX_BOOL Head_Runtime_SetState(FX_UINT32 thread_id, FX_INT32 state);
+	static FX_BOOL Head_Runtime_SetTag(FX_UINT32 thread_id, FX_INT32 tag);
+	static FX_BOOL Head_Runtime_SetJointPosCmd(FX_UINT32 thread_id, FX_DOUBLE joint_pos[3]);
+	static FX_BOOL Head_Runtime_SetVelRatio(FX_UINT32 thread_id, FX_DOUBLE vel_ratio);
+	static FX_BOOL Head_Runtime_SetAccRatio(FX_UINT32 thread_id, FX_DOUBLE acc_ratio);
 	/*(4) BODY 设置目标关节位置  设置速度 设置加速度 设置PD模式下的P参数 设置PD模式下的D参数*/
-	static FX_BOOL Body_Runtime_EmergencyStop();
-	static FX_BOOL Body_Runtime_SetState(FX_INT32 state);
-	static FX_BOOL Body_Runtime_SetTag(FX_INT32 tag);
-	static FX_BOOL Body_Runtime_SetJointPosCmd(FX_DOUBLE joint_pos[6]);
-	static FX_BOOL Body_Runtime_SetVelRatio(FX_DOUBLE vel_ratio);
-	static FX_BOOL Body_Runtime_SetAccRatio(FX_DOUBLE acc_ratio);
-	static FX_BOOL Body_Runtime_SetPDP(FX_DOUBLE p[6]);
-	static FX_BOOL Body_Runtime_SetPDD(FX_DOUBLE d[6]);
-	static FX_BOOL Body_Runtime_SetCmdPDSerial(FX_INT16 serial);
-	static FX_BOOL Body_Runtime_InitTraj(FX_INT32 point_num);
-	static FX_BOOL Body_Runtime_SetTraj(FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
-	static FX_BOOL Body_Runtime_RunTraj();
-	static FX_BOOL Body_Runtime_StopTraj();
+	static FX_BOOL Body_Runtime_EmergencyStop(FX_UINT32 thread_id);
+	static FX_BOOL Body_Runtime_SetState(FX_UINT32 thread_id, FX_INT32 state);
+	static FX_BOOL Body_Runtime_SetTag(FX_UINT32 thread_id, FX_INT32 tag);
+	static FX_BOOL Body_Runtime_SetJointPosCmd(FX_UINT32 thread_id, FX_DOUBLE joint_pos[6]);
+	static FX_BOOL Body_Runtime_SetVelRatio(FX_UINT32 thread_id, FX_DOUBLE vel_ratio);
+	static FX_BOOL Body_Runtime_SetAccRatio(FX_UINT32 thread_id, FX_DOUBLE acc_ratio);
+	static FX_BOOL Body_Runtime_SetPDP(FX_UINT32 thread_id, FX_DOUBLE p[6]);
+	static FX_BOOL Body_Runtime_SetPDD(FX_UINT32 thread_id, FX_DOUBLE d[6]);
+	static FX_BOOL Body_Runtime_SetCmdPDSerial(FX_UINT32 thread_id, FX_INT16 serial);
+	static FX_BOOL Body_Runtime_InitTraj(FX_UINT32 thread_id, FX_INT32 point_num);
+	static FX_BOOL Body_Runtime_SetTraj(FX_UINT32 thread_id, FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
+	static FX_BOOL Body_Runtime_RunTraj(FX_UINT32 thread_id);
+	static FX_BOOL Body_Runtime_StopTraj(FX_UINT32 thread_id);
 	/*(5) LIFT 设置状态 设置目标关节位置  设置速度 设置加速度*/
-	static FX_BOOL Lift_Runtime_EmergencyStop();
-	static FX_BOOL Lift_Runtime_SetState(FX_INT32 state);
-	static FX_BOOL Lift_Runtime_SetTag(FX_INT32 tag);
-	static FX_BOOL Lift_Runtime_SetJointPosCmd(FX_DOUBLE joint_pos[2]);
-	static FX_BOOL Lift_Runtime_SetVelRatio(FX_DOUBLE vel_ratio);
-	static FX_BOOL Lift_Runtime_SetAccRatio(FX_DOUBLE acc_ratio);
-	static FX_BOOL Lift_Runtime_InitTraj(FX_INT32 point_num);
-	static FX_BOOL Lift_Runtime_SetTraj(FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
-	static FX_BOOL Lift_Runtime_RunTraj();
-	static FX_BOOL Lift_Runtime_StopTraj();
+	static FX_BOOL Lift_Runtime_EmergencyStop(FX_UINT32 thread_id);
+	static FX_BOOL Lift_Runtime_SetState(FX_UINT32 thread_id, FX_INT32 state);
+	static FX_BOOL Lift_Runtime_SetTag(FX_UINT32 thread_id, FX_INT32 tag);
+	static FX_BOOL Lift_Runtime_SetJointPosCmd(FX_UINT32 thread_id, FX_DOUBLE joint_pos[2]);
+	static FX_BOOL Lift_Runtime_SetVelRatio(FX_UINT32 thread_id, FX_DOUBLE vel_ratio);
+	static FX_BOOL Lift_Runtime_SetAccRatio(FX_UINT32 thread_id, FX_DOUBLE acc_ratio);
+	static FX_BOOL Lift_Runtime_InitTraj(FX_UINT32 thread_id, FX_INT32 point_num);
+	static FX_BOOL Lift_Runtime_SetTraj(FX_UINT32 thread_id, FX_INT32 serial, FX_INT32 point_num, FX_DOUBLE *point_data);
+	static FX_BOOL Lift_Runtime_RunTraj(FX_UINT32 thread_id);
+	static FX_BOOL Lift_Runtime_StopTraj(FX_UINT32 thread_id);
 	/*(6) HAND0 */
-	static FX_BOOL Hand0_Runtime_SetCmdAction(FX_INT8 action_type);
-	static FX_BOOL Hand0_Runtime_SetCmdPos(FX_INT8 pos[24]);
-	static FX_BOOL Hand0_Runtime_SetCmdP(FX_INT8 p[24]);
-	static FX_BOOL Hand0_Runtime_SetCmdD(FX_INT8 d[24]);
-	static FX_BOOL Hand0_Runtime_SetCmdMaxTor(FX_INT8 max_tor[24]);
+	static FX_BOOL Hand0_Runtime_SetCmdAction(FX_UINT32 thread_id, FX_INT8 action_type);
+	static FX_BOOL Hand0_Runtime_SetCmdPos(FX_UINT32 thread_id, FX_INT8 pos[24]);
+	static FX_BOOL Hand0_Runtime_SetCmdP(FX_UINT32 thread_id, FX_INT8 p[24]);
+	static FX_BOOL Hand0_Runtime_SetCmdD(FX_UINT32 thread_id, FX_INT8 d[24]);
+	static FX_BOOL Hand0_Runtime_SetCmdMaxTor(FX_UINT32 thread_id, FX_INT8 max_tor[24]);
 	/*(7) HAND1 */
-	static FX_BOOL Hand1_Runtime_SetCmdAction(FX_INT8 action_type);
-	static FX_BOOL Hand1_Runtime_SetCmdPos(FX_INT8 pos[24]);
-	static FX_BOOL Hand1_Runtime_SetCmdP(FX_INT8 p[24]);
-	static FX_BOOL Hand1_Runtime_SetCmdD(FX_INT8 d[24]);
-	static FX_BOOL Hand1_Runtime_SetCmdMaxTor(FX_INT8 max_tor[24]);
+	static FX_BOOL Hand1_Runtime_SetCmdAction(FX_UINT32 thread_id, FX_INT8 action_type);
+	static FX_BOOL Hand1_Runtime_SetCmdPos(FX_UINT32 thread_id, FX_INT8 pos[24]);
+	static FX_BOOL Hand1_Runtime_SetCmdP(FX_UINT32 thread_id, FX_INT8 p[24]);
+	static FX_BOOL Hand1_Runtime_SetCmdD(FX_UINT32 thread_id, FX_INT8 d[24]);
+	static FX_BOOL Hand1_Runtime_SetCmdMaxTor(FX_UINT32 thread_id, FX_INT8 max_tor[24]);
 
 	/*/////////////////////////////////////////////////////////
 	///通讯数据结构
@@ -298,6 +286,8 @@ private:
 	DDSS *pDDSS1;
 	DDSS *pDDSS2;
 
+    CACB m_RuntimeACB[8];
+
 #ifdef CMPL_WIN
 	MMRESULT m_TimeEventID;
 #endif
@@ -306,12 +296,12 @@ private:
 #endif
 
 	RobotCtrl();
-	static FX_BOOL SetIns(FX_INT32 ins);
-	static FX_BOOL SetState(FX_INT32 ins, FX_INT32 cmd_state);
-	static FX_BOOL SetFLoat(FX_INT32 ins, FX_INT32 num, FX_DOUBLE *pdata);
-	static FX_BOOL SetByte(FX_INT32 ins, FX_INT32 num, FX_INT8 *pdata);
-	static FX_BOOL SetInt(FX_INT32 ins, FX_INT32 num, FX_INT32 *pdata);
-	static FX_BOOL SetShortInt(FX_INT32 ins, FX_INT32 num, FX_INT16 *pdata);
-	static FX_BOOL SetRawData(FX_INT32 ins, FX_INT32 num, FX_UCHAR *pdata);
+	static FX_BOOL SetIns(FX_UINT32 thread_id, FX_INT32 cmd);
+	static FX_BOOL SetState(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 cmd_state);
+	static FX_BOOL SetFLoat(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 num, FX_DOUBLE *pdata);
+	static FX_BOOL SetByte(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 num, FX_INT8 *pdata);
+	static FX_BOOL SetInt(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 num, FX_INT32 *pdata);
+	static FX_BOOL SetShortInt(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 num, FX_INT16 *pdata);
+	static FX_BOOL SetRawData(FX_UINT32 thread_id, FX_INT32 cmd, FX_INT32 num, FX_UCHAR *pdata);
 };
 #endif

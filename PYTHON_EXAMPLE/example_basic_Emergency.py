@@ -83,17 +83,9 @@ def main():
 
 
     print(f"\n### 4/6. Run pos1 and pos2...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj, pos1)
     if ret != 0:
         print(f"Set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     while 1:
         rt_dict = robot.get_rt_dict()
@@ -105,32 +97,16 @@ def main():
 
     time.sleep(0.5)
 
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj, pos2)
     if ret != 0:
         print(f"Set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     time.sleep(2)
 
     print(f"\n### 5/6. Emergency stop triggered while moving to pos2...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.emergency_stop(emergency_stop_mask)
     if ret != emergency_stop_mask:
         print(f"Set Emergency stop failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     time.sleep(0.01)
 

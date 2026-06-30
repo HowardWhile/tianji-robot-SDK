@@ -136,9 +136,7 @@ int main(int argc, char** argv)
            pos1[0], pos1[1], pos1[2], pos1[3], pos1[4], pos1[5], pos1[6]);
     getchar();
 
-    if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-        FX_L1_Runtime_SetJointPosCmd(FX_OBJ_ARM0, pos1) != FUNC_RET_SUCCESS ||
-        FX_L1_Comm_Send() != FUNC_RET_SUCCESS)
+    if (FX_L1_Runtime_SetJointPosCmd(1, FX_OBJ_ARM0, pos1) != FUNC_RET_SUCCESS)
     {
         printf("Failed to set arm0's target position\n");
         goto WAIT_EXIT;
@@ -151,9 +149,7 @@ int main(int argc, char** argv)
            pos2[0], pos2[1], pos2[2], pos2[3], pos2[4], pos2[5], pos2[6]);
     getchar();
 
-    if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-        FX_L1_Runtime_SetJointPosCmd(FX_OBJ_ARM0, pos2) != FUNC_RET_SUCCESS ||
-        FX_L1_Comm_Send() != FUNC_RET_SUCCESS)
+    if (FX_L1_Runtime_SetJointPosCmd(1, FX_OBJ_ARM0, pos2) != FUNC_RET_SUCCESS)
     {
         printf("Failed to set arm0's target position\n");
         goto WAIT_EXIT;

@@ -67,17 +67,9 @@ def main():
             return
     else:
         print(f"Trigger an emergency error ")
-        ret = robot.comm_clear(50)
-        if ret != 0:
-            print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
         ret = robot.emergency_stop(emergency_stop_mask)
         if ret != emergency_stop_mask:
             print(f"Set Emergency stop failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
-        ret = robot.comm_send()
-        if ret != 0:
-            print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
             return
         time.sleep(0.01)
 

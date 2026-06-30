@@ -67,6 +67,7 @@ public:
 	FX_INT32 OnGetStoreNum();
 	FX_BOOL WriteBuf(FX_UCHAR *data_ptr, FX_INT32 size_int);
 	FX_INT32 ReadBuf(FX_UCHAR *data_ptr, FX_INT32 size_int);
+    FX_INT32 PeekBuf(FX_UCHAR *data_ptr, FX_INT32 size_int);
 	FX_BOOL Empty();
 
 protected:

@@ -190,46 +190,6 @@ extern "C"
                                             char *remote_file_path);
 
     /* =========================================================
-     * Communication APIs
-     * ========================================================= */
-
-    /**
-     * @brief Wait internal communication socket ready to send data.
-     *
-     * Resets communication state and discards pending data.
-     *
-     * @param timeout Time to wait for completion, in milliseconds.
-     * @return Defined in FXFuncReturn.
-     *
-     * @see FXFuncReturn
-     */
-    FX_L1_SDK_API int FX_L1_Comm_Clear(unsigned int timeout);
-
-    /**
-     * @brief Send prepared communication data.
-     *
-     * Transmits data already staged in the internal send buffer.
-     *
-     * @return Defined in FXFuncReturn.
-     *
-     * @see FXFuncReturn
-     */
-    FX_L1_SDK_API int FX_L1_Comm_Send();
-
-    /**
-     * @brief Send data and wait for a response.
-     *
-     * Sends buffered data and blocks until a response is received
-     * or the timeout expires.
-     *
-     * @param timeout Maximum wait time in milliseconds.
-     * @return Defined in FXFuncReturn.
-     *
-     * @see FXFuncReturn
-     */
-    FX_L1_SDK_API int FX_L1_Comm_SendAndWait(unsigned int timeout);
-
-    /* =========================================================
      * Feedback APIs
      * ========================================================= */
 
@@ -246,9 +206,11 @@ extern "C"
      *
      * @param obj_type Target object type.
      * @param version Output buffer for version strings.
-     * @return void
+     * @return Defined in FXFuncReturn.
+     *
+     * @see FXFuncReturn
      */
-    FX_L1_SDK_API void FX_L1_Fbk_GetCtrlObjServoVersion(FXObjType obj_type,
+    FX_L1_SDK_API int FX_L1_Fbk_GetCtrlObjServoVersion(FXObjType obj_type,
                                                         char version[7][30]);
 
     /**
@@ -257,9 +219,11 @@ extern "C"
      * @param obj_type Target object type.
      * @param version Output array of version integers.
      * @param serial Output array of serial numbers.
-     * @return void
+     * @return Defined in FXFuncReturn.
+     *
+     * @see FXFuncReturn
      */
-    FX_L1_SDK_API void FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial(
+    FX_L1_SDK_API int FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial(
         FXObjType obj_type, int version[7], int serial[7]);
 
     /**
@@ -310,6 +274,47 @@ extern "C"
      * @return Pointer to ROBOT_SG data.
      */
     FX_L1_SDK_API const ROBOT_SG *FX_L1_Fbk_GetSG();
+
+    /**
+     * @brief Sample the user data from feedback.
+     *
+     * @param data_ptr Pointer to store the retrieved user data.
+     */
+    FX_L1_SDK_API void FX_L1_Fbk_GetUserData(void* data_ptr);
+
+     /**
+     * @brief Reset all registered user data sets.
+     *
+     * @return Defined in FXFuncReturn.
+     *
+     * @note This function clears all previously registered user data sets.
+     */
+    FX_L1_SDK_API void FX_L1_Fbk_ResetUserDataSet();
+    
+    /**
+     * @brief Register a user data set for feedback.
+     *
+     * @param name      Name identifier for the user data set.
+     * @param data_type Data type (@ref FXUserDataType).
+     * @param sub       Sub-index for the data set.
+     * @param data_num  Number of data elements.
+     *
+     * @return Defined in FXFuncReturn.
+     *
+     * @see FXFuncReturn, FXUserDataType
+     */
+    FX_L1_SDK_API int FX_L1_Fbk_RegisterUserDataSet(char* name, FXUserDataType data_type, int sub, int data_num);
+    
+    /**
+     * @brief Check the validity of user data set length.
+     *
+     * @param user_data_len Total length of user data to verify.
+     *
+     * @return Defined in FXFuncReturn.
+     *
+     * @see FXFuncReturn
+     */
+    FX_L1_SDK_API int FX_L1_Fbk_CheckUserDataSet(int user_data_len);
 
     /**
      * @brief Retrieve servo error codes for a control object.
@@ -790,96 +795,96 @@ extern "C"
      * @param obj_mask Bitmask of affected objects.
      * @return Bitmask of objects successfully stopped.
      */
-    FX_L1_SDK_API unsigned int FX_L1_Runtime_EmergencyStop(
-        unsigned int obj_mask);
+    FX_L1_SDK_API unsigned int FX_L1_Runtime_EmergencyStop(unsigned int thread_id, unsigned int obj_mask);
 
     /**
      * @brief Send user defined tag command.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param tag User defined tag.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetTag(FXObjType obj_type,
-                                           int tag);
+    FX_L1_SDK_API int FX_L1_Runtime_SetTag(unsigned int thread_id, FXObjType obj_type, int tag);
 
     /**
      * @brief Send joint position command.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param pos_cmd Joint position command array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetJointPosCmd(FXObjType obj_type,
-                                                   double pos_cmd[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetJointPosCmd(unsigned int thread_id, FXObjType obj_type, double pos_cmd[7]);
 
     /**
      * @brief Send joint position command in PD mode.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param pos_cmd Joint position command array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetJointPosPDCmd(FXObjType obj_type,
-                                                     double pos_cmd[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetJointPosPDCmd(unsigned int thread_id, FXObjType obj_type, double pos_cmd[7]);
 
     /**
      * @brief Apply force control parameters.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param force_ctrl Force control definition array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetForceCtrl(
-        FXObjType obj_type, double force_ctrl[FX_FORCE_DEF_NUM]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetForceCtrl(unsigned int thread_id, FXObjType obj_type, double force_ctrl[FX_FORCE_DEF_NUM]);
 
     /**
      * @brief Apply torque control parameters.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param torque_ctrl Torque control definition array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetTorqueCtrl(
-        FXObjType obj_type, double torque_ctrl[FX_TORQUE_DEF_NUM]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetTorqueCtrl(unsigned int thread_id, FXObjType obj_type, double torque_ctrl[FX_TORQUE_DEF_NUM]);
 
     /**
      * @brief Set velocity scaling ratio.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param vel_ratio Velocity scaling factor.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetVelRatio(FXObjType obj_type,
-                                                double vel_ratio);
+    FX_L1_SDK_API int FX_L1_Runtime_SetVelRatio(unsigned int thread_id, FXObjType obj_type, double vel_ratio);
 
     /**
      * @brief Set acceleration scaling ratio.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param acc_ratio Acceleration scaling factor.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetAccRatio(FXObjType obj_type,
-                                                double acc_ratio);
+    FX_L1_SDK_API int FX_L1_Runtime_SetAccRatio(unsigned int thread_id, FXObjType obj_type, double acc_ratio);
 
     /**
      * @brief Set velocity and acceleration scaling ratios.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param vel_ratio Velocity scaling factor.
      * @param acc_ratio Acceleration scaling factor.
@@ -887,35 +892,36 @@ extern "C"
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetSpeedRatio(FXObjType obj_type,
-                                                  double vel_ratio,
-                                                  double acc_ratio);
+    FX_L1_SDK_API int FX_L1_Runtime_SetSpeedRatio(unsigned int thread_id, FXObjType obj_type, double vel_ratio, double acc_ratio);
 
     /**
      * @brief Set joint stiffness coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Joint stiffness array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetJointK(FXObjType obj_type, double k[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetJointK(unsigned int thread_id, FXObjType obj_type, double k[7]);
 
     /**
      * @brief Set joint damping coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param d Joint damping array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetJointD(FXObjType obj_type, double d[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetJointD(unsigned int thread_id, FXObjType obj_type, double d[7]);
 
     /**
      * @brief Set joint stiffness and damping coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Joint stiffness array.
      * @param d Joint damping array.
@@ -923,34 +929,36 @@ extern "C"
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetJointKD(FXObjType obj_type,
-                                               double k[7], double d[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetJointKD(unsigned int thread_id, FXObjType obj_type, double k[7], double d[7]);
 
     /**
      * @brief Set Cartesian stiffness coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Cartesian stiffness array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetCartK(FXObjType obj_type, double k[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetCartK(unsigned int thread_id, FXObjType obj_type, double k[7]);
 
     /**
      * @brief Set Cartesian damping coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param d Cartesian damping array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetCartD(FXObjType obj_type, double d[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetCartD(unsigned int thread_id, FXObjType obj_type, double d[7]);
 
     /**
      * @brief Set Cartesian stiffness and damping coefficients.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Cartesian stiffness array.
      * @param d Cartesian damping array.
@@ -958,34 +966,36 @@ extern "C"
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetCartKD(FXObjType obj_type,
-                                              double k[7], double d[7]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetCartKD(unsigned int thread_id, FXObjType obj_type, double k[7], double d[7]);
 
     /**
      * @brief Set tool kinematics parameters.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Tool kinematic parameters.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetToolK(FXObjType obj_type, double k[6]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetToolK(unsigned int thread_id, FXObjType obj_type, double k[6]);
 
     /**
      * @brief Set tool dynamics parameters.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param d Tool dynamic parameters.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetToolD(FXObjType obj_type, double d[10]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetToolD(unsigned int thread_id, FXObjType obj_type, double d[10]);
 
     /**
      * @brief Set tool kinematics and dynamics parameters.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_type Target object type.
      * @param k Tool kinematic parameters.
      * @param d Tool dynamic parameters.
@@ -993,115 +1003,124 @@ extern "C"
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetToolKD(FXObjType obj_type,
-                                              double k[6], double d[10]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetToolKD(unsigned int thread_id, FXObjType obj_type, double k[6], double d[10]);
 
     /**
      * @brief Set body PD control proportional gains.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param p Proportional gain array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPDP(double p[6]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPDP(unsigned int thread_id, double p[6]);
 
     /**
      * @brief Set body PD control derivative gains.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param d Derivative gain array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPDD(double d[6]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPDD(unsigned int thread_id, double d[6]);
 
     /**
      * @brief Set body PD control gains.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param p Proportional gain array.
      * @param d Derivative gain array.
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPD(double p[6], double d[6]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetBodyPD(unsigned int thread_id, double p[6], double d[6]);
 
     /**
      * @brief Start trajectory execution.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_mask Bitmask of objects executing the trajectory.
      * @return Bitmask of objects successfully started.
      */
-    FX_L1_SDK_API unsigned int FX_L1_Runtime_RunTraj(unsigned int obj_mask);
+    FX_L1_SDK_API unsigned int FX_L1_Runtime_RunTraj(unsigned int thread_id, unsigned int obj_mask);
 
     /**
      * @brief Stop trajectory execution.
      *
+     * @param thread_id Thread ID for this function call, range 1~7.
      * @param obj_mask Bitmask of objects to stop.
      * @return Bitmask of objects successfully stopped.
      */
-    FX_L1_SDK_API unsigned int FX_L1_Runtime_StopTraj(unsigned int obj_mask);
+    FX_L1_SDK_API unsigned int FX_L1_Runtime_StopTraj(unsigned int thread_id, unsigned int obj_mask);
 
     /**
      * @brief Set the runtime action command for the specified hand.
      *
-     * @param[in] hand_type  Hand identifier (@ref FXHandType).
-     * @param[in] hand_action Action to be applied (@ref FXHandAction).
+     * @param thread_id Thread ID for this function call, range 1~7.
+     * @param hand_type  Hand identifier (@ref FXHandType).
+     * @param hand_action Action to be applied (@ref FXHandAction).
      *
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetHandAction(FXHandType hand_type, FXHandAction hand_action);
+    FX_L1_SDK_API int FX_L1_Runtime_SetHandAction(unsigned int thread_id, FXHandType hand_type, FXHandAction hand_action);
 
     /**
      * @brief Set the target position command for the specified hand.
      *
-     * @param[in] hand_type Hand identifier (@ref FXHandType).
-     * @param[in] pos       Target position array for each joint (length = 24).
+     * @param thread_id Thread ID for this function call, range 1~7.
+     * @param hand_type Hand identifier (@ref FXHandType).
+     * @param pos       Target position array for each joint (length = 24).
      *
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetHandPos(FXHandType hand_type, int pos[24]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetHandPos(unsigned int thread_id, FXHandType hand_type, int pos[24]);
 
     /**
      * @brief Set the proportional gain (P) for the specified hand.
      *
-     * @param[in] hand_type Hand identifier (@ref FXHandType).
-     * @param[in] p         Proportional gain array for each joint (length = 24).
+     * @param thread_id Thread ID for this function call, range 1~7.
+     * @param hand_type Hand identifier (@ref FXHandType).
+     * @param p         Proportional gain array for each joint (length = 24).
      *
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetHandP(FXHandType hand_type, int p[24]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetHandP(unsigned int thread_id, FXHandType hand_type, int p[24]);
 
     /**
      * @brief Set the derivative gain (D) for the specified hand.
      *
-     * @param[in] hand_type Hand identifier (@ref FXHandType).
-     * @param[in] d         Derivative gain array for each joint (length = 24).
+     * @param thread_id Thread ID for this function call, range 1~7.
+     * @param hand_type Hand identifier (@ref FXHandType).
+     * @param d         Derivative gain array for each joint (length = 24).
      *
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetHandD(FXHandType hand_type, int d[24]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetHandD(unsigned int thread_id, FXHandType hand_type, int d[24]);
 
     /**
      * @brief Set the maximum torque limit for the specified hand.
      *
-     * @param[in] hand_type Hand identifier (@ref FXHandType).
-     * @param[in] max_tor   Maximum torque array for each joint (length = 24).
+     * @param thread_id Thread ID for this function call, range 1~7.
+     * @param hand_type Hand identifier (@ref FXHandType).
+     * @param max_tor   Maximum torque array for each joint (length = 24).
      *
      * @return Defined in FXFuncReturn.
      *
      * @see FXFuncReturn
      */
-    FX_L1_SDK_API int FX_L1_Runtime_SetHandMaxTor(FXHandType hand_type, int max_tor[24]);
+    FX_L1_SDK_API int FX_L1_Runtime_SetHandMaxTor(unsigned int thread_id, FXHandType hand_type, int max_tor[24]);
 
     /* =========================================================
      * Kinematics and motion planning APIs

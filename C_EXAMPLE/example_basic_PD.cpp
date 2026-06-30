@@ -1136,9 +1136,8 @@ int main(int argc, char** argv)
     /* Move to mechanical home */
     printf("Press any key to move arm0 to mechanical home\n");
     getchar();
-    if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-        FX_L1_Runtime_SetJointPosPDCmd(FX_OBJ_ARM0, mechanical_home) != FUNC_RET_SUCCESS ||
-        FX_L1_Comm_Send() != FUNC_RET_SUCCESS) {
+    if (FX_L1_Runtime_SetJointPosPDCmd(1, FX_OBJ_ARM0, mechanical_home) != FUNC_RET_SUCCESS)
+    {
         printf("Failed to send home position command\n");
         goto WAIT_EXIT;
     }
@@ -1153,9 +1152,8 @@ int main(int argc, char** argv)
 
     while (pos_array_count < TRAJ_POINT_NUM) {
 
-        if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-            FX_L1_Runtime_SetJointPosPDCmd(FX_OBJ_ARM0, pos_array[pos_array_count]) != FUNC_RET_SUCCESS ||
-            FX_L1_Comm_Send() != FUNC_RET_SUCCESS) {
+        if (FX_L1_Runtime_SetJointPosPDCmd(1, FX_OBJ_ARM0, pos_array[pos_array_count]) != FUNC_RET_SUCCESS)
+        {
             printf("Failed to send trajectory point %d\n", pos_array_count);
             goto WAIT_EXIT;
         }

@@ -93,17 +93,9 @@ def main():
     print(f"current joints:{rt_dict["arms"][arm_idx]["fb"]["fb_pos"]}")
 
     print(f"\n### 4/6. Run pos1 and pos2...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj, pos1)
     if ret != 0:
         print(f"Set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     while 1:
         rt_dict = robot.get_rt_dict()
@@ -115,17 +107,9 @@ def main():
 
     time.sleep(0.5)
 
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj, pos2)
     if ret != 0:
         print(f"Set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     while 1:
         rt_dict = robot.get_rt_dict()

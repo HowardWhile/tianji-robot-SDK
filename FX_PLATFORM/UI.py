@@ -8,14 +8,22 @@ import math
 import sys
 import ast
 import difflib
+import re
 from pathlib import Path
 
-root_dir = Path(__file__).parent.parent
-if str(root_dir) not in sys.path:
-    sys.path.insert(0, str(root_dir))
+if getattr(sys, 'frozen', False):
+    base_dir = Path(sys._MEIPASS)
+    root_dir = Path(sys.executable).parent
+else:
+    base_dir = Path(__file__).parent
+    root_dir = base_dir.parent
+
+for p in [str(base_dir), str(root_dir)]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from PYTHON_SDK.GentoRobot import GentoRobot, RobotDataManager, ArmsSynchronousPlanningParams, error_dict, FXObjType, \
-    FXLogMask, FXObjMask, FXTerminalType, state_map, FXHandType,FXHandAction,FXHandState
+    FXLogMask, FXObjMask, FXTerminalType, robot_type_map, state_map, FXHandType,FXHandAction,FXHandState
 
 
 class App:
@@ -1439,7 +1447,7 @@ class App:
         self.connect_btn.pack(side="left", padx=5)
 
         self.arm_ip_entry = tk.Entry(self.control_frame)
-        self.arm_ip_entry.insert(0, "6,6,7,190")
+        self.arm_ip_entry.insert(0, "6.6.7.190")
         self.arm_ip_entry.pack(side="left", padx=5)
 
         # more func
@@ -1557,12 +1565,26 @@ class App:
         return 0
 
     def toggle_connection(self):
+        def validate_and_parse_ip(ip_str):
+            ip_str = ip_str.strip()
+            if not ip_str:
+                return None
+            pattern = re.compile(
+                r'^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')
+            if not pattern.match(ip_str):
+                return None
+            ip_parts = [int(x) for x in ip_str.split('.')]
+            return ip_parts
         if not self.connected:
             try:
                 global_robot_ip = self.arm_ip_entry.get()
-                ip_parts = [int(x) for x in global_robot_ip.split(',')]
-                if len(ip_parts) != 4:
-                    raise ValueError
+                ip_parts = validate_and_parse_ip(global_robot_ip)
+                if ip_parts is None or len(ip_parts) != 4:
+                    messagebox.showerror("IP error", f"Your input ip: {global_robot_ip}\nplease enter IPv4 address, eg: 6.6.7.190")
+                    return
+                # if len(ip_parts) != 4:
+                #     messagebox.showerror("IP error", "please enter IPv4 address, eg: 6.6.7.190")
+                #     return
                 self.connect_btn.config(state="disabled")
                 self.status_label.config(text="Connecting...")
                 self.status_light.config(fg="blue")
@@ -1652,7 +1674,10 @@ class App:
                                FXObjType.OBJ_BODY, FXObjType.OBJ_HEAD]
             for device, obj_type in zip(devices_servo, obj_types_servo):
                 try:
-                    val = robot.get_ctrl_obj_servo_version(obj_type)
+                    ret,val = robot.get_ctrl_obj_servo_version(obj_type)
+                    if ret<0:
+                        self.servo_versions[device] =  f"Error: {robot._get_operate_error_msg(ret)}"
+                        return
                     if isinstance(val, (list, tuple)):
                         val = ", ".join(str(v) for v in val)
                     self.servo_versions[device] = str(val)
@@ -1665,7 +1690,11 @@ class App:
             obj_types_sensor = [FXObjType.OBJ_ARM0, FXObjType.OBJ_ARM1, FXObjType.OBJ_BODY]
             for device, obj_type in zip(devices_sensor, obj_types_sensor):
                 try:
-                    ver, serial = robot.get_ctrl_obj_sensor_version_and_serial(obj_type)
+                    ret, ver, serial = robot.get_ctrl_obj_sensor_version_and_serial(obj_type)
+                    if ret < 0:
+                        self.sensor_versions[device] = f"Error: {robot._get_operate_error_msg(ret)}"
+                        self.sensor_serials[device]= f"Error: {robot._get_operate_error_msg(ret)}"
+                        return
                     if isinstance(ver, (list, tuple)):
                         ver_str = ", ".join(str(v) for v in ver)
                     else:
@@ -2044,47 +2073,45 @@ class App:
 
     def hand_p_d_torq_set(self,obj):
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             if obj == 'Hand0':
                 kp = float(self.hand0_kp_entry.get())
                 kd = float(self.hand0_kd_entry.get())
                 tor = float(self.hand0_tor_entry.get())
-                if robot.runtime_set_hand_p(FXHandType.FX_HAND_LEFT, kp) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set kp failed")
+                ret = robot.runtime_set_hand_p(FXHandType.FX_HAND_LEFT, kp)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set kp failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_hand_d(FXHandType.FX_HAND_LEFT, kd) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set kd failed")
+                ret = robot.runtime_set_hand_d(FXHandType.FX_HAND_LEFT, kd)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set kd failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_hand_max_tor(FXHandType.FX_HAND_LEFT, tor) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set max torque failed")
+                ret = robot.runtime_set_hand_max_tor(FXHandType.FX_HAND_LEFT, tor)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set max torque failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             elif obj == 'Hand1':
                 kp = float(self.hand1_kp_entry.get())
                 kd = float(self.hand1_kd_entry.get())
                 tor= float(self.hand1_tor_entry.get())
-                if robot.runtime_set_hand_p(FXHandType.FX_HAND_RIGHT, kp) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set kp failed")
+                ret = robot.runtime_set_hand_p(FXHandType.FX_HAND_RIGHT, kp)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set kp failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_hand_d(FXHandType.FX_HAND_RIGHT, kd) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set kd failed")
+                ret = robot.runtime_set_hand_d(FXHandType.FX_HAND_RIGHT, kd)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set kd failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_hand_max_tor(FXHandType.FX_HAND_RIGHT, tor) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set max torque failed")
+                ret = robot.runtime_set_hand_max_tor(FXHandType.FX_HAND_RIGHT, tor)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set max torque failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             else:
                 raise ValueError(f"Unknown obj: {obj}")
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f"Operation failed: {e}")
 
     def hand_disable(self,obj):
         try:
-            ret = robot.comm_clear(500)
-            if ret != 0:
-                messagebox.showerror('Error', f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
             if obj=='Hand0':
                 ret = robot.runtime_set_hand_action(FXHandType.FX_HAND_LEFT, FXHandAction.FX_HAND_ACTION_DISABLE)
                 if ret != 0:
@@ -2095,19 +2122,11 @@ class App:
                 if ret != 0:
                     messagebox.showerror('Error', f"Set hand1 disable failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-            ret = robot.comm_send_and_wait(500)
-            if ret <= 0:
-                messagebox.showerror('Error', f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
         except Exception as e:
             messagebox.showerror('Error', f"Set idle failed: {e}")
 
     def hand_enable(self, obj):
         try:
-            ret = robot.comm_clear(500)
-            if ret != 0:
-                messagebox.showerror('Error', f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
             if obj == 'Hand0':
                 ret = robot.runtime_set_hand_action(FXHandType.FX_HAND_LEFT, FXHandAction.FX_HAND_ACTION_ENABLE)
                 if ret != 0:
@@ -2118,19 +2137,11 @@ class App:
                 if ret != 0:
                     messagebox.showerror('Error', f"Set hand1 enable failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-            ret = robot.comm_send_and_wait(500)
-            if ret <= 0:
-                messagebox.showerror('Error', f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
         except Exception as e:
             messagebox.showerror('Error', f"Set idle failed: {e}")
 
     def hand_reset(self, obj):
         try:
-            ret = robot.comm_clear(500)
-            if ret != 0:
-                messagebox.showerror('Error', f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
             if obj == 'Hand0':
                 ret = robot.runtime_set_hand_action(FXHandType.FX_HAND_LEFT, FXHandAction.FX_HAND_ACTION_RESET)
                 if ret != 0:
@@ -2141,10 +2152,6 @@ class App:
                 if ret != 0:
                     messagebox.showerror('Error', f"Set hand1 reset failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-            ret = robot.comm_send_and_wait(500)
-            if ret <= 0:
-                messagebox.showerror('Error', f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-                return
         except Exception as e:
             messagebox.showerror('Error', f"Set idle failed: {e}")
 
@@ -2224,16 +2231,9 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [int(value.strip()) for value in values]
-                        if robot.comm_clear(500) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
-                            return
                         ret=robot.runtime_set_hand_pos(FXHandType.FX_HAND_LEFT, point_list)
                         if ret!= 0:
-                            messagebox.showerror('Failed!', f"{obj} set run pose failed:{robot._get_operate_error_msg(ret)}")
-                            return
-                        ret = robot.comm_send_and_wait(500)
-                        if ret <= 0:
-                            messagebox.showerror("Error","Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                            messagebox.showerror('Failed!', f"{obj} set run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2247,15 +2247,9 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [int(value.strip()) for value in values]
-                        if robot.comm_clear(500) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
-                            return
-                        if robot.runtime_set_hand_pos(FXHandType.FX_HAND_RIGHT, point_list)!= 0:
-                            messagebox.showerror('Failed!', f"set {obj} run pose failed")
-                            return
-                        ret = robot.comm_send_and_wait(500)
-                        if ret <= 0:
-                            messagebox.showerror("Error","Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                        ret = robot.runtime_set_hand_pos(FXHandType.FX_HAND_RIGHT, point_list)
+                        if ret != 0:
+                            messagebox.showerror('Failed!', f"set {obj} run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2269,57 +2263,63 @@ class App:
 
     def vel_acc_set(self, obj):
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             if obj == 'Arm0':
                 vel = int(self.left_speed_entry.get())
                 acc = int(self.left_accel_entry.get())
-                if robot.runtime_set_vel_ratio(FXObjType.OBJ_ARM0, vel) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set vel failed")
+                ret = robot.runtime_set_vel_ratio(FXObjType.OBJ_ARM0, vel)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_acc_ratio(FXObjType.OBJ_ARM0, acc) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set acc failed")
+                ret = robot.runtime_set_acc_ratio(FXObjType.OBJ_ARM0, acc)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             elif obj == 'Arm1':
                 vel = int(self.right_speed_entry.get())
                 acc = int(self.right_accel_entry.get())
-                if robot.runtime_set_vel_ratio(FXObjType.OBJ_ARM1, vel) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set vel failed")
+                ret = robot.runtime_set_vel_ratio(FXObjType.OBJ_ARM1, vel)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_acc_ratio(FXObjType.OBJ_ARM1, acc) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set acc failed")
+                ret = robot.runtime_set_acc_ratio(FXObjType.OBJ_ARM1, acc)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             elif obj == 'Body':
                 vel = int(self.body_speed_entry.get())
                 acc = int(self.body_accel_entry.get())
-                if robot.runtime_set_vel_ratio(FXObjType.OBJ_BODY, vel) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set vel failed")
+                ret = robot.runtime_set_vel_ratio(FXObjType.OBJ_BODY, vel)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_acc_ratio(FXObjType.OBJ_BODY, acc) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set acc failed")
+                ret = robot.runtime_set_acc_ratio(FXObjType.OBJ_BODY, acc)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             elif obj == 'Head':
                 vel = int(self.head_speed_entry.get())
                 acc = int(self.head_accel_entry.get())
-                if robot.runtime_set_vel_ratio(FXObjType.OBJ_HEAD, vel) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set vel failed")
+                ret = robot.runtime_set_vel_ratio(FXObjType.OBJ_HEAD, vel)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_acc_ratio(FXObjType.OBJ_HEAD, acc) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set acc failed")
+                ret = robot.runtime_set_acc_ratio(FXObjType.OBJ_HEAD, acc)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             elif obj == 'Lift':
                 vel = int(self.lift_speed_entry.get())
                 acc = int(self.lift_accel_entry.get())
-                if robot.runtime_set_vel_ratio(FXObjType.OBJ_LIFT, vel) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set vel failed")
+                ret = robot.runtime_set_vel_ratio(FXObjType.OBJ_LIFT, vel)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
-                if robot.runtime_set_acc_ratio(FXObjType.OBJ_LIFT, acc) != 0:
-                    messagebox.showerror('Failed!', f"{obj} set acc failed")
+                ret = robot.runtime_set_acc_ratio(FXObjType.OBJ_LIFT, acc)
+                if ret != 0:
+                    messagebox.showerror('Failed!', f"{obj} set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                     return
             else:
                 raise ValueError(f"Unknown obj: {obj}")
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f"Operation failed: {e}")
 
@@ -2532,14 +2532,10 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [float(value.strip()) for value in values]
-                        if robot.comm_clear(50) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
-                            return
                         ret=robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_ARM0, point_list)
                         if ret!= 0:
-                            messagebox.showerror('Failed!', f"{obj} set run pose failed:{robot._get_operate_error_msg(ret)}")
+                            messagebox.showerror('Failed!', f"{obj} set run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
-                        robot.comm_send()
                         time.sleep(0.1)
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2553,13 +2549,10 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [float(value.strip()) for value in values]
-                        if robot.comm_clear(50) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
+                        ret = robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_ARM1, point_list)
+                        if ret != 0:
+                            messagebox.showerror('Failed!', f"set {obj} run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
-                        if robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_ARM1, point_list) != 0:
-                            messagebox.showerror('Failed!', f"set {obj} run pose failed")
-                            return
-                        robot.comm_send()
                         time.sleep(0.1)
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2573,13 +2566,10 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [float(value.strip()) for value in values]
-                        if robot.comm_clear(50) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
+                        ret = robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_BODY, point_list)
+                        if ret != 0:
+                            messagebox.showerror('Failed!', f"set {obj} run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
-                        if robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_BODY, point_list) != 0:
-                            messagebox.showerror('Failed!', f"set {obj} run pose failed")
-                            return
-                        robot.comm_send()
                         time.sleep(0.1)
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2593,13 +2583,10 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [float(value.strip()) for value in values]
-                        if robot.comm_clear(50) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
+                        ret = robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_HEAD, point_list)
+                        if ret != 0:
+                            messagebox.showerror('Failed!', f"set {obj} run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
-                        if robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_HEAD, point_list) != 0:
-                            messagebox.showerror('Failed!', f"set {obj} run pose failed")
-                            return
-                        robot.comm_send()
                         time.sleep(0.1)
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2613,13 +2600,10 @@ class App:
                     if is_valid:
                         values = value_str.split(',')
                         point_list = [float(value.strip()) for value in values]
-                        if robot.comm_clear(50) != 0:
-                            messagebox.showerror('Failed!', "clear buffer failed")
+                        ret = robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_LIFT, point_list)
+                        if ret != 0:
+                            messagebox.showerror('Failed!', f"set {obj} run pose failed. Error msg: {robot._get_operate_error_msg(ret)}")
                             return
-                        if robot.runtime_set_joint_pos_cmd(FXObjType.OBJ_LIFT, point_list) != 0:
-                            messagebox.showerror('Failed!', f"set {obj} run pose failed")
-                            return
-                        robot.comm_send()
                         time.sleep(0.1)
                     else:
                         messagebox.showerror("Error", f"Invalid format: {selected}")
@@ -2744,16 +2728,14 @@ class App:
                 return
             d1_list = [float(x) for x in result.split(',')]
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
+            ret = robot.runtime_set_tool_kd(FXObjType.OBJ_ARM0, k0_list, d0_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"set tools failed for arm0. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
-            if robot.runtime_set_tool_kd(FXObjType.OBJ_ARM0, k0_list, d0_list)!=0:
-                messagebox.showerror('Failed!', f"set tools failed for arm0")
+            ret = robot.runtime_set_tool_kd(FXObjType.OBJ_ARM1, k1_list, d1_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"set tools failed for arm1. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
-            if robot.runtime_set_tool_kd(FXObjType.OBJ_ARM1, k1_list, d1_list)!=0:
-                messagebox.showerror('Failed!', f"set tools failed for arm1")
-                return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', str(e))
 
@@ -3697,13 +3679,19 @@ class App:
         tk.Label(arm0_cart_row, text="Start XYZABC", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.cart_start_arm0_entry = tk.Entry(arm0_cart_row, width=50)
         self.cart_start_arm0_entry.pack(side="left", padx=2)
-        self.cart_start_arm0_entry.insert(0, "509.734, 233.609, 365.948, -169.144, 55.011, -146.752")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.cart_start_arm0_entry.insert(0, "447.829, 203.577, 336.036, -169.144, 55.011, -146.752")
+        else:
+            self.cart_start_arm0_entry.insert(0, "509.734, 233.609, 365.948, -169.144, 55.011, -146.752")
         tk.Button(arm0_cart_row, text="GetCur",
                   command=lambda: self.pln_get_cur_xyzabc('Arm0')).pack(side="left", padx=2)
         tk.Label(arm0_cart_row, text="End XYZABC", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.cart_end_arm0_entry = tk.Entry(arm0_cart_row, width=50)
         self.cart_end_arm0_entry.pack(side="left", padx=2)
-        self.cart_end_arm0_entry.insert(0, "509.734, 233.609, 265.948, -169.144, 55.011, -146.752")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.cart_end_arm0_entry.insert(0, "447.829, 203.577, 236.036, -169.144, 55.011, -146.752")
+        else:
+            self.cart_end_arm0_entry.insert(0, "509.734, 233.609, 265.948, -169.144, 55.011, -146.752")
 
         arm0_cart_row1 = tk.Frame(linear_frame, bg="white")
         arm0_cart_row1.pack(fill="x", pady=(2,10))
@@ -3721,13 +3709,19 @@ class App:
         tk.Label(arm1_cart_row, text="Start XYZABC", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.cart_start_arm1_entry = tk.Entry(arm1_cart_row, width=50)
         self.cart_start_arm1_entry.pack(side="left", padx=2)
-        self.cart_start_arm1_entry.insert(0, "509.734, -233.609, 365.948, 169.144, 55.011, 146.752")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.cart_start_arm1_entry.insert(0, "447.829, -203.577, 336.036, 169.144, 55.011, 146.752")
+        else:
+            self.cart_start_arm1_entry.insert(0, "509.734, -233.609, 365.948, 169.144, 55.011, 146.752")
         tk.Button(arm1_cart_row, text="GetCur",
                   command=lambda: self.pln_get_cur_xyzabc('Arm1')).pack(side="left", padx=2)
         tk.Label(arm1_cart_row, text="End XYZABC", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.cart_end_arm1_entry = tk.Entry(arm1_cart_row, width=50)
         self.cart_end_arm1_entry.pack(side="left", padx=2)
-        self.cart_end_arm1_entry.insert(0, "509.734, -233.609, 265.948, 169.144, 55.011, 146.752")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.cart_end_arm1_entry.insert(0, "447.829, -203.577, 236.036, 169.144, 55.011, 146.752")
+        else:
+            self.cart_end_arm1_entry.insert(0, "509.734, -233.609, 265.948, 169.144, 55.011, 146.752")
 
         arm1_cart_row1 = tk.Frame(linear_frame, bg="white")
         arm1_cart_row1.pack(fill="x", pady=(2,10))
@@ -3784,7 +3778,10 @@ class App:
         tk.Label(arm0_multi_row, text="start joints", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.multi_start_joints_arm0_entry = tk.Entry(arm0_multi_row, width=50)
         self.multi_start_joints_arm0_entry.pack(side="left", padx=2)
-        self.multi_start_joints_arm0_entry.insert(0, "17.970, -35.197, 11.414, -73.344, -9.154, -17.035, 7.086")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.multi_start_joints_arm0_entry.insert(0, "17.832, -35.817, 11.527, -75.747, -9.230, -14.070, 7.530")
+        else:
+            self.multi_start_joints_arm0_entry.insert(0, "17.970, -35.197, 11.414, -73.344, -9.154, -17.035, 7.086")
         tk.Button(arm0_multi_row, text="GetCur",
                   command=lambda: self.pln_get_cur_joints_as_ref('Arm0')).pack(side="left",
                                                                                                           padx=2)
@@ -3801,12 +3798,22 @@ class App:
         tk.Label(arm0_multi_row1, text="All points", bg="white", width=10).pack(side="left", padx=(50, 0))
         self.multi_points_arm0_combo = ttk.Combobox(arm0_multi_row1, width=50, state="readonly")
         self.multi_points_arm0_combo.pack(side="left", padx=2)
-        default_points0 = [
-            "509.731, 233.614, 265.949, -169.144, 55.011, -146.752",
-            "509.731, 233.614, 65.949, -169.144, 55.011, -146.752",
-            "509.731, 33.614, 65.949, -169.144, 55.011, -146.752",
-            "509.731, 33.614, 265.949, -169.144, 55.011, -146.752"
-        ]
+
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            default_points0=[
+            "447.833, 203.571, 236.037, -169.143, 55.012, -146.752", 
+            "447.833, 203.571, 336.03700000000003, -169.143, 55.012, -146.752", 
+            "447.833, 303.571, 336.03700000000003, -169.143, 55.012, -146.752", 
+            "447.833, 303.571, 236.03700000000003, -169.143, 55.012, -146.752"
+            ]
+        else:
+            default_points0 = [
+                "509.731, 233.614, 265.949, -169.144, 55.011, -146.752",
+                "509.731, 233.614, 65.949, -169.144, 55.011, -146.752",
+                "509.731, 33.614, 65.949, -169.144, 55.011, -146.752",
+                "509.731, 33.614, 265.949, -169.144, 55.011, -146.752"
+            ]
+
         self.multi_points_arm0_list = default_points0.copy()
         self.multi_points_arm0_combo['values'] = tuple(self.multi_points_arm0_list)
         if self.multi_points_arm0_list:
@@ -3819,7 +3826,10 @@ class App:
         tk.Label(arm1_multi_row, text="start joints", bg="white", width=10).pack(side="left", padx=(5, 0))
         self.multi_start_joints_arm1_entry = tk.Entry(arm1_multi_row, width=50)
         self.multi_start_joints_arm1_entry.pack(side="left", padx=2)
-        self.multi_start_joints_arm1_entry.insert(0, "-17.970, -35.197, -11.414, -73.344, 9.154, -17.035, -7.086")
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:
+            self.multi_start_joints_arm1_entry.insert(0, "-17.832, -35.817, -11.527, -75.747, 9.230, -14.070, -7.530")
+        else:
+            self.multi_start_joints_arm1_entry.insert(0, "-17.970, -35.197, -11.414, -73.344, 9.154, -17.035, -7.086")
         tk.Button(arm1_multi_row, text="GetCur",
                   command=lambda: self.pln_get_cur_joints_as_ref('Arm1')).pack(side="left",
                                                                                                           padx=2)
@@ -3835,12 +3845,20 @@ class App:
         tk.Label(arm1_multi_row1, text="All points", bg="white", width=10).pack(side="left", padx=(50, 0))
         self.multi_points_arm1_combo = ttk.Combobox(arm1_multi_row1, width=50, state="readonly")
         self.multi_points_arm1_combo.pack(side="left", padx=2)
-        default_points1 = [
-            "509.731, -233.614, 265.949, 169.144, 55.011, 146.752",
-            "509.731, -233.614, 65.949, 169.144, 55.011, 146.752",
-            "509.731, -33.614, 65.949, 169.144, 55.011, 146.752",
-            "509.731, -33.614, 265.949, 169.144, 55.011, 146.752"
-        ]
+        if robot.get_robot_type() == robot_type_map[1] or robot.get_robot_type() == robot_type_map[4]:   
+            default_points1=[
+            "447.833, -203.571, 236.037, 169.143, 55.012, 146.752", 
+            "447.833, -203.571, 336.03700000000003, 169.143, 55.012, 146.752", 
+            "447.833, -103.571, 336.03700000000003, 169.143, 55.012, 146.752", 
+            "447.833, -103.571, 236.03700000000003, 169.143, 55.012, 146.752"
+            ]
+        else:
+            default_points1 = [
+                "509.731, -233.614, 265.949, 169.144, 55.011, 146.752",
+                "509.731, -233.614, 65.949, 169.144, 55.011, 146.752",
+                "509.731, -33.614, 65.949, 169.144, 55.011, 146.752",
+                "509.731, -33.614, 265.949, 169.144, 55.011, 146.752"
+            ]
         self.multi_points_arm1_list = default_points1.copy()
         self.multi_points_arm1_combo['values'] = tuple(self.multi_points_arm1_list)
         if self.multi_points_arm1_list:
@@ -4167,16 +4185,12 @@ class App:
                 messagebox.showerror("Error", f"Arm0 planning failed, error msg: {robot._get_operate_error_msg(ret)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero1 and is_zero0:
             ret = robot.plan_joints(1, start1, end1, vel, acc, freq)
@@ -4190,15 +4204,11 @@ class App:
                 messagebox.showerror("Error", f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(ret)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
             mask = FXObjMask.OBJ_ARM1_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero0 and not is_zero1:
             points0 = robot.plan_joints(0, start0, end0, vel, acc, freq)
@@ -4221,15 +4231,11 @@ class App:
                 messagebox.showerror("Error", f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(points1)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
             mask=FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask!=mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
     def clear_linear_inputs(self):
         for entry in [self.linear_start_arm0_entry, self.linear_end_arm0_entry,
@@ -4302,16 +4308,12 @@ class App:
             else:
                 messagebox.showerror("Error", f"Arm0 planning failed, error msg: {robot._get_operate_error_msg(ret)}")
                 return
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero1 and is_zero0:
             ret = robot.plan_linear_keep_joints(1, start1, end1, vel, acc, freq)
@@ -4325,16 +4327,12 @@ class App:
                 messagebox.showerror("Error", f"Arm1 Planning failed, error msg: {robot._get_operate_error_msg(ret)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM1_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero0 and not is_zero1:
             points0 = robot.plan_linear_keep_joints(0, start0, end0, vel, acc, freq)
@@ -4356,16 +4354,12 @@ class App:
             else:
                 messagebox.showerror("Error", f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(points1)}")
                 return
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
             ret_mask = robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
     def pln_get_cur_xyzabc(self, obj):
         try:
@@ -4506,16 +4500,12 @@ class App:
                                      f"Arm0 planning failed, error msg: {robot._get_operate_error_msg(points)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero1 and is_zero0:
             points = robot.plan_linear(1, start1, end1,ref1, vel, acc, freq)
@@ -4529,16 +4519,12 @@ class App:
                                      f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(points)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM1_FLAG
             ret_mask=robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if not is_zero0 and not is_zero1:
             points0 = robot.plan_linear(0, start0, end0, ref0,vel, acc, freq)
@@ -4563,16 +4549,12 @@ class App:
                                      f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(points1)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
             ret_mask = robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
     def is_duplicate_xyzabc(self, point_list, target_list):
         new_tuple = tuple(point_list)
@@ -4711,16 +4693,12 @@ class App:
                 messagebox.showerror("Error", f"Arm0 planning failed, error msg: {robot._get_operate_error_msg(ret2)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG
             ret_mask = robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"run planning trajectory failed for arm0")
+                messagebox.showerror('Failed!', f"run planning trajectory failed for arm0. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if len(points_arm1) >= 2 and len(points_arm0)==0:
             if all(v == 0 for v in start_joints_arm1):
@@ -4750,19 +4728,15 @@ class App:
                 messagebox.showerror("Error", f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(ret2)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM1_FLAG
             ret_mask = robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"run planning trajectory failed for arm1")
+                messagebox.showerror('Failed!', f"run planning trajectory failed for arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
         if len(points_arm1) >= 2 and len(points_arm0) >= 2:
-            if all(v == 0 for v in start_joints_arm0):
+            if all(v == 0 for v in start_joints_arm0) and all(v == 0 for v in start_joints_arm1):
                 messagebox.showwarning('value error', "reference joints can not be all zero")
                 return
             ret0 = robot.plan_linear_multi_points_set_start(0, start_joints_arm0, points_arm0[0], points_arm0[1],
@@ -4815,16 +4789,12 @@ class App:
                 messagebox.showerror("Error", f"Arm1 planning failed, error msg: {robot._get_operate_error_msg(point1)}")
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
 
             mask = FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
             ret_mask = robot.runtime_run_traj(mask)
             if ret_mask != mask:
-                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1")
+                messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
                 return
-            robot.comm_send()
 
     def clear_syn_inputs(self):
         for entry in [self.syn_joints_arm0_entry, self.syn_joints_arm1_entry]:
@@ -4959,25 +4929,18 @@ class App:
         if ret!=0:
             messagebox.showerror("Failed!", f"Arm1 send planning points failed: {robot._get_operate_error_msg(ret)}")
             return
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
-            return
 
         mask = FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
         ret_mask = robot.runtime_run_traj(mask)
         if ret_mask != mask:
-            messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1")
+            messagebox.showerror('Failed!', f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
             return
-        robot.comm_send()
 
     def stop_motion(self):
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
+        ret_mask = robot.runtime_stop_traj(FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG)
+        if ret_mask != (FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG):
+            messagebox.showerror('Failed!', f"brake planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
             return
-        if robot.runtime_stop_traj(FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG)!=0:
-            messagebox.showerror('Failed!', f"brake planning trajectory failed for arm0 & arm1")
-            return
-        robot.comm_send()
 
     def disable_soft_limit(self, obj_type: int, axis_mask: int):
         if not self.connected:
@@ -5008,14 +4971,10 @@ class App:
         try:
             obj_type = self._obj_name_to_type(obj)
             axis_mask = 0x7F  # All 7 axes
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
             ret=robot.config_reset_enc_offset(obj_type, axis_mask)
             if ret!= 0:
                 messagebox.showerror('Failed!', f"{obj} reset encoder offset failed: {robot._get_operate_error_msg(ret)} ")
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', str(e))
 
@@ -5032,14 +4991,10 @@ class App:
             else:
                 raise ValueError("obj must be 'A' or 'B'")
             axis_mask = 0x7F  # All 7 axes
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
             ret=robot.config_clear_enc_error(obj_type, axis_mask)
             if ret!= 0:
                 messagebox.showerror('Failed!', f"{obj}Clear encoder error failed: {robot._get_operate_error_msg(ret)}")
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', str(e))
 
@@ -5066,15 +5021,11 @@ class App:
         remote_path = simpledialog.askstring("Remote Path", "Enter remote path (e.g., /home/robot/file.bin):")
         if not remote_path:
             return
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
-            return
         if robot.send_file(local_path, remote_path) == 0:
             messagebox.showinfo("Success", f"File sent to {remote_path}")
         else:
             messagebox.showerror("Failed", "Send file failed")
             return
-        robot.comm_send()
 
     def _receive_file_from_robot(self):
         remote_path = simpledialog.askstring("Remote Path",
@@ -5084,26 +5035,18 @@ class App:
         local_path = filedialog.asksaveasfilename(title="Save file as")
         if not local_path:
             return
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
-            return
         if robot.recv_file(local_path, remote_path) == 0:
             messagebox.showinfo("Success", f"File received and saved to {local_path}")
         else:
             messagebox.showerror("Failed", "Receive file failed")
             return
-        robot.comm_send()
 
     def Estop(self):
         if not self.connected:
             messagebox.showerror('Error', 'Please connect robot')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
-                return
             robot.emergency_stop(FXObjMask.OBJ_ALL_FLAG)
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f'Emergency stop failed: {e}')
 
@@ -5336,18 +5279,25 @@ class App:
             return
         d_list = [float(x) for x in result.split(',')]
 
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
-            return
 
         if obj in ('Arm0', 'Arm1'):
-            success=robot.runtime_set_joint_k(obj_type, k_list) and robot.runtime_set_joint_d(obj_type, d_list)
+            ret = robot.runtime_set_joint_k(obj_type, k_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} K parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
+            ret = robot.runtime_set_joint_d(obj_type, d_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} D parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
         else:
-            success=robot.runtime_set_body_pdp(k_list) and robot.runtime_set_body_pdd(d_list)
-        if success!=0:
-            messagebox.showerror('Failed!', f"Set {obj} parameters failed")
-            return
-        robot.comm_send()
+            ret = robot.runtime_set_body_pdp(k_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} P parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
+            ret = robot.runtime_set_body_pdd(d_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} PD parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
 
     def cart_kd_set(self, obj):
         if not self.connected:
@@ -5393,18 +5343,25 @@ class App:
             return
         d_list = [float(x) for x in result.split(',')]
 
-        if robot.comm_clear(50) != 0:
-            messagebox.showerror('Failed!', "Clear buffer failed")
-            return
 
         if obj in ('Arm0', 'Arm1'):
-            success = robot.runtime_set_cart_k(obj_type, k_list) and robot.runtime_set_cart_d(obj_type, d_list)
+            ret = robot.runtime_set_cart_k(obj_type, k_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} Cartesian K parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
+            ret = robot.runtime_set_cart_d(obj_type, d_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} Cartesian D parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
         else:
-            success = robot.runtime_set_body_pdp(k_list) and robot.runtime_set_body_pdd(d_list)
-        if success!=0:
-            messagebox.showerror('Failed!', f"Set {obj} Cartesian/PD parameters failed")
-            return
-        robot.comm_send()
+            ret = robot.runtime_set_body_pdp(k_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} P parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
+            ret = robot.runtime_set_body_pdd(d_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set {obj} PD parameters failed. Error msg: {robot._get_operate_error_msg(ret)}")
+                return
 
     def load_default_param(self):
         self.cart_k_b_entry.set("3000,3000,3000,100,100,100,50")
@@ -5552,15 +5509,14 @@ class App:
                 messagebox.showerror('Error', 'Torque Ctrl must have 5 comma-separated values')
                 return
 
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "Clear buffer failed")
+            ret = robot.runtime_set_force_ctrl(obj_type, force_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set force ctrl failed for {obj}. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
-            success = robot.runtime_set_force_ctrl(obj_type, force_list) and \
-                      robot.runtime_set_torque_ctrl(obj_type, torque_list)
-            if success != 0:
-                messagebox.showerror('Failed!', f"Set force/torque failed for {obj}")
+            ret = robot.runtime_set_torque_ctrl(obj_type, torque_list)
+            if ret != 0:
+                messagebox.showerror('Failed!', f"Set torque ctrl failed for {obj}. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f"Force/Torque set failed: {e}")
 
@@ -5593,9 +5549,6 @@ class App:
             messagebox.showerror('Error', f'{obj} does not support PD mode')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             obj_type = self._obj_name_to_type(obj)
             if obj == 'Body':
                 vel = int(self.body_speed_entry.get())
@@ -5620,7 +5573,6 @@ class App:
                 messagebox.showerror('Failed!',
                                      f'{obj} switch to PD failed: {robot._get_operate_error_msg(ret)}')
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f'PD switch failed: {e}')
 
@@ -5633,9 +5585,6 @@ class App:
             messagebox.showerror('Error', f'{obj} does not support Joint Impedance mode')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             obj_type = self._obj_name_to_type(obj)
             if obj == 'Arm0':
                 vel = int(self.left_speed_entry.get())
@@ -5665,11 +5614,10 @@ class App:
                 if len(k_list) != 7 or len(d_list) != 7:
                     messagebox.showerror('Error', 'K/D must have 7 values')
                     return
-            ret = robot.switch_to_imp_joint_mode(obj_type, 1000, vel, acc, k_list, d_list)
+            ret = robot.switch_to_imp_joint_mode(obj_type, 2000, vel, acc, k_list, d_list)
             if ret != 0:
                 messagebox.showerror('Failed!', f'{obj} switch to joint impedance failed: {robot._get_operate_error_msg(ret)}')
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f'Joint Impedance switch failed: {e}')
 
@@ -5682,9 +5630,6 @@ class App:
             messagebox.showerror('Error', f'{obj} does not support Cartesian Impedance mode')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             obj_type = self._obj_name_to_type(obj)
             if obj == 'Arm0':
                 vel = int(self.left_speed_entry.get())
@@ -5701,11 +5646,10 @@ class App:
             if len(k_list) != 7 or len(d_list) != 7:
                 messagebox.showerror('Error', 'Cartesian K/D must have 7 values')
                 return
-            ret = robot.switch_to_imp_cart_mode(obj_type, 1000, vel, acc, k_list, d_list)
+            ret = robot.switch_to_imp_cart_mode(obj_type, 2000, vel, acc, k_list, d_list)
             if ret != 0:
                 messagebox.showerror('Failed!', f'{obj} switch to cartesian impedance failed: {robot._get_operate_error_msg(ret)}')
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f'Cartesian Impedance switch failed: {e}')
 
@@ -5718,9 +5662,6 @@ class App:
             messagebox.showerror('Error', f'{obj} does not support Force Impedance mode')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             obj_type = self._obj_name_to_type(obj)
             if obj == 'Arm0':
                 force_str = self.force_a_entry.get().strip()
@@ -5734,11 +5675,10 @@ class App:
             if len(force_ctrl) != 5 or len(torque_ctrl) != 5:
                 messagebox.showerror('Error', 'Force Ctrl and Torque Ctrl must each have 5 comma-separated values')
                 return
-            ret = robot.switch_to_imp_force_mode(obj_type, 1000, force_ctrl, torque_ctrl)
+            ret = robot.switch_to_imp_force_mode(obj_type, 2000, force_ctrl, torque_ctrl)
             if ret != 0:
                 messagebox.showerror('Failed!', f'{obj} switch to force impedance failed: {robot._get_operate_error_msg(ret)}')
                 return
-            robot.comm_send()
         except ValueError as e:
             messagebox.showerror('Error', f'Invalid number format in Force/Torque: {e}')
         except Exception as e:
@@ -5853,9 +5793,6 @@ class App:
             result = messagebox.askokcancel("Confirm",
                                             f"Confirm to perform the UnBrake operation on {obj}?")
             if result:
-                if robot.comm_clear(50) != 0:
-                    messagebox.showerror('Failed!', "clear buffer failed")
-                    return
                 obj_type = self._obj_name_to_type(obj)
                 if obj in ('Arm0', 'Arm1'):
                     axis_mask = 0x7F  # 7 axes
@@ -5871,7 +5808,6 @@ class App:
                 if ret!= 0:
                     messagebox.showerror('Failed!', f"{obj} release brake failed: {robot._get_operate_error_msg(ret)}")
                     return
-                robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f"Release brake failed: {e}")
 
@@ -5881,9 +5817,6 @@ class App:
             messagebox.showerror('Error', 'Robot not connected')
             return
         try:
-            if robot.comm_clear(50) != 0:
-                messagebox.showerror('Failed!', "clear buffer failed")
-                return
             obj_type = self._obj_name_to_type(obj)
             # Lock brakes for all axes
             if obj in ('Arm0', 'Arm1'):
@@ -5900,7 +5833,6 @@ class App:
             if ret!= 0:
                 messagebox.showerror('Failed!', f"{obj} brake lock failed: {robot._get_operate_error_msg(ret)}")
                 return
-            robot.comm_send()
         except Exception as e:
             messagebox.showerror('Error', f"Brake lock failed: {e}")
 

@@ -33,22 +33,14 @@ def main():
     def emergency_stop_thread(robot):
         input()
         print("\nStopping run trajectory...")
-        if robot.comm_clear(50) != 0:
-            print("Clear buffer failed")
-            print("\nTrigger Emergency stop...")
-            robot.emergency_stop(FXObjMask.OBJ_ALL_FLAG)
-            time.sleep(0.1)
-            print("Exiting program.")
-            sys.exit(0)
         ret_mask = robot.runtime_stop_traj(ctrl_obj_masks)
         if ret_mask != ctrl_obj_masks:
-            print(f"brake trajectory failed for arm0 & arm1")
+            print(f"brake trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
             print("\nTrigger Emergency stop...")
             robot.emergency_stop(FXObjMask.OBJ_ALL_FLAG)
             time.sleep(0.1)
             print("Exiting program.")
             sys.exit(0)
-        robot.comm_send()
         time.sleep(0.1)
 
 
@@ -122,22 +114,18 @@ def main():
     rt_dict = robot.get_rt_dict()
     sg_dict = robot.get_sg_dict()
     print("arm0:")
-    print(f"current state：{rt_dict["arms"][0]["state"]["cur"]}")
+    print(f"current state:{rt_dict["arms"][0]["state"]["cur"]}")
     print(f"current joints:{rt_dict["arms"][0]["fb"]["fb_pos"]}")
     print(f"current vel:{sg_dict["arms"][0]['set']["vel_ratio"]}")
     print(f"current acc:{sg_dict["arms"][0]['set']["acc_ratio"]}")
     print("arm1:")
-    print(f"current state：{rt_dict["arms"][1]["state"]["cur"]}")
+    print(f"current state:{rt_dict["arms"][1]["state"]["cur"]}")
     print(f"current joints:{rt_dict["arms"][1]["fb"]["fb_pos"]}")
     print(f"current vel:{sg_dict["arms"][1]['set']["vel_ratio"]}")
     print(f"current acc:{sg_dict["arms"][1]['set']["acc_ratio"]}")
 
 
     print(f"\n### 4/10. Run initial pos...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj1, arm0_start_pos)
     if ret != 0:
         print(f"Arm0 set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
@@ -145,10 +133,6 @@ def main():
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj2, arm1_start_pos)
     if ret != 0:
         print(f"Arm1 set joint command failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     while 1:
         rt_dict = robot.get_rt_dict()
@@ -162,10 +146,6 @@ def main():
 
     print(f"\n### 5/10. Set the global speed and acceleration to the maximum to prevent limiting the planned speed and acceleration....")
     time.sleep(0.5)
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_speed_ratio(ctrl_obj1, global_vel,global_acc)
     if ret != 0:
         print(f"Arm0 set vel and acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
@@ -173,10 +153,6 @@ def main():
     ret = robot.runtime_set_speed_ratio(ctrl_obj2, global_vel,global_acc)
     if ret != 0:
         print(f"Arm1 set vel and acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     time.sleep(0.02)
     sg_dict = robot.get_sg_dict()
@@ -219,17 +195,11 @@ def main():
         return
 
     print(f"\n### 8/10. Run trajectory")
-    if robot.comm_clear(50) != 0:
-        print("Clear buffer failed")
-        return
     mask = FXObjMask.OBJ_ARM0_FLAG | FXObjMask.OBJ_ARM1_FLAG
     ret_mask = robot.runtime_run_traj(mask)
     if ret_mask != mask:
-        print(f"Run planning trajectory failed for arm0 & arm1")
+        print(f"Run planning trajectory failed for arm0 & arm1. Return mask: {ret_mask}")
         return
-    ret=robot.comm_send()
-    if ret!=0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
 
     while 1:
         sg_dict = robot.get_sg_dict()

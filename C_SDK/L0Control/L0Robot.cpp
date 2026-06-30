@@ -103,24 +103,6 @@ int FX_L0_System_GetPDCmdCycleTime(int* cycle_time)
 }
 
 /*=============================================================================
- * 组包发送机制
- *============================================================================*/
-int FX_L0_Communication_Clear(unsigned int timeout)
-{
-    return ((RobotCtrl::ClearSend(timeout) == FX_TRUE) ? 0 : -1);
-}
-
-int FX_L0_Communication_Send(void)
-{
-    return ((RobotCtrl::SetSend() == FX_TRUE) ? 0 : -1);
-}
-
-int FX_L0_Communication_SendWaitResponse(unsigned int time_out)
-{
-    return RobotCtrl::WaitSend(time_out);
-}
-
-/*=============================================================================
  * 参数读写
  *============================================================================*/
 int FX_L0_Param_GetInt(char name[30], int *ret_value)
@@ -496,376 +478,376 @@ int FX_L0_Lift_Config_DisableSoftLimit(unsigned char axis_mask)
  * 运行时接口
  *============================================================================*/
 // Arm0
-int FX_L0_Arm0_Runtime_EmergencyStop(void)
+int FX_L0_Arm0_Runtime_EmergencyStop(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm0_Runtime_EmergencyStop() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_EmergencyStop(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetState(int state)
+int FX_L0_Arm0_Runtime_SetState(unsigned int thread_id, int state)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetState(state) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetState(thread_id, state) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetTag(int tag)
+int FX_L0_Arm0_Runtime_SetTag(unsigned int thread_id, int tag)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetTag(tag) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetTag(thread_id, tag) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetJointPosCmd(double joint_pos[7])
+int FX_L0_Arm0_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetJointPosCmd(joint_pos) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetJointPosCmd(thread_id, joint_pos) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetJointTorCmd(double joint_tor[7])
+int FX_L0_Arm0_Runtime_SetJointTorCmd(unsigned int thread_id, double joint_tor[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetJointTorCmd(joint_tor) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetJointTorCmd(thread_id, joint_tor) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetForceCtrl(double force_ctrl[5])
+int FX_L0_Arm0_Runtime_SetForceCtrl(unsigned int thread_id, double force_ctrl[5])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetForceCtrl(force_ctrl) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetForceCtrl(thread_id, force_ctrl) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetTorqueCtrl(double torque_ctrl[5])
+int FX_L0_Arm0_Runtime_SetTorqueCtrl(unsigned int thread_id, double torque_ctrl[5])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetTorqueCtrl(torque_ctrl) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetTorqueCtrl(thread_id, torque_ctrl) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetCmdPDSerial(int cmd_serial)
+int FX_L0_Arm0_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetCmdPDSerial(cmd_serial) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetCmdPDSerial(thread_id, cmd_serial) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetVelRatio(double vel_ratio)
+int FX_L0_Arm0_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetVelRatio(vel_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetVelRatio(thread_id, vel_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetAccRatio(double acc_ratio)
+int FX_L0_Arm0_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetAccRatio(acc_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetAccRatio(thread_id, acc_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetJointK(double k[7])
+int FX_L0_Arm0_Runtime_SetJointK(unsigned int thread_id, double k[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetJointK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetJointK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetJointD(double d[7])
+int FX_L0_Arm0_Runtime_SetJointD(unsigned int thread_id, double d[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetJointD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetJointD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetCartK(double k[7])
+int FX_L0_Arm0_Runtime_SetCartK(unsigned int thread_id, double k[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetCartK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetCartK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetCartD(double d[7])
+int FX_L0_Arm0_Runtime_SetCartD(unsigned int thread_id, double d[7])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetCartD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetCartD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetToolK(double k[6])
+int FX_L0_Arm0_Runtime_SetToolK(unsigned int thread_id, double k[6])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetToolK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetToolK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetToolD(double d[10])
+int FX_L0_Arm0_Runtime_SetToolD(unsigned int thread_id, double d[10])
 {
-    return ((RobotCtrl::Arm0_Runtime_SetToolD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetToolD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetImpType(int imp_type)
+int FX_L0_Arm0_Runtime_SetImpType(unsigned int thread_id, int imp_type)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetImpType(imp_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetImpType(thread_id, imp_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetDragType(int drag_type)
+int FX_L0_Arm0_Runtime_SetDragType(unsigned int thread_id, int drag_type)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetDragType(drag_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetDragType(thread_id, drag_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_InitTraj(int point_num)
+int FX_L0_Arm0_Runtime_InitTraj(unsigned int thread_id, int point_num)
 {
-    return ((RobotCtrl::Arm0_Runtime_InitTraj(point_num) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_InitTraj(thread_id, point_num) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_SetTraj(int serial, int point_num, double *point_data)
+int FX_L0_Arm0_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data)
 {
-    return ((RobotCtrl::Arm0_Runtime_SetTraj(serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_SetTraj(thread_id, serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_RunTraj(void)
+int FX_L0_Arm0_Runtime_RunTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm0_Runtime_RunTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_RunTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm0_Runtime_StopTraj(void)
+int FX_L0_Arm0_Runtime_StopTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm0_Runtime_StopTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm0_Runtime_StopTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
 // Arm1
-int FX_L0_Arm1_Runtime_EmergencyStop(void)
+int FX_L0_Arm1_Runtime_EmergencyStop(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm1_Runtime_EmergencyStop() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_EmergencyStop(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetState(int state)
+int FX_L0_Arm1_Runtime_SetState(unsigned int thread_id, int state)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetState(state) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetState(thread_id, state) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetTag(int tag)
+int FX_L0_Arm1_Runtime_SetTag(unsigned int thread_id, int tag)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetTag(tag) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetTag(thread_id, tag) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetJointPosCmd(double joint_pos[7])
+int FX_L0_Arm1_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetJointPosCmd(joint_pos) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetJointPosCmd(thread_id, joint_pos) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetJointTorCmd(double joint_tor[7])
+int FX_L0_Arm1_Runtime_SetJointTorCmd(unsigned int thread_id, double joint_tor[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetJointTorCmd(joint_tor) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetJointTorCmd(thread_id, joint_tor) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetForceCtrl(double force_ctrl[5])
+int FX_L0_Arm1_Runtime_SetForceCtrl(unsigned int thread_id, double force_ctrl[5])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetForceCtrl(force_ctrl) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetForceCtrl(thread_id, force_ctrl) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetTorqueCtrl(double torque_ctrl[5])
+int FX_L0_Arm1_Runtime_SetTorqueCtrl(unsigned int thread_id, double torque_ctrl[5])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetTorqueCtrl(torque_ctrl) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetTorqueCtrl(thread_id, torque_ctrl) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetVelRatio(double vel_ratio)
+int FX_L0_Arm1_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetVelRatio(vel_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetVelRatio(thread_id, vel_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetAccRatio(double acc_ratio)
+int FX_L0_Arm1_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetAccRatio(acc_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetAccRatio(thread_id, acc_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetJointK(double k[7])
+int FX_L0_Arm1_Runtime_SetJointK(unsigned int thread_id, double k[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetJointK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetJointK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetJointD(double d[7])
+int FX_L0_Arm1_Runtime_SetJointD(unsigned int thread_id, double d[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetJointD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetJointD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetCartK(double k[7])
+int FX_L0_Arm1_Runtime_SetCartK(unsigned int thread_id, double k[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetCartK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetCartK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetCartD(double d[7])
+int FX_L0_Arm1_Runtime_SetCartD(unsigned int thread_id, double d[7])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetCartD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetCartD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetToolK(double k[6])
+int FX_L0_Arm1_Runtime_SetToolK(unsigned int thread_id, double k[6])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetToolK(k) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetToolK(thread_id, k) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetToolD(double d[10])
+int FX_L0_Arm1_Runtime_SetToolD(unsigned int thread_id, double d[10])
 {
-    return ((RobotCtrl::Arm1_Runtime_SetToolD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetToolD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetImpType(int imp_type)
+int FX_L0_Arm1_Runtime_SetImpType(unsigned int thread_id, int imp_type)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetImpType(imp_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetImpType(thread_id, imp_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetDragType(int drag_type)
+int FX_L0_Arm1_Runtime_SetDragType(unsigned int thread_id, int drag_type)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetDragType(drag_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetDragType(thread_id, drag_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetCmdPDSerial(int cmd_serial)
+int FX_L0_Arm1_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetCmdPDSerial(cmd_serial) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetCmdPDSerial(thread_id, cmd_serial) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_InitTraj(int point_num)
+int FX_L0_Arm1_Runtime_InitTraj(unsigned int thread_id, int point_num)
 {
-    return ((RobotCtrl::Arm1_Runtime_InitTraj(point_num) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_InitTraj(thread_id, point_num) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_SetTraj(int serial, int point_num, double *point_data)
+int FX_L0_Arm1_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data)
 {
-    return ((RobotCtrl::Arm1_Runtime_SetTraj(serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_SetTraj(thread_id, serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_RunTraj(void)
+int FX_L0_Arm1_Runtime_RunTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm1_Runtime_RunTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_RunTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Arm1_Runtime_StopTraj(void)
+int FX_L0_Arm1_Runtime_StopTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Arm1_Runtime_StopTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Arm1_Runtime_StopTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
 // Head
-int FX_L0_Head_Runtime_EmergencyStop(void)
+int FX_L0_Head_Runtime_EmergencyStop(unsigned int thread_id)
 {
-    return ((RobotCtrl::Head_Runtime_EmergencyStop() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_EmergencyStop(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Head_Runtime_SetState(int state)
+int FX_L0_Head_Runtime_SetState(unsigned int thread_id, int state)
 {
-    return ((RobotCtrl::Head_Runtime_SetState(state) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_SetState(thread_id, state) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Head_Runtime_SetTag(int tag)
+int FX_L0_Head_Runtime_SetTag(unsigned int thread_id, int tag)
 {
-    return ((RobotCtrl::Head_Runtime_SetTag(tag) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_SetTag(thread_id, tag) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Head_Runtime_SetJointPosCmd(double joint_pos[3])
+int FX_L0_Head_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[3])
 {
-    return ((RobotCtrl::Head_Runtime_SetJointPosCmd(joint_pos) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_SetJointPosCmd(thread_id, joint_pos) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Head_Runtime_SetVelRatio(double vel_ratio)
+int FX_L0_Head_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio)
 {
-    return ((RobotCtrl::Head_Runtime_SetVelRatio(vel_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_SetVelRatio(thread_id, vel_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Head_Runtime_SetAccRatio(double acc_ratio)
+int FX_L0_Head_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio)
 {
-    return ((RobotCtrl::Head_Runtime_SetAccRatio(acc_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Head_Runtime_SetAccRatio(thread_id, acc_ratio) == FX_TRUE) ? 0 : -1);
 }
 
 // Body
-int FX_L0_Body_Runtime_EmergencyStop(void)
+int FX_L0_Body_Runtime_EmergencyStop(unsigned int thread_id)
 {
-    return ((RobotCtrl::Body_Runtime_EmergencyStop() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_EmergencyStop(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetState(int state)
+int FX_L0_Body_Runtime_SetState(unsigned int thread_id, int state)
 {
-    return ((RobotCtrl::Body_Runtime_SetState(state) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetState(thread_id, state) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetTag(int tag)
+int FX_L0_Body_Runtime_SetTag(unsigned int thread_id, int tag)
 {
-    return ((RobotCtrl::Body_Runtime_SetTag(tag) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetTag(thread_id, tag) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetJointPosCmd(double joint_pos[6])
+int FX_L0_Body_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[6])
 {
-    return ((RobotCtrl::Body_Runtime_SetJointPosCmd(joint_pos) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetJointPosCmd(thread_id, joint_pos) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetVelRatio(double vel_ratio)
+int FX_L0_Body_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio)
 {
-    return ((RobotCtrl::Body_Runtime_SetVelRatio(vel_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetVelRatio(thread_id, vel_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetAccRatio(double acc_ratio)
+int FX_L0_Body_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio)
 {
-    return ((RobotCtrl::Body_Runtime_SetAccRatio(acc_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetAccRatio(thread_id, acc_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetPDP(double p[6])
+int FX_L0_Body_Runtime_SetPDP(unsigned int thread_id, double p[6])
 {
-    return ((RobotCtrl::Body_Runtime_SetPDP(p) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetPDP(thread_id, p) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetPDD(double d[6])
+int FX_L0_Body_Runtime_SetPDD(unsigned int thread_id, double d[6])
 {
-    return ((RobotCtrl::Body_Runtime_SetPDD(d) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetPDD(thread_id, d) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetCmdPDSerial(int cmd_serial)
+int FX_L0_Body_Runtime_SetCmdPDSerial(unsigned int thread_id, int cmd_serial)
 {
-    return ((RobotCtrl::Body_Runtime_SetCmdPDSerial(cmd_serial) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetCmdPDSerial(thread_id, cmd_serial) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_InitTraj(int point_num)
+int FX_L0_Body_Runtime_InitTraj(unsigned int thread_id, int point_num)
 {
-    return ((RobotCtrl::Body_Runtime_InitTraj(point_num) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_InitTraj(thread_id, point_num) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_SetTraj(int serial, int point_num, double *point_data)
+int FX_L0_Body_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data)
 {
-    return ((RobotCtrl::Body_Runtime_SetTraj(serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_SetTraj(thread_id, serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_RunTraj(void)
+int FX_L0_Body_Runtime_RunTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Body_Runtime_RunTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_RunTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Body_Runtime_StopTraj(void)
+int FX_L0_Body_Runtime_StopTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Body_Runtime_StopTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Body_Runtime_StopTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 // Lift
 
-int FX_L0_Lift_Runtime_EmergencyStop(void)
+int FX_L0_Lift_Runtime_EmergencyStop(unsigned int thread_id)
 {
-    return ((RobotCtrl::Lift_Runtime_EmergencyStop() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_EmergencyStop(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetState(int state)
+int FX_L0_Lift_Runtime_SetState(unsigned int thread_id, int state)
 {
-    return ((RobotCtrl::Lift_Runtime_SetState(state) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetState(thread_id, state) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetTag(int tag)
+int FX_L0_Lift_Runtime_SetTag(unsigned int thread_id, int tag)
 {
-    return ((RobotCtrl::Lift_Runtime_SetTag(tag) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetTag(thread_id, tag) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetJointPosCmd(double joint_pos[2])
+int FX_L0_Lift_Runtime_SetJointPosCmd(unsigned int thread_id, double joint_pos[2])
 {
-    return ((RobotCtrl::Lift_Runtime_SetJointPosCmd(joint_pos) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetJointPosCmd(thread_id, joint_pos) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetVelRatio(double vel_ratio)
+int FX_L0_Lift_Runtime_SetVelRatio(unsigned int thread_id, double vel_ratio)
 {
-    return ((RobotCtrl::Lift_Runtime_SetVelRatio(vel_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetVelRatio(thread_id, vel_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetAccRatio(double acc_ratio)
+int FX_L0_Lift_Runtime_SetAccRatio(unsigned int thread_id, double acc_ratio)
 {
-    return ((RobotCtrl::Lift_Runtime_SetAccRatio(acc_ratio) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetAccRatio(thread_id, acc_ratio) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_InitTraj(int point_num)
+int FX_L0_Lift_Runtime_InitTraj(unsigned int thread_id, int point_num)
 {
-    return ((RobotCtrl::Lift_Runtime_InitTraj(point_num) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_InitTraj(thread_id, point_num) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_SetTraj(int serial, int point_num, double *point_data)
+int FX_L0_Lift_Runtime_SetTraj(unsigned int thread_id, int serial, int point_num, double *point_data)
 {
-    return ((RobotCtrl::Lift_Runtime_SetTraj(serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_SetTraj(thread_id, serial, point_num, point_data) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_RunTraj(void)
+int FX_L0_Lift_Runtime_RunTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Lift_Runtime_RunTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_RunTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Lift_Runtime_StopTraj(void)
+int FX_L0_Lift_Runtime_StopTraj(unsigned int thread_id)
 {
-    return ((RobotCtrl::Lift_Runtime_StopTraj() == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Lift_Runtime_StopTraj(thread_id) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand0_Runtime_SetCmdAction(int action_type)
+int FX_L0_Hand0_Runtime_SetCmdAction(unsigned int thread_id, int action_type)
 {
     if(action_type != FX_HAND_ACTION_DISABLE
         && action_type != FX_HAND_ACTION_ENABLE
@@ -873,10 +855,10 @@ int FX_L0_Hand0_Runtime_SetCmdAction(int action_type)
     {
         return -1;
     }
-    return ((RobotCtrl::Hand0_Runtime_SetCmdAction(action_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand0_Runtime_SetCmdAction(thread_id, action_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand0_Runtime_SetCmdPos(int pos[24])
+int FX_L0_Hand0_Runtime_SetCmdPos(unsigned int thread_id, int pos[24])
 {
     FX_INT8 pos_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -894,10 +876,10 @@ int FX_L0_Hand0_Runtime_SetCmdPos(int pos[24])
             pos_int8[i] = pos[i];
         }
     }
-    return ((RobotCtrl::Hand0_Runtime_SetCmdPos(pos_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand0_Runtime_SetCmdPos(thread_id, pos_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand0_Runtime_SetCmdP(int p[24])
+int FX_L0_Hand0_Runtime_SetCmdP(unsigned int thread_id, int p[24])
 {
     FX_INT8 p_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -915,10 +897,10 @@ int FX_L0_Hand0_Runtime_SetCmdP(int p[24])
             p_int8[i] = p[i];
         }
     }
-    return ((RobotCtrl::Hand0_Runtime_SetCmdP(p_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand0_Runtime_SetCmdP(thread_id, p_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand0_Runtime_SetCmdD(int d[24])
+int FX_L0_Hand0_Runtime_SetCmdD(unsigned int thread_id, int d[24])
 {
     FX_INT8 d_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -936,10 +918,10 @@ int FX_L0_Hand0_Runtime_SetCmdD(int d[24])
             d_int8[i] = d[i];
         }
     }
-    return ((RobotCtrl::Hand0_Runtime_SetCmdD(d_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand0_Runtime_SetCmdD(thread_id, d_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand0_Runtime_SetCmdMaxTor(int max_tor[24])
+int FX_L0_Hand0_Runtime_SetCmdMaxTor(unsigned int thread_id, int max_tor[24])
 {
     FX_INT8 max_tor_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -957,10 +939,10 @@ int FX_L0_Hand0_Runtime_SetCmdMaxTor(int max_tor[24])
             max_tor_int8[i] = max_tor[i];
         }
     }
-    return ((RobotCtrl::Hand0_Runtime_SetCmdMaxTor(max_tor_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand0_Runtime_SetCmdMaxTor(thread_id, max_tor_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand1_Runtime_SetCmdAction(int action_type)
+int FX_L0_Hand1_Runtime_SetCmdAction(unsigned int thread_id, int action_type)
 {
     if(action_type != FX_HAND_ACTION_DISABLE
         && action_type != FX_HAND_ACTION_ENABLE
@@ -968,10 +950,10 @@ int FX_L0_Hand1_Runtime_SetCmdAction(int action_type)
     {
         return -1;
     }
-    return ((RobotCtrl::Hand1_Runtime_SetCmdAction(action_type) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand1_Runtime_SetCmdAction(thread_id, action_type) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand1_Runtime_SetCmdPos(int pos[24])
+int FX_L0_Hand1_Runtime_SetCmdPos(unsigned int thread_id, int pos[24])
 {
     FX_INT8 pos_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -989,10 +971,10 @@ int FX_L0_Hand1_Runtime_SetCmdPos(int pos[24])
             pos_int8[i] = pos[i];
         }
     }
-    return ((RobotCtrl::Hand1_Runtime_SetCmdPos(pos_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand1_Runtime_SetCmdPos(thread_id, pos_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand1_Runtime_SetCmdP(int p[24])
+int FX_L0_Hand1_Runtime_SetCmdP(unsigned int thread_id, int p[24])
 {
     FX_INT8 p_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -1010,10 +992,10 @@ int FX_L0_Hand1_Runtime_SetCmdP(int p[24])
             p_int8[i] = p[i];
         }
     }
-    return ((RobotCtrl::Hand1_Runtime_SetCmdP(p_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand1_Runtime_SetCmdP(thread_id, p_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand1_Runtime_SetCmdD(int d[24])
+int FX_L0_Hand1_Runtime_SetCmdD(unsigned int thread_id, int d[24])
 {
     FX_INT8 d_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -1031,10 +1013,10 @@ int FX_L0_Hand1_Runtime_SetCmdD(int d[24])
             d_int8[i] = d[i];
         }
     }
-    return ((RobotCtrl::Hand1_Runtime_SetCmdD(d_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand1_Runtime_SetCmdD(thread_id, d_int8) == FX_TRUE) ? 0 : -1);
 }
 
-int FX_L0_Hand1_Runtime_SetCmdMaxTor(int max_tor[24])
+int FX_L0_Hand1_Runtime_SetCmdMaxTor(unsigned int thread_id, int max_tor[24])
 {
     FX_INT8 max_tor_int8[24] = {0};
     for(FX_INT32 i = 0; i < 24; i++)
@@ -1052,7 +1034,7 @@ int FX_L0_Hand1_Runtime_SetCmdMaxTor(int max_tor[24])
             max_tor_int8[i] = max_tor[i];
         }
     }
-    return ((RobotCtrl::Hand1_Runtime_SetCmdMaxTor(max_tor_int8) == FX_TRUE) ? 0 : -1);
+    return ((RobotCtrl::Hand1_Runtime_SetCmdMaxTor(thread_id, max_tor_int8) == FX_TRUE) ? 0 : -1);
 }
 
 /*=============================================================================

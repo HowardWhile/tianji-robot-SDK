@@ -41,31 +41,15 @@ def main():
     rt_dict = robot.get_rt_dict()
     hand_state=rt_dict["hands"][0]["fb"]["state"]
     if hand_state==FXHandState.FX_HAND_STATE_ERROR:
-        ret = robot.comm_clear(500)
-        if ret != 0:
-            print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
         ret = robot.runtime_set_hand_action(hand_type, FXHandAction.FX_HAND_ACTION_RESET)
         if ret != 0:
             print(f"Set hand reset failed. Error msg: {robot._get_operate_error_msg(ret)}")
             return
-        ret = robot.comm_send_and_wait(500)
-        if ret != 0:
-            print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
         time.sleep(0.1)
 
-        ret = robot.comm_clear(500)
-        if ret != 0:
-            print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
         ret = robot.runtime_set_hand_action(hand_type, FXHandAction.FX_HAND_ACTION_ENABLE)
         if ret != 0:
             print(f"Set hand enable failed. Error msg: {robot._get_operate_error_msg(ret)}")
-            return
-        ret = robot.comm_send_and_wait(500)
-        if ret != 0:
-            print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
             return
         time.sleep(0.1)
 
@@ -78,46 +62,22 @@ def main():
     print(f"\n### 4/5. Hand action...")
     print("Left hand is ready to work.")
     input("Press Enter key to make a gesture1")
-    ret = robot.comm_clear(500)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_hand_pos(hand_type, gesture1)
     if ret != 0:
         print(f"Set hand gesture1 failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
-    ret = robot.comm_send_and_wait(500)
-    if ret <=  0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
 
     input("Press Enter key to make a gesture2")
-    ret = robot.comm_clear(500)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_hand_pos(hand_type, gesture2)
     if ret != 0:
         print(f"Set hand gesture2 failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
-    ret = robot.comm_send_and_wait(500)
-    if ret <= 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
 
 
     input("Press Enter key to make an open palm")
-    ret = robot.comm_clear(500)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_hand_pos(hand_type, open_palm)
     if ret != 0:
         print(f"Set hand open palm failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send_and_wait(500)
-    if ret <=  0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
 
     print(f"\n### 5/5. Task finished.")

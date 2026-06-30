@@ -11,6 +11,7 @@ import inspect
 from typing import Optional, Union, Sequence, List, Tuple
 import time
 import math
+import threading
 
 current_file_path = os.path.abspath(__file__)
 current_path = os.path.dirname(current_file_path)
@@ -24,7 +25,6 @@ class FXObjType:
     OBJ_HEAD = 2
     OBJ_BODY = 3
     OBJ_LIFT = 4
-
 
 
 class FXObjMask:
@@ -70,6 +70,22 @@ class FXHandAction:
     FX_HAND_ACTION_DISABLE = 0
     FX_HAND_ACTION_ENABLE = 1
     FX_HAND_ACTION_RESET = 2
+
+
+class FXUserDataType:
+    """User data types for sample data registration."""
+    FX_char = 0
+    FX_short = 1
+    FX_int = 2
+    FX_long = 3
+    FX_long_long = 5
+    FX_unsigned_char = 6
+    FX_unsigned_short = 7
+    FX_unsigned_int = 8
+    FX_unsigned_long = 9
+    FX_unsigned_long_long = 10
+    FX_float = 11
+    FX_double = 12
 
 
 class FXHandState:
@@ -673,7 +689,7 @@ fault_code_dict_EN = {
     "0xFF91": "Drive internal error 2",
 }
 
-import threading
+
 
 
 class SwitchableLock:
@@ -712,6 +728,8 @@ class GentoRobot:
         @raise RuntimeError: If unable to get RT/SG pointers from the SDK.
         """
         self._lock = SwitchableLock()
+
+        self._thread_id = 1
 
         self.precision = precision
         self._round_float = lambda v: round(v, self.precision)
@@ -782,16 +800,6 @@ class GentoRobot:
         d.FX_L1_System_RecvFile.argtypes = [c_char_p, c_char_p]
         d.FX_L1_System_RecvFile.restype = c_int32
 
-        # Communication
-        d.FX_L1_Comm_Clear.argtypes = [c_uint32]
-        d.FX_L1_Comm_Clear.restype = c_int32
-
-        d.FX_L1_Comm_Send.argtypes = []
-        d.FX_L1_Comm_Send.restype = c_int32
-
-        d.FX_L1_Comm_SendAndWait.argtypes = [c_uint32]
-        d.FX_L1_Comm_SendAndWait.restype = c_int32
-
         # State feedback
         d.FX_L1_Fbk_GetCtrlObjDof.argtypes = [c_int32]
         d.FX_L1_Fbk_GetCtrlObjDof.restype = c_int32
@@ -803,11 +811,11 @@ class GentoRobot:
         d.FX_L1_Fbk_GetRobotType.restype = c_int32
 
         d.FX_L1_Fbk_GetCtrlObjServoVersion.argtypes = [c_int32, POINTER((c_char * 30) * 7)]
-        d.FX_L1_Fbk_GetCtrlObjServoVersion.restype = None
+        d.FX_L1_Fbk_GetCtrlObjServoVersion.restype = c_int32
 
         d.FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial.argtypes = [c_int32, POINTER(c_int32 * 7),
                                                                  POINTER(c_int32 * 7)]
-        d.FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial.restype = None
+        d.FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial.restype = c_int32
 
         d.FX_L1_State_GetServoErrorCode.argtypes = [c_int32, POINTER(c_uint * 7)]
         d.FX_L1_State_GetServoErrorCode.restype = c_int32
@@ -815,11 +823,20 @@ class GentoRobot:
         d.FX_L1_State_ResetError.argtypes = [c_uint, c_uint, POINTER(c_uint)]
         d.FX_L1_State_ResetError.restype = c_int32
 
-        d.FX_L1_Runtime_EmergencyStop.argtypes = [c_uint32]
-        d.FX_L1_Runtime_EmergencyStop.restype = c_uint32
-
         d.FX_L1_Fbk_GetCtrlObjPhysicalState.argtypes = [c_int32, POINTER(c_int)]
         d.FX_L1_Fbk_GetCtrlObjPhysicalState.restype = c_int32
+
+        d.FX_L1_Fbk_GetUserData.argtypes = [c_void_p]
+        d.FX_L1_Fbk_GetUserData.restype = None
+
+        d.FX_L1_Fbk_ResetUserDataSet.argtypes = []
+        d.FX_L1_Fbk_ResetUserDataSet.restype = None
+
+        d.FX_L1_Fbk_RegisterUserDataSet.argtypes = [c_char_p, c_int32, c_int32, c_int32]
+        d.FX_L1_Fbk_RegisterUserDataSet.restype = c_int32
+
+        d.FX_L1_Fbk_CheckUserDataSet.argtypes = [c_int32]
+        d.FX_L1_Fbk_CheckUserDataSet.restype = c_int32
 
         # State switching
         switch_funcs = [
@@ -908,80 +925,89 @@ class GentoRobot:
         d.FX_L1_Config_SetPDCmdCycleTime.restype = c_int
 
         # Runtime commands
-        d.FX_L1_Runtime_SetJointPosCmd.argtypes = [c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_EmergencyStop.argtypes = [c_uint32, c_uint32]
+        d.FX_L1_Runtime_EmergencyStop.restype = c_uint32
+
+        d.FX_L1_Runtime_SetTag.argtypes = [c_uint32, c_int32, c_int32]
+        d.FX_L1_Runtime_SetTag.restype = c_int32
+
+        d.FX_L1_Runtime_SetJointPosCmd.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetJointPosCmd.restype = c_int32
 
-        d.FX_L1_Runtime_SetForceCtrl.argtypes = [c_int32, POINTER(c_double * 5)]
+        d.FX_L1_Runtime_SetJointPosPDCmd.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetJointPosPDCmd.restype = c_int32
+
+        d.FX_L1_Runtime_SetForceCtrl.argtypes = [c_uint32, c_int32, POINTER(c_double * 5)]
         d.FX_L1_Runtime_SetForceCtrl.restype = c_int32
 
-        d.FX_L1_Runtime_SetTorqueCtrl.argtypes = [c_int32, POINTER(c_double * 5)]
+        d.FX_L1_Runtime_SetTorqueCtrl.argtypes = [c_uint32, c_int32, POINTER(c_double * 5)]
         d.FX_L1_Runtime_SetTorqueCtrl.restype = c_int32
 
-        d.FX_L1_Runtime_SetVelRatio.argtypes = [c_int32, c_double]
+        d.FX_L1_Runtime_SetVelRatio.argtypes = [c_uint32, c_int32, c_double]
         d.FX_L1_Runtime_SetVelRatio.restype = c_int32
 
-        d.FX_L1_Runtime_SetAccRatio.argtypes = [c_int32, c_double]
+        d.FX_L1_Runtime_SetAccRatio.argtypes = [c_uint32, c_int32, c_double]
         d.FX_L1_Runtime_SetAccRatio.restype = c_int32
 
-        d.FX_L1_Runtime_SetSpeedRatio.argtypes = [c_int32, c_double, c_double]
+        d.FX_L1_Runtime_SetSpeedRatio.argtypes = [c_uint32, c_int32, c_double, c_double]
         d.FX_L1_Runtime_SetSpeedRatio.restype = c_int32
 
-        d.FX_L1_Runtime_SetJointK.argtypes = [c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetJointK.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetJointK.restype = c_int32
 
-        d.FX_L1_Runtime_SetJointD.argtypes = [c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetJointD.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetJointD.restype = c_int32
 
-        d.FX_L1_Runtime_SetJointKD.argtypes = [c_int32, POINTER(c_double * 7), POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetJointKD.argtypes = [c_uint32, c_int32, POINTER(c_double * 7), POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetJointKD.restype = c_int32
 
-        d.FX_L1_Runtime_SetCartK.argtypes = [c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetCartK.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetCartK.restype = c_int32
 
-        d.FX_L1_Runtime_SetCartD.argtypes = [c_int32, POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetCartD.argtypes = [c_uint32, c_int32, POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetCartD.restype = c_int32
 
-        d.FX_L1_Runtime_SetCartKD.argtypes = [c_int32, POINTER(c_double * 7), POINTER(c_double * 7)]
+        d.FX_L1_Runtime_SetCartKD.argtypes = [c_uint32, c_int32, POINTER(c_double * 7), POINTER(c_double * 7)]
         d.FX_L1_Runtime_SetCartKD.restype = c_int32
 
-        d.FX_L1_Runtime_SetToolK.argtypes = [c_int32, POINTER(c_double * 6)]
+        d.FX_L1_Runtime_SetToolK.argtypes = [c_uint32, c_int32, POINTER(c_double * 6)]
         d.FX_L1_Runtime_SetToolK.restype = c_int32
 
-        d.FX_L1_Runtime_SetToolD.argtypes = [c_int32, POINTER(c_double * 10)]
+        d.FX_L1_Runtime_SetToolD.argtypes = [c_uint32, c_int32, POINTER(c_double * 10)]
         d.FX_L1_Runtime_SetToolD.restype = c_int32
 
-        d.FX_L1_Runtime_SetToolKD.argtypes = [c_int32, POINTER(c_double * 6), POINTER(c_double * 10)]
+        d.FX_L1_Runtime_SetToolKD.argtypes = [c_uint32, c_int32, POINTER(c_double * 6), POINTER(c_double * 10)]
         d.FX_L1_Runtime_SetToolKD.restype = c_int32
 
-        d.FX_L1_Runtime_SetBodyPDP.argtypes = [POINTER(c_double * 6)]
+        d.FX_L1_Runtime_SetBodyPDP.argtypes = [c_uint32, POINTER(c_double * 6)]
         d.FX_L1_Runtime_SetBodyPDP.restype = c_int32
 
-        d.FX_L1_Runtime_SetBodyPDD.argtypes = [POINTER(c_double * 6)]
+        d.FX_L1_Runtime_SetBodyPDD.argtypes = [c_uint32, POINTER(c_double * 6)]
         d.FX_L1_Runtime_SetBodyPDD.restype = c_int32
 
-        d.FX_L1_Runtime_SetBodyPD.argtypes = [POINTER(c_double * 6), POINTER(c_double * 6)]
+        d.FX_L1_Runtime_SetBodyPD.argtypes = [c_uint32, POINTER(c_double * 6), POINTER(c_double * 6)]
         d.FX_L1_Runtime_SetBodyPD.restype = c_int32
 
-        d.FX_L1_Runtime_RunTraj.argtypes = [c_uint32]
+        d.FX_L1_Runtime_RunTraj.argtypes = [c_uint32, c_uint32]
         d.FX_L1_Runtime_RunTraj.restype = c_uint32
 
-        d.FX_L1_Runtime_StopTraj.argtypes = [c_uint32]
+        d.FX_L1_Runtime_StopTraj.argtypes = [c_uint32, c_uint32]
         d.FX_L1_Runtime_StopTraj.restype = c_uint32
 
         # hand
-        d.FX_L1_Runtime_SetHandAction.argtypes = [c_int32, c_int32]
+        d.FX_L1_Runtime_SetHandAction.argtypes = [c_uint32, c_int32, c_int32]
         d.FX_L1_Runtime_SetHandAction.restype = c_int32
 
-        d.FX_L1_Runtime_SetHandPos.argtypes = [c_int32, POINTER(c_int32)]
+        d.FX_L1_Runtime_SetHandPos.argtypes = [c_uint32, c_int32, POINTER(c_int32)]
         d.FX_L1_Runtime_SetHandPos.restype = c_int32
 
-        d.FX_L1_Runtime_SetHandP.argtypes = [c_int32, POINTER(c_int32)]
+        d.FX_L1_Runtime_SetHandP.argtypes = [c_uint32, c_int32, POINTER(c_int32)]
         d.FX_L1_Runtime_SetHandP.restype = c_int32
 
-        d.FX_L1_Runtime_SetHandD.argtypes = [c_int32, POINTER(c_int32)]
+        d.FX_L1_Runtime_SetHandD.argtypes = [c_uint32, c_int32, POINTER(c_int32)]
         d.FX_L1_Runtime_SetHandD.restype = c_int32
 
-        d.FX_L1_Runtime_SetHandMaxTor.argtypes = [c_int32, POINTER(c_int32)]
+        d.FX_L1_Runtime_SetHandMaxTor.argtypes = [c_uint32, c_int32, POINTER(c_int32)]
         d.FX_L1_Runtime_SetHandMaxTor.restype = c_int32
 
         # Kinematics functions
@@ -1422,34 +1448,7 @@ class GentoRobot:
         with self._lock:
             return self.dll.FX_L1_System_RecvFile(local_path.encode('utf-8'), remote_path.encode('utf-8'))
 
-    # ==================== Communication ====================
-    def comm_clear(self, timeout: int) -> int:
-        """Clear the communication buffer.
-
-        @param timeout: Timeout in milliseconds.
-        @return: 0 on success, negative error code otherwise.
-        """
-        with self._lock:
-            return self.dll.FX_L1_Comm_Clear(timeout)
-
-    def comm_send(self) -> int:
-        """Send pending communication data.
-
-        @return: 0 on success, negative error code otherwise.
-        """
-        with self._lock:
-            return self.dll.FX_L1_Comm_Send()
-
-    def comm_send_and_wait(self, timeout: int) -> int:
-        """Send data and wait for acknowledgment.
-
-        @param timeout: Timeout in milliseconds.
-        @return: 0 on success, negative error code otherwise.
-        """
-        with self._lock:
-            return self.dll.FX_L1_Comm_SendAndWait(timeout)
-
-        # ==================== State feedback ====================
+    # ==================== State feedback ====================
 
     def get_ctrl_obj_dof(self, obj_type: int) -> int:
         """Get the number of degrees of freedom for a given object.
@@ -1460,16 +1459,19 @@ class GentoRobot:
         with self._lock:
             return self.dll.FX_L1_Fbk_GetCtrlObjDof(obj_type)
 
-    def get_ctrl_obj_servo_version(self, obj_type: int) -> List[str]:
+    def get_ctrl_obj_servo_version(self, obj_type: int) -> Tuple[int, List[str]]:
         """Get servo version strings for each axis of the object.
 
         @param obj_type: Object type (FXObjType).
-        @return: List of version strings (one per axis, up to 7).
+        @return: Tuple of (return_code, version_strings). return_code is 0 on success,
+                 non-zero on failure (see FXFuncReturn). On failure, version_strings is an empty list.
         """
         VersionArrayType = (c_char * 30) * 7
         version_arr = VersionArrayType()
         with self._lock:
-            self.dll.FX_L1_Fbk_GetCtrlObjServoVersion(obj_type, version_arr)
+            ret = self.dll.FX_L1_Fbk_GetCtrlObjServoVersion(obj_type, version_arr)
+            if ret < 0:
+                return ret, []
             result = []
             for i in range(7):
                 raw_bytes = bytes(version_arr[i])
@@ -1477,19 +1479,24 @@ class GentoRobot:
                 if null_pos != -1:
                     raw_bytes = raw_bytes[:null_pos]
                 result.append(raw_bytes.decode('utf-8', errors='ignore'))
-            return result
+            return ret, result
 
-    def get_ctrl_obj_sensor_version_and_serial(self, obj_type: int) -> Tuple[List[int], List[int]]:
+    def get_ctrl_obj_sensor_version_and_serial(self, obj_type: int) -> Tuple[int, List[int], List[int]]:
         """Get sensor version and serial numbers for each axis.
 
         @param obj_type: Object type (FXObjType).
-        @return: Tuple of two lists: (versions, serials).
+        @return: Tuple of (return_code, versions, serials). return_code is 0 on success,
+                 non-zero on failure. On failure, versions and serials are empty lists.
         """
         version_arr = (c_int32 * 7)()
         serial_arr = (c_int32 * 7)()
         with self._lock:
-            self.dll.FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial(obj_type, version_arr, serial_arr)
-            return [version_arr[i] for i in range(7)], [serial_arr[i] for i in range(7)]
+            ret = self.dll.FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial(obj_type, version_arr, serial_arr)
+            if ret < 0:
+                return ret, [], []
+            versions = [version_arr[i] for i in range(7)]
+            serials = [serial_arr[i] for i in range(7)]
+            return ret, versions, serials
 
     def get_ctrl_obj_physical_state(self, obj_type: int) -> tuple[int, int]:
         """Get the physical state of the object.
@@ -1566,14 +1573,43 @@ class GentoRobot:
             ret = self.dll.FX_L1_State_ResetError(obj_type, timeout, byref(system_errorcode))
         return ret, system_errorcode.value
 
-    def emergency_stop(self, obj_mask: int) -> int:
-        """Trigger emergency stop for the objects specified by the mask.
+    def fbk_reset_user_data_set(self) -> None:
+        """Reset all registered user data sets.
 
-        @param obj_mask: Bitmask (FXObjMask).
+        Clears all previously registered user data sets.
+        """
+        with self._lock:
+            self.dll.FX_L1_Fbk_ResetUserDataSet()
+
+    def fbk_register_user_data_set(self, name: str, data_type: int, sub: int, data_num: int) -> int:
+        """Register a user data set for feedback sampling.
+
+        @param name:      Name identifier for the user data set (e.g., 'ROBOT_RT.m_RT_FrameSerial').
+        @param data_type: Data type (FXUserDataType).
+        @param sub:       Sub-index for the data set.
+        @param data_num:  Number of data elements.
         @return: 0 on success, negative error code otherwise.
         """
         with self._lock:
-            return self.dll.FX_L1_Runtime_EmergencyStop(obj_mask)
+            return self.dll.FX_L1_Fbk_RegisterUserDataSet(name.encode('utf-8'), data_type, sub, data_num)
+
+    def fbk_check_user_data_set(self, user_data_len: int) -> int:
+        """Check the validity of user data set length.
+
+        @param user_data_len: Total length of user data in bytes to verify.
+        @return: 0 on success, negative error code otherwise.
+        """
+        with self._lock:
+            return self.dll.FX_L1_Fbk_CheckUserDataSet(user_data_len)
+
+    def fbk_get_user_data(self, buffer) -> None:
+        """Sample the user data from feedback into the provided buffer.
+
+        @param buffer: A ctypes buffer (e.g., created by create_string_buffer or cast)
+                       large enough to hold the registered user data.
+        """
+        with self._lock:
+            self.dll.FX_L1_Fbk_GetUserData(buffer)
 
     # ==================== State switching ====================
     def switch_to_idle(self, obj_type: int, timeout: int) -> int:
@@ -1773,7 +1809,6 @@ class GentoRobot:
             return self.dll.FX_L1_State_SwitchToCollaborativeRelease(obj_type, timeout)
 
     # ==================== Parameters ====================
-
     def param_set_int(self, name: str, value: int) -> int:
         """Set an integer parameter.
 
@@ -1976,6 +2011,25 @@ class GentoRobot:
             return self.dll.FX_L1_Config_SetPDCmdCycleTime(cycle_time)
 
     # ==================== Runtime commands ====================
+    def emergency_stop(self, obj_mask: int) -> int:
+        """Trigger emergency stop for the objects specified by the mask.
+
+        @param obj_mask: Bitmask (FXObjMask).
+        @return: bitmask (FXObjMask).
+        """
+        with self._lock:
+            return self.dll.FX_L1_Runtime_EmergencyStop(self._thread_id, obj_mask)
+
+    def runtime_set_tag(self, obj_type: int, tag: int) -> int:
+        """Set a user-defined tag on the specified object.
+
+        @param obj_type: Object type (FXObjType).
+        @param tag: User-defined tag value.
+        @return: 0 on success, negative error code otherwise.
+        """
+        with self._lock:
+            return self.dll.FX_L1_Runtime_SetTag(self._thread_id, obj_type, tag)
+
     def runtime_set_joint_pos_cmd(self, obj_type: int, positions: List[float]) -> int:
         """Send a joint position command to the specified object.
 
@@ -2000,7 +2054,7 @@ class GentoRobot:
         padded = list(positions) + [0.0] * (7 - expected)
         arr = (c_double * 7)(*padded)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetJointPosCmd(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetJointPosCmd(self._thread_id, obj_type, arr)
 
     def runtime_set_joint_pos_pd_cmd(self, obj_type: int, positions: List[float]) -> int:
         """Send a joint position command in PD control mode.
@@ -2014,7 +2068,7 @@ class GentoRobot:
             raise ValueError(f"PD position command requires 7 elements, got {len(positions)}")
         arr = (c_double * 7)(*positions)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetJointPosPDCmd(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetJointPosPDCmd(self._thread_id, obj_type, arr)
 
     def runtime_set_force_ctrl(self, obj_type: int, force_ctrl: List[float]) -> int:
         """Set force control parameters for impedance force mode.
@@ -2028,7 +2082,7 @@ class GentoRobot:
             raise ValueError("force_ctrl must have 5 elements")
         arr = (c_double * 5)(*force_ctrl)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetForceCtrl(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetForceCtrl(self._thread_id, obj_type, arr)
 
     def runtime_set_torque_ctrl(self, obj_type: int, torque_ctrl: List[float]) -> int:
         """Set torque control parameters for impedance force mode.
@@ -2042,7 +2096,7 @@ class GentoRobot:
             raise ValueError("torque_ctrl must have 5 elements")
         arr = (c_double * 5)(*torque_ctrl)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetTorqueCtrl(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetTorqueCtrl(self._thread_id, obj_type, arr)
 
     def runtime_set_vel_ratio(self, obj_type: int, ratio: float) -> int:
         """Set the velocity scaling ratio for motion commands.
@@ -2053,7 +2107,7 @@ class GentoRobot:
         """
         ratio = max(1, min(ratio, 100))
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetVelRatio(obj_type, ratio)
+            return self.dll.FX_L1_Runtime_SetVelRatio(self._thread_id, obj_type, ratio)
 
     def runtime_set_acc_ratio(self, obj_type: int, ratio: float) -> int:
         """Set the acceleration scaling ratio for motion commands.
@@ -2064,7 +2118,7 @@ class GentoRobot:
         """
         ratio = max(1, min(ratio, 100))
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetAccRatio(obj_type, ratio)
+            return self.dll.FX_L1_Runtime_SetAccRatio(self._thread_id, obj_type, ratio)
 
     def runtime_set_speed_ratio(self, obj_type: int, vel_ratio: float, acc_ratio: float) -> int:
         """Set both velocity and acceleration scaling ratios.
@@ -2077,7 +2131,7 @@ class GentoRobot:
         vel_ratio = max(1, min(vel_ratio, 100))
         acc_ratio = max(1, min(acc_ratio, 100))
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetSpeedRatio(obj_type, vel_ratio, acc_ratio)
+            return self.dll.FX_L1_Runtime_SetSpeedRatio(self._thread_id, obj_type, vel_ratio, acc_ratio)
 
     def runtime_set_joint_k(self, obj_type: int, k: List[float]) -> int:
         """Set joint‑space stiffness coefficients for impedance control.
@@ -2092,7 +2146,7 @@ class GentoRobot:
         k = [max(0, v) for v in k]
         arr = (c_double * 7)(*k)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetJointK(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetJointK(self._thread_id, obj_type, arr)
 
     def runtime_set_joint_d(self, obj_type: int, d: List[float]) -> int:
         """Set joint‑space damping coefficients for impedance control.
@@ -2107,7 +2161,7 @@ class GentoRobot:
         d = [max(0, v) for v in d]
         arr = (c_double * 7)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetJointD(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetJointD(self._thread_id, obj_type, arr)
 
     def runtime_set_joint_kd(self, obj_type: int, k: List[float], d: List[float]) -> int:
         """Set both joint‑space stiffness and damping coefficients.
@@ -2122,7 +2176,7 @@ class GentoRobot:
         k_arr = (c_double * 7)(*k)
         d_arr = (c_double * 7)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetJointKD(obj_type, k_arr, d_arr)
+            return self.dll.FX_L1_Runtime_SetJointKD(self._thread_id, obj_type, k_arr, d_arr)
 
     def runtime_set_cart_k(self, obj_type: int, k: List[float]) -> int:
         """Set Cartesian‑space stiffness coefficients for impedance control.
@@ -2137,7 +2191,7 @@ class GentoRobot:
         k = [max(0, v) for v in k]
         arr = (c_double * 7)(*k)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetCartK(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetCartK(self._thread_id, obj_type, arr)
 
     def runtime_set_cart_d(self, obj_type: int, d: List[float]) -> int:
         """Set Cartesian‑space damping coefficients for impedance control.
@@ -2152,7 +2206,7 @@ class GentoRobot:
         d = [max(0, v) for v in d]
         arr = (c_double * 7)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetCartD(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetCartD(self._thread_id, obj_type, arr)
 
     def runtime_set_cart_kd(self, obj_type: int, k: List[float], d: List[float]) -> int:
         """Set both Cartesian‑space stiffness and damping coefficients.
@@ -2167,7 +2221,7 @@ class GentoRobot:
         k_arr = (c_double * 7)(*k)
         d_arr = (c_double * 7)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetCartKD(obj_type, k_arr, d_arr)
+            return self.dll.FX_L1_Runtime_SetCartKD(self._thread_id, obj_type, k_arr, d_arr)
 
     def runtime_set_tool_k(self, obj_type: int, k: List[float]) -> int:
         """Set tool kinematics (offset from flange to TCP).
@@ -2181,7 +2235,7 @@ class GentoRobot:
             raise ValueError("kinematics must have 6 elements (tool offset)")
         arr = (c_double * 6)(*k)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetToolK(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetToolK(self._thread_id, obj_type, arr)
 
     def runtime_set_tool_d(self, obj_type: int, d: List[float]) -> int:
         """Set tool dynamics parameters.
@@ -2195,7 +2249,7 @@ class GentoRobot:
             raise ValueError("dynamics must have 10 elements (tool dynamics)")
         arr = (c_double * 10)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetToolD(obj_type, arr)
+            return self.dll.FX_L1_Runtime_SetToolD(self._thread_id, obj_type, arr)
 
     def runtime_set_tool_kd(self, obj_type: int, k: List[float], d: List[float]) -> int:
         """Set both tool kinematics and dynamics in one call.
@@ -2213,7 +2267,7 @@ class GentoRobot:
         k_arr = (c_double * 6)(*k)
         d_arr = (c_double * 10)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetToolKD(obj_type, k_arr, d_arr)
+            return self.dll.FX_L1_Runtime_SetToolKD(self._thread_id, obj_type, k_arr, d_arr)
 
     def runtime_set_body_pdp(self, p: List[float]) -> int:
         """Set body proportional (P) gains.
@@ -2227,7 +2281,7 @@ class GentoRobot:
         p = [max(0, v) for v in p]
         arr = (c_double * 6)(*p)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetBodyPDP(arr)
+            return self.dll.FX_L1_Runtime_SetBodyPDP(self._thread_id, arr)
 
     def runtime_set_body_pdd(self, d: List[float]) -> int:
         """Set body derivative (D) gains.
@@ -2241,7 +2295,7 @@ class GentoRobot:
         d = [max(0, v) for v in d]
         arr = (c_double * 6)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetBodyPDD(arr)
+            return self.dll.FX_L1_Runtime_SetBodyPDD(self._thread_id, arr)
 
     def runtime_set_body_pd(self, p: List[float], d: List[float]) -> int:
         """Set both body proportional and derivative gains.
@@ -2258,25 +2312,25 @@ class GentoRobot:
         p_arr = (c_double * 6)(*p)
         d_arr = (c_double * 6)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetBodyPD(p_arr, d_arr)
+            return self.dll.FX_L1_Runtime_SetBodyPD(self._thread_id, p_arr, d_arr)
 
     def runtime_run_traj(self, obj_mask: int) -> int:
         """Start trajectory execution for the objects specified by the mask.
 
         @param obj_mask: Bitmask of objects (FXObjMask).
-        @return: 0 on success, negative error code otherwise.
+        @return: bitmask (FXObjMask) of objects that successfully started trajectory execution.
         """
         with self._lock:
-            return self.dll.FX_L1_Runtime_RunTraj(obj_mask)
+            return self.dll.FX_L1_Runtime_RunTraj(self._thread_id, obj_mask)
 
     def runtime_stop_traj(self, obj_mask: int) -> int:
         """Stop trajectory execution for the objects specified by the mask.
 
         @param obj_mask: Bitmask of objects (FXObjMask).
-        @return: 0 on success, negative error code otherwise.
+        @return: bitmask (FXObjMask) of objects that successfully stopped trajectory execution.
         """
         with self._lock:
-            return self.dll.FX_L1_Runtime_StopTraj(obj_mask)
+            return self.dll.FX_L1_Runtime_StopTraj(self._thread_id, obj_mask)
 
     def runtime_set_hand_action(self, hand_type: int, hand_action: int) -> int:
         """Set the runtime action command for the specified hand.
@@ -2286,7 +2340,7 @@ class GentoRobot:
         @return: 0 on success, negative error code otherwise.
         """
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetHandAction(hand_type, hand_action)
+            return self.dll.FX_L1_Runtime_SetHandAction(self._thread_id, hand_type, hand_action)
 
     def runtime_set_hand_pos(self, hand_type: int, pos: List[int]) -> int:
         """Set the target position ratio command for the specified hand.
@@ -2300,7 +2354,7 @@ class GentoRobot:
             raise ValueError("pos must have 24 elements")
         arr = (c_int * 24)(*pos)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetHandPos(hand_type, arr)
+            return self.dll.FX_L1_Runtime_SetHandPos(self._thread_id, hand_type, arr)
 
     def runtime_set_hand_p(self, hand_type: int, p: List[int]) -> int:
         """Set the proportional gain (P) for the specified hand.
@@ -2314,7 +2368,7 @@ class GentoRobot:
             raise ValueError("p must have 24 elements")
         arr = (c_int * 24)(*p)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetHandP(hand_type, arr)
+            return self.dll.FX_L1_Runtime_SetHandP(self._thread_id, hand_type, arr)
 
     def runtime_set_hand_d(self, hand_type: int, d: List[int]) -> int:
         """Set the derivative gain (D) for the specified hand.
@@ -2328,7 +2382,7 @@ class GentoRobot:
             raise ValueError("d must have 24 elements")
         arr = (c_int * 24)(*d)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetHandD(hand_type, arr)
+            return self.dll.FX_L1_Runtime_SetHandD(self._thread_id, hand_type, arr)
 
     def runtime_set_hand_max_tor(self, hand_type: int, max_tor: List[int]) -> int:
         """Set the maximum torque limit for the specified hand.
@@ -2342,7 +2396,7 @@ class GentoRobot:
             raise ValueError("max_tor must have 24 elements")
         arr = (c_int * 24)(*max_tor)
         with self._lock:
-            return self.dll.FX_L1_Runtime_SetHandMaxTor(hand_type, arr)
+            return self.dll.FX_L1_Runtime_SetHandMaxTor(self._thread_id, hand_type, arr)
 
     # ==================== Kinematics ====================
     # ---------- Private handle management ----------
@@ -3123,6 +3177,7 @@ class GentoRobot:
             -20: "Invalid robot type to support or robot unlinked",
             -21: "Invalid hand type to support",
             -22: "Controller has already linked by other client",
+            -23: "Invalid thread id",
 
             -1000: "Kinematics context or arm environment is not initialized",
             -1001: "Kinematics environment initialization failed",

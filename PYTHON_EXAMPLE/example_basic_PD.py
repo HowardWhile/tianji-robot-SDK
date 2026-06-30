@@ -160,17 +160,9 @@ def main():
 
     # --- Move to mechanical home ---
     print(f"\n### 4/7. Moving to mechanical home...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Communication clear buffer failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_pd_cmd(ctrl_obj, mechanical_home)
     if ret != 0:
         print(f"Set joint PD command failed. Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
-    if ret != 0:
-        print(f"Communication send failed. Error msg: {robot._get_operate_error_msg(ret)}")
         return
     time.sleep(0.5)
     rt_dict = robot.get_rt_dict()
@@ -184,9 +176,7 @@ def main():
 
     t_start = time.time()
     for i, pos in enumerate(pos_array):
-        robot.comm_clear(50)
         robot.runtime_set_joint_pos_pd_cmd(ctrl_obj, pos)
-        robot.comm_send()
 
         rt_dict = robot.get_rt_dict()
         sg_dict = robot.get_sg_dict()

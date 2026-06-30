@@ -131,9 +131,7 @@ int main(int argc, char** argv)
     /* Move arm to zero position */
     printf("Press any key to let arm0 move to zero position\n");
     getchar();
-    if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-        FX_L1_Runtime_SetJointPosCmd(FX_OBJ_ARM0, zero_position) != FUNC_RET_SUCCESS ||
-        FX_L1_Comm_SendAndWait(500) < 0)
+    if (FX_L1_Runtime_SetJointPosCmd(1, FX_OBJ_ARM0, zero_position) != FUNC_RET_SUCCESS)
     {
         printf("Failed to set arm0's target position\n");
         goto WAIT_EXIT;

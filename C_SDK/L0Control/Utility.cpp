@@ -207,6 +207,14 @@ FX_BOOL CMarvNetAgent::OnSend()
 	{
 		return FX_FALSE;
 	}
+
+    FX_INT32 send_len = sendto(m_nc._tosock_, (char *)m_buf.m_SendBuf, m_buf.m_Slen, 0, (struct sockaddr *)&m_nc._to, sizeof(m_nc._to));
+    if(send_len != m_buf.m_Slen)
+    {
+        return FX_FALSE;
+    }
+    return FX_TRUE;
+#if 0    
 	if (m_buf.m_STag != 100)
 	{
 		return FX_FALSE;
@@ -239,6 +247,7 @@ FX_BOOL CMarvNetAgent::OnSend()
 	}
 	m_buf.m_Slen = 0;
 	return FX_TRUE;
+#endif    
 }
 
 FX_BOOL CMarvNetAgent::OnSendLink()
@@ -413,7 +422,6 @@ FX_BOOL CACB::WriteBuf(FX_UCHAR *data_ptr, FX_INT32 size_int)
 			write_lock_ = 0;
 			return FX_FALSE;
 		}
-
 		base_[wpos] = size_int / 256;
 		wpos++;
 		wpos %= size_;
@@ -523,6 +531,63 @@ FX_INT32 CACB::ReadBuf(FX_UCHAR *data_ptr, FX_INT32 size_int)
 	read_lock_ = 0;
 
 	item_num_--;
+	return sizetmp;
+}
+
+FX_INT32 CACB::PeekBuf(FX_UCHAR *data_ptr, FX_INT32 size_int)
+{
+	if (init_tag_ == FX_FALSE)
+	{
+		return -1;
+	}
+	if (read_lock_ != 0)
+	{
+		return -1;
+	}
+	read_lock_ = 1;
+
+	FX_INT32 wpos = write_pos_;
+	FX_INT32 rpos = read_pos_;
+	rpos++;
+	rpos %= size_;
+	if (rpos == wpos)
+	{
+		read_lock_ = 0;
+		return 0;
+	}
+
+	FX_INT32 sizetmp;
+	sizetmp = base_[rpos] * 256;
+	rpos++;
+	rpos %= size_;
+	sizetmp += base_[rpos];
+	if (size_int < sizetmp)
+	{
+		read_lock_ = 0;
+		return -2;
+	}
+
+	rpos++;
+	rpos %= size_;
+
+	rpos += 4;
+	rpos %= size_;
+
+	FX_INT32 explen = size_ - rpos;
+	if (explen <= sizetmp)
+	{
+		memcpy(data_ptr, &base_[rpos], explen);
+		if (sizetmp - explen > 0)
+		{
+			memcpy(&data_ptr[explen], base_, sizetmp - explen);
+		}
+	}
+	else
+	{
+		memcpy(data_ptr, &base_[rpos], sizetmp);
+	}
+	read_lock_ = 0;
+
 	return sizetmp;
 }
 

@@ -97,17 +97,9 @@ def main():
 
         if int(sg_dict["arms"][arm_idx]['set']["vel_ratio"])!=vel:
             print(f"Set vel to {vel}")
-            ret=robot.comm_clear(50)
-            if ret != 0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-                return
             ret=robot.runtime_set_vel_ratio(ctrl_obj,vel)
             if ret!=0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-                return
-            ret=robot.comm_send()
-            if ret!=0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
+                print(f"set vel failed. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
             time.sleep(0.01)
             sg_dict = robot.get_sg_dict()
@@ -115,32 +107,16 @@ def main():
 
         if int(sg_dict["arms"][0]['set']["acc_ratio"])!=acc:
             print(f"Set acc to {acc}")
-            ret=robot.comm_clear(50)
-            if ret != 0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-                return
             ret=robot.runtime_set_acc_ratio(ctrl_obj,acc)
             if ret!=0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-                return
-            ret=robot.comm_send()
-            if ret!=0:
-                print(f"Error msg: {robot._get_operate_error_msg(ret)}")
+                print(f"set acc failed. Error msg: {robot._get_operate_error_msg(ret)}")
                 return
             time.sleep(0.01)
             sg_dict = robot.get_sg_dict()
             print(f"After set, current acc:{sg_dict["arms"][0]['set']["acc_ratio"]}")
 
     print(f"\n### 4/8. Run zero joints...")
-    ret = robot.comm_clear(50)
-    if ret != 0:
-        print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-        return
     ret = robot.runtime_set_joint_pos_cmd(ctrl_obj, pos1)
-    if ret != 0:
-        print(f"Error msg: {robot._get_operate_error_msg(ret)}")
-        return
-    ret = robot.comm_send()
     if ret != 0:
         print(f"Error msg: {robot._get_operate_error_msg(ret)}")
         return

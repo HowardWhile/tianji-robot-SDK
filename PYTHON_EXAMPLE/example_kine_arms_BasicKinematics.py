@@ -91,7 +91,7 @@ def main():
     arm0_ik_result_structure = robot.inverse_kinematics(0, arm0_ik_params)
     if arm0_ik_result_structure:
         print(f'ik joints(close to reference joints)::{arm0_ik_result_structure.m_Output_RetJoint[:]}')
-        print(f'IK exceed joints:）: {arm0_ik_result_structure.m_Output_IsJntExd}')
+        print(f'IK exceed joints: {arm0_ik_result_structure.m_Output_IsJntExd}')
         print(f'IK exceed joint tags: {arm0_ik_result_structure.m_Output_JntExdTags[:]}')
         print(f'Positive limits of joints: {arm0_ik_result_structure.m_Output_RunLmtP[:]}')
         print(f'Negative limits of joints: {arm0_ik_result_structure.m_Output_RunLmtN[:]}')
@@ -104,7 +104,7 @@ def main():
     arm1_ik_result_structure = robot.inverse_kinematics(1, arm1_ik_params)
     if arm1_ik_result_structure:
         print(f'ik joints(close to reference joints)::{arm1_ik_result_structure.m_Output_RetJoint[:]}')
-        print(f'IK exceed joints:）: {arm1_ik_result_structure.m_Output_IsJntExd}')
+        print(f'IK exceed joints: {arm1_ik_result_structure.m_Output_IsJntExd}')
         print(f'IK exceed joint tags: {arm1_ik_result_structure.m_Output_JntExdTags[:]}')
         print(f'Positive limits of joints: {arm1_ik_result_structure.m_Output_RunLmtP[:]}')
         print(f'Negative limits of joints: {arm1_ik_result_structure.m_Output_RunLmtN[:]}')
