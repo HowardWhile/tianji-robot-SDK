@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1230</width>
+    <height>817</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralWidget {
+    background-color: #eef1f6;
+    background-image: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #eef1f6, stop:1 #e3e9f5);
+}
+QMainWindow {
+    background-color: #eef1f6;
+}
+
+/* ===== 通用按钮 ===== */
+QPushButton {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #f5f7fa);
+    color: #2c3e50;
+    border: 1px solid #d6dae3;
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+QPushButton:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #eaf2ff, stop:1 #d6e6ff);
+    border-color: #4a90e2;
+    color: #1a73e8;
+}
+QPushButton:pressed {
+    background-color: #d0e0ff;
+    border-color: #1a73e8;
+}
+QPushButton:disabled {
+    background-color: #eceef1;
+    color: #9aa0a6;
+    border-color: #d6dae3;
+}
+
+/* ===== 主操作按钮（渐变蓝） ===== */
+QPushButton#pushButton_26,
+QPushButton#pushButton_30,
+QPushButton#pushButton_32,
+QPushButton#pushButton_27,
+QPushButton#pushButton_33 {
+    color: #ffffff;
+    border: 1px solid #2a5cd6;
+    border-radius: 10px;
+    font-weight: 600;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #4a90e2, stop:0.5 #1a73e8, stop:1 #1557b8);
+}
+QPushButton#pushButton_26:hover,
+QPushButton#pushButton_30:hover,
+QPushButton#pushButton_32:hover,
+QPushButton#pushButton_27:hover,
+QPushButton#pushButton_33:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #5aa0f2, stop:0.5 #2a83f0, stop:1 #1a67c8);
+    border-color: #1557b8;
+}
+QPushButton#pushButton_26:pressed,
+QPushButton#pushButton_30:pressed,
+QPushButton#pushButton_32:pressed,
+QPushButton#pushButton_27:pressed,
+QPushButton#pushButton_33:pressed {
+    background-color: #0f44a0;
+}
+
+/* ===== 危险按钮（停止播放 - 红色调） ===== */
+QPushButton#pushButton_33 {
+    color: #ffffff;
+    border: 1px solid #b03a3a;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #ff7a7a, stop:0.5 #e84c4c, stop:1 #c93838);
+}
+QPushButton#pushButton_33:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #ff8a8a, stop:0.5 #f05a5a, stop:1 #d34848);
+    border-color: #b03a3a;
+}
+QPushButton#pushButton_33:pressed {
+    background-color: #a02828;
+}
+
+/* ===== 次要动作按钮（描边） ===== */
+QPushButton#pushButton_28,
+QPushButton#pushButton_31,
+QPushButton#pushButton_29 {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #eef4ff);
+    color: #1a73e8;
+    border: 1px solid #1a73e8;
+    border-radius: 10px;
+    font-weight: 600;
+}
+QPushButton#pushButton_28:hover,
+QPushButton#pushButton_31:hover,
+QPushButton#pushButton_29:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #eaf2ff, stop:1 #d6e6ff);
+    color: #0f44a0;
+    border-color: #0f44a0;
+}
+QPushButton#pushButton_28:pressed,
+QPushButton#pushButton_31:pressed,
+QPushButton#pushButton_29:pressed {
+    background-color: #d0e0ff;
+}
+
+/* ===== 钢琴黑键（第一排 1-5 1-5） ===== */
+QPushButton#pushButton_16,
+QPushButton#pushButton_17,
+QPushButton#pushButton_18,
+QPushButton#pushButton_19,
+QPushButton#pushButton_20,
+QPushButton#pushButton_21,
+QPushButton#pushButton_22,
+QPushButton#pushButton_23,
+QPushButton#pushButton_24,
+QPushButton#pushButton_25 {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #3a3f4b, stop:1 #1f2329);
+    color: #f5f7fa;
+    border: 1px solid #0d1014;
+    border-radius: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    font-weight: 700;
+}
+QPushButton#pushButton_16:hover,
+QPushButton#pushButton_17:hover,
+QPushButton#pushButton_18:hover,
+QPushButton#pushButton_19:hover,
+QPushButton#pushButton_20:hover,
+QPushButton#pushButton_21:hover,
+QPushButton#pushButton_22:hover,
+QPushButton#pushButton_23:hover,
+QPushButton#pushButton_24:hover,
+QPushButton#pushButton_25:hover {
+    color: #ffffff;
+    border-color: #1557b8;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #4a90e2, stop:1 #1a73e8);
+}
+QPushButton#pushButton_16:pressed,
+QPushButton#pushButton_17:pressed,
+QPushButton#pushButton_18:pressed,
+QPushButton#pushButton_19:pressed,
+QPushButton#pushButton_20:pressed,
+QPushButton#pushButton_21:pressed,
+QPushButton#pushButton_22:pressed,
+QPushButton#pushButton_23:pressed,
+QPushButton#pushButton_24:pressed,
+QPushButton#pushButton_25:pressed {
+    background-color: #0f44a0;
+    border-color: #0f44a0;
+}
+
+/* ===== 钢琴白键（第二排 1-7 1-8） ===== */
+QPushButton#pushButton,
+QPushButton#pushButton_2,
+QPushButton#pushButton_3,
+QPushButton#pushButton_4,
+QPushButton#pushButton_5,
+QPushButton#pushButton_6,
+QPushButton#pushButton_7,
+QPushButton#pushButton_8,
+QPushButton#pushButton_9,
+QPushButton#pushButton_10,
+QPushButton#pushButton_11,
+QPushButton#pushButton_12,
+QPushButton#pushButton_13,
+QPushButton#pushButton_14,
+QPushButton#pushButton_15 {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #f0f2f5);
+    color: #2c3e50;
+    border: 1px solid #c8ccd4;
+    border-radius: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    font-weight: 700;
+}
+QPushButton#pushButton:hover,
+QPushButton#pushButton_2:hover,
+QPushButton#pushButton_3:hover,
+QPushButton#pushButton_4:hover,
+QPushButton#pushButton_5:hover,
+QPushButton#pushButton_6:hover,
+QPushButton#pushButton_7:hover,
+QPushButton#pushButton_8:hover,
+QPushButton#pushButton_9:hover,
+QPushButton#pushButton_10:hover,
+QPushButton#pushButton_11:hover,
+QPushButton#pushButton_12:hover,
+QPushButton#pushButton_13:hover,
+QPushButton#pushButton_14:hover,
+QPushButton#pushButton_15:hover {
+    color: #ffffff;
+    border-color: #1557b8;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #4a90e2, stop:1 #1a73e8);
+}
+QPushButton#pushButton:pressed,
+QPushButton#pushButton_2:pressed,
+QPushButton#pushButton_3:pressed,
+QPushButton#pushButton_4:pressed,
+QPushButton#pushButton_5:pressed,
+QPushButton#pushButton_6:pressed,
+QPushButton#pushButton_7:pressed,
+QPushButton#pushButton_8:pressed,
+QPushButton#pushButton_9:pressed,
+QPushButton#pushButton_10:pressed,
+QPushButton#pushButton_11:pressed,
+QPushButton#pushButton_12:pressed,
+QPushButton#pushButton_13:pressed,
+QPushButton#pushButton_14:pressed,
+QPushButton#pushButton_15:pressed {
+    background-color: #0f44a0;
+    border-color: #0f44a0;
+}
+
+/* ===== 下拉框 ===== */
+QComboBox {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #f5f7fa);
+    color: #2c3e50;
+    border: 1px solid #d6dae3;
+    border-radius: 10px;
+    padding: 6px 14px;
+    min-height: 28px;
+    min-width: 180px;
+    font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
+}
+QComboBox:hover {
+    border-color: #4a90e2;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #eaf2ff);
+}
+QComboBox::drop-down {
+    border: none;
+    width: 28px;
+}
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #5a6473;
+    margin-right: 10px;
+}
+QComboBox QAbstractItemView {
+    background-color: #ffffff;
+    color: #2c3e50;
+    border: 1px solid #d6dae3;
+    border-radius: 8px;
+    outline: none;
+    selection-background-color: #1a73e8;
+    selection-color: #ffffff;
+    padding: 4px;
+}
+
+/* ===== 菜单栏 / 工具栏 / 状态栏 ===== */
+QMenuBar {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #ffffff, stop:1 #f5f7fa);
+    color: #2c3e50;
+    border-bottom: 1px solid #e6e9ef;
+    padding: 3px;
+}
+QMenuBar::item {
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin: 0 2px;
+}
+QMenuBar::item:selected {
+    background-color: #eaf2ff;
+    color: #1a73e8;
+}
+QToolBar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6e9ef;
+    spacing: 4px;
+}
+QStatusBar {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #f5f7fa, stop:1 #ffffff);
+    color: #5a6473;
+    border-top: 1px solid #e6e9ef;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>18</number>
+    </property>
+    <property name="leftMargin">
+     <number>40</number>
+    </property>
+    <property name="topMargin">
+     <number>30</number>
+    </property>
+    <property name="rightMargin">
+     <number>40</number>
+    </property>
+    <property name="bottomMargin">
+     <number>30</number>
+    </property>
+    <item>
+     <spacer name="topSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="topControlsLayout">
+      <item>
+       <spacer name="topLeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_29">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>循环播放</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_30">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>开始播放</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_33">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>96</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>停止播放</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_31">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>PUT</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_28">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>DRAG</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_26">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>连接</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="topRightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="comboLayout">
+      <item>
+       <spacer name="comboLeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>210</width>
+          <height>42</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>1、欢乐颂</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2、友谊地久天长</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3、小星星</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4、找朋友</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_32">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Send</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="comboRightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="numberRow1Layout">
+      <item>
+       <spacer name="row1LeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_16">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_17">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_18">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_19">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_20">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_21">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_22">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_23">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_24">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_25">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="row1RightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="numberRow2Layout">
+      <item>
+       <spacer name="row2LeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_10">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_14">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_13">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_15">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>87</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="row2RightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="finishRowLayout">
+      <item>
+       <spacer name="finishLeftSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_27">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei,Segoe UI,sans-serif</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>完成</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="finishRightSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="bottomSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1230</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
