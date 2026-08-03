@@ -1,8 +1,100 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "bf53acab1b1e825ed088c659bfc87ca8192a32de",
-  "generatedAt": "2026-07-31T10:23:54.475Z",
+  "gitCommitHash": "e1256c6e26bfe47138088b6a56ae001df16fcc50",
+  "generatedAt": "2026-08-03T10:31:12.466Z",
   "files": {
+    "C_EXAMPLE_USE_DLL_SO/build_linux.sh": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/build_linux.sh",
+      "contentHash": "a98d789a54ad2479a55631456ce68dc914f3c3bd0e7c8fa89f7804b55db8ad32",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE_USE_DLL_SO/build_windows.bat": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/build_windows.bat",
+      "contentHash": "773e322d0fdbc7ecc7a1e346de724b0a90c4f1cc1e775234713632cd6b87d4e9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 35,
+      "hasStructuralAnalysis": false
+    },
+    "C_EXAMPLE_USE_DLL_SO/libGentoSDK.dll": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/libGentoSDK.dll",
+      "contentHash": "3d9eaec9171a752a29f871efba68001a9134c301089aac82cc601844e44ea9c1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 881,
+      "hasStructuralAnalysis": false
+    },
+    "C_EXAMPLE_USE_DLL_SO/libGentoSDKPY.so": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/libGentoSDKPY.so",
+      "contentHash": "79cbb95582e823a2314a7e1d280b49ac6b7287829a4777d6ddd4b619917e91fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4503,
+      "hasStructuralAnalysis": false
+    },
+    "C_EXAMPLE_USE_DLL_SO/test_link.cpp": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/test_link.cpp",
+      "contentHash": "793baf2e0a7c60e46749e1e2a366f7e235166e1f567a5c085153049aa7e3c54d",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "stdlib.h",
+          "specifiers": [
+            "stdlib.h"
+          ]
+        },
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "main"
+      ],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE_USE_DLL_SO/test_link.exe": {
+      "filePath": "C_EXAMPLE_USE_DLL_SO/test_link.exe",
+      "contentHash": "6f617217ef8359ed835505a46bda57c0a0a63fc281e35957f23907f20f2f646d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 153,
+      "hasStructuralAnalysis": false
+    },
     "C_EXAMPLE/example_basic_AccessParameter.cpp": {
       "filePath": "C_EXAMPLE/example_basic_AccessParameter.cpp",
       "contentHash": "f32b9ac2b8a557ab8cee11d2b1cff23f7ac3fa4ed301cfa02b4c860f3f4ecabc",
@@ -65,7 +157,7 @@
     },
     "C_EXAMPLE/example_basic_DragCartX.cpp": {
       "filePath": "C_EXAMPLE/example_basic_DragCartX.cpp",
-      "contentHash": "9f3446771cda6f8da817d9d7f723cd467b5a211a3ec59da0c526a67d6e5c3100",
+      "contentHash": "2ade6337c8812ae5eb7f0d1f68bb269f229c07aca3e048ea81c965993fc3ed56",
       "functions": [
         {
           "name": "main",
@@ -75,7 +167,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 218
+          "lineCount": 91
         }
       ],
       "classes": [],
@@ -90,12 +182,12 @@
       "exports": [
         "main"
       ],
-      "totalLines": 254,
+      "totalLines": 127,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_DragJoint.cpp": {
       "filePath": "C_EXAMPLE/example_basic_DragJoint.cpp",
-      "contentHash": "939e511af1adbe67ff97c01572b9e7221201b8ddce749f410eadcef695ea9fe2",
+      "contentHash": "137532beb0d54eaeabadaa5b4100c7a4527caca5145e774b180e62b7c2545500",
       "functions": [
         {
           "name": "main",
@@ -125,7 +217,7 @@
     },
     "C_EXAMPLE/example_basic_DragJoint2ImpCart.cpp": {
       "filePath": "C_EXAMPLE/example_basic_DragJoint2ImpCart.cpp",
-      "contentHash": "cbe4655c928567fbb91690c6a18894f9fc00de9c444f9c20ac19cef9702c34ea",
+      "contentHash": "9c8382c4a2cb3b47eb98bcb5b76e81f636413c34ab7025e1b254f86d22d0e598",
       "functions": [
         {
           "name": "main",
@@ -155,7 +247,7 @@
     },
     "C_EXAMPLE/example_basic_Emergency.cpp": {
       "filePath": "C_EXAMPLE/example_basic_Emergency.cpp",
-      "contentHash": "04571abc2e55359049b7bfc59f4cb4047e38d18bf2ccb687bc0cdb519d06b6a2",
+      "contentHash": "f10aaf55f623747c2784eaaf4133d3b3ccddd7302b8f964d055556cfa3689fff",
       "functions": [
         {
           "name": "main",
@@ -165,7 +257,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 129
+          "lineCount": 123
         }
       ],
       "classes": [],
@@ -180,12 +272,12 @@
       "exports": [
         "main"
       ],
-      "totalLines": 218,
+      "totalLines": 197,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_FileTransfer.cpp": {
       "filePath": "C_EXAMPLE/example_basic_FileTransfer.cpp",
-      "contentHash": "a109ab1fe7603c65d42426a61821612ef2dc06431aa2534ed9d65294af0160c8",
+      "contentHash": "d6740e47a5554e0ca8aa7e676af56ea0e3a63cf41e8975a8fe6c8b29c1375b13",
       "functions": [
         {
           "name": "main",
@@ -213,9 +305,9 @@
       "totalLines": 86,
       "hasStructuralAnalysis": true
     },
-    "C_EXAMPLE/example_basic_ImpJoint.cpp": {
-      "filePath": "C_EXAMPLE/example_basic_ImpJoint.cpp",
-      "contentHash": "7dbe1f72d999e008f8960e6d1f9618780569c9101551edefc4dcc33ab1f07c12",
+    "C_EXAMPLE/example_basic_Hand.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_Hand.cpp",
+      "contentHash": "9dd3bb4aa6152a738c8633fceb2071fa76222a79d33b815cd3e0cff2914453bf",
       "functions": [
         {
           "name": "main",
@@ -225,7 +317,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 141
+          "lineCount": 103
         }
       ],
       "classes": [],
@@ -240,13 +332,50 @@
       "exports": [
         "main"
       ],
-      "totalLines": 178,
+      "totalLines": 141,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_basic_ImpJoint.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_ImpJoint.cpp",
+      "contentHash": "23bf919fb1e7fa34648058385396bdad25d417378245a6361d2dae931a5bcb81",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 137
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "main"
+      ],
+      "totalLines": 174,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_LinkSystem.cpp": {
       "filePath": "C_EXAMPLE/example_basic_LinkSystem.cpp",
-      "contentHash": "1ee3f510fc6085c97d84bd3f3ac8aa24fe87eafa5a20041e471f9c30cddaafc9",
+      "contentHash": "e9cde7aa316231728011c5cea0c52fd92c1bab87312e18f89258b150ba7bf309",
       "functions": [
+        {
+          "name": "CheckLinkState",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
         {
           "name": "main",
           "params": [
@@ -255,7 +384,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 31
+          "lineCount": 42
         }
       ],
       "classes": [],
@@ -268,14 +397,126 @@
         }
       ],
       "exports": [
+        "CheckLinkState",
         "main"
       ],
-      "totalLines": 61,
+      "totalLines": 101,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_basic_MultiThread.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_MultiThread.cpp",
+      "contentHash": "bd01ce6bcfb51c260f2b41785563f849659d3c21f00bfd54e8d81440f2569424",
+      "functions": [
+        {
+          "name": "InterpolateJoints",
+          "params": [
+            "start",
+            "target",
+            "alpha",
+            "out"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "thread0",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "thread1",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "thread2",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 138
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        },
+        {
+          "source": "thread",
+          "specifiers": [
+            "thread"
+          ]
+        }
+      ],
+      "exports": [
+        "InterpolateJoints",
+        "thread0",
+        "thread1",
+        "thread2",
+        "main"
+      ],
+      "totalLines": 313,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_basic_PD.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_PD.cpp",
+      "contentHash": "3fedf9b40021e76abba6e073db3cf8a129c3a6846dbacaa964fffc77f1f85e10",
+      "functions": [
+        {
+          "name": "WriteSample2File",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 145
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "WriteSample2File",
+        "main"
+      ],
+      "totalLines": 1205,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_Position.cpp": {
       "filePath": "C_EXAMPLE/example_basic_Position.cpp",
-      "contentHash": "798904b48dac408216f7760f1812c2e2a25516a44c84e99f600ad9d310af9bcc",
+      "contentHash": "94481337d532bc1de89713e1f185e745b81e9b0420b0b9b8e93779171fd11bab",
       "functions": [
         {
           "name": "main",
@@ -285,7 +526,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 121
+          "lineCount": 117
         }
       ],
       "classes": [],
@@ -300,7 +541,7 @@
       "exports": [
         "main"
       ],
-      "totalLines": 158,
+      "totalLines": 154,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_ResetEncoder.cpp": {
@@ -346,7 +587,7 @@
     },
     "C_EXAMPLE/example_basic_ResetError.cpp": {
       "filePath": "C_EXAMPLE/example_basic_ResetError.cpp",
-      "contentHash": "67f1cc7837b768a2f4f4a974a78c3336c72193e6780b9c99b8c74bbec1c6cccf",
+      "contentHash": "a3bef2730d1a899b7f0765a571fceb9c7f6eb5a10f57cd84cc00876abaa8ce0e",
       "functions": [
         {
           "name": "main",
@@ -356,7 +597,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 124
+          "lineCount": 122
         }
       ],
       "classes": [],
@@ -371,12 +612,12 @@
       "exports": [
         "main"
       ],
-      "totalLines": 162,
+      "totalLines": 160,
       "hasStructuralAnalysis": true
     },
     "C_EXAMPLE/example_basic_ResetSensor.cpp": {
       "filePath": "C_EXAMPLE/example_basic_ResetSensor.cpp",
-      "contentHash": "d7e78ee0faccf6a422331285dbee5820afa5d0d47832fe1740fce7155e7db188",
+      "contentHash": "248a4e8857914a4f9ba99e22677070a9cb95dc12a2fa0d343ec93d5a7a49378c",
       "functions": [
         {
           "name": "ReadArm0SensorFbk",
@@ -395,7 +636,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 114
+          "lineCount": 112
         }
       ],
       "classes": [],
@@ -411,47 +652,854 @@
         "ReadArm0SensorFbk",
         "main"
       ],
-      "totalLines": 182,
+      "totalLines": 180,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_basic_SampleData.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_SampleData.cpp",
+      "contentHash": "ea838e00417ea766a105056f5449c1c82436c99fdb88b7a8ebba2837d221d9e9",
+      "functions": [
+        {
+          "name": "thread0",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 58
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        },
+        {
+          "source": "thread",
+          "specifiers": [
+            "thread"
+          ]
+        }
+      ],
+      "exports": [
+        "thread0",
+        "main"
+      ],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_basic_Terminal.cpp": {
+      "filePath": "C_EXAMPLE/example_basic_Terminal.cpp",
+      "contentHash": "248506579a827f6aa1bc6900eccef189665029e3ee12841ae1d310d8778ddd93",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 162
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot/L1Robot.h",
+          "specifiers": [
+            "L1Robot/L1Robot.h"
+          ]
+        },
+        {
+          "source": "windows.h",
+          "specifiers": [
+            "windows.h"
+          ]
+        }
+      ],
+      "exports": [
+        "main"
+      ],
+      "totalLines": 204,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_DualArm_BasicKinematics.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_DualArm_BasicKinematics.cpp",
+      "contentHash": "3f8220148556cb7538607f6f9f6cfc8529f185eb8cef2447f0baf26548351c49",
+      "functions": [
+        {
+          "name": "PrintMatrix",
+          "params": [
+            "name",
+            "matrix"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "SetIdentityMatrix",
+          "params": [
+            "matrix"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "FillInverseKinematicsInput",
+          "params": [
+            "ik_params",
+            "ref_joints",
+            "target_pose"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 37
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 52
+        },
+        {
+          "name": "DoDualArm_BasicKinematics",
+          "params": [
+            "handle"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 143
+        },
+        {
+          "name": "DualArm_BasicKinematics_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 72
+        },
+        {
+          "name": "DualArm_BasicKinematics_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "DualArm_BasicKinematics_ByIniConfig",
+        "DualArm_BasicKinematics_ByInputParams",
+        "main"
+      ],
+      "totalLines": 450,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_DualArm_MoveJ.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_DualArm_MoveJ.cpp",
+      "contentHash": "66518e92e21a731d40f23c7e5227c8a2ae1a753edffd2857a5d0993cee135134",
+      "functions": [
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 64
+        },
+        {
+          "name": "PrepareArmPositionMode",
+          "params": [
+            "obj_type",
+            "arm_name",
+            "vel_ratio",
+            "acc_ratio"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "StartTrajectory",
+          "params": [
+            "obj_mask"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "DualArm_MoveJ_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 199
+        },
+        {
+          "name": "DualArm_MoveJ_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 86
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "DualArm_MoveJ_ByIniConfig",
+        "DualArm_MoveJ_ByInputParams",
+        "main"
+      ],
+      "totalLines": 510,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_DualArm_SynchronousMoveL.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_DualArm_SynchronousMoveL.cpp",
+      "contentHash": "fbae2a08ffcc134bd36a3b0484fb53b83cace181c6881b09b7a9a783108dfc81",
+      "functions": [
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "PrintXYZABC",
+          "params": [
+            "name",
+            "xyzabc"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 52
+        },
+        {
+          "name": "PrepareArmPositionMode",
+          "params": [
+            "obj_type",
+            "arm_name",
+            "vel_ratio",
+            "acc_ratio"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "StartTrajectory",
+          "params": [
+            "obj_mask"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "DualArm_SynchronousMoveL_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 224
+        },
+        {
+          "name": "DualArm_SynchronousMoveL_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 99
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "DualArm_SynchronousMoveL_ByIniConfig",
+        "DualArm_SynchronousMoveL_ByInputParams",
+        "main"
+      ],
+      "totalLines": 543,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_SingleArm_MoveL_KeepJ.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_SingleArm_MoveL_KeepJ.cpp",
+      "contentHash": "87c35dbbf053b8b94e5c2b131d2ef0d1b367fab3de1935bd46c0ed005e715abc",
+      "functions": [
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 64
+        },
+        {
+          "name": "PrepareArmPositionMode",
+          "params": [
+            "obj_type",
+            "arm_name",
+            "vel_ratio",
+            "acc_ratio"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "StartTrajectory",
+          "params": [
+            "obj_mask"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "SingleArm_MoveL_KeepJ_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 153
+        },
+        {
+          "name": "SingleArm_MoveL_KeepJ_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 57
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SingleArm_MoveL_KeepJ_ByIniConfig",
+        "SingleArm_MoveL_KeepJ_ByInputParams",
+        "main"
+      ],
+      "totalLines": 435,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_SingleArm_MoveL.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_SingleArm_MoveL.cpp",
+      "contentHash": "c763f582cc2534506b35f2a27ff3314564f8e1587eba06674a6b61ee42871e45",
+      "functions": [
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "PrintXYZABC",
+          "params": [
+            "name",
+            "xyzabc"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 63
+        },
+        {
+          "name": "PrepareArmPositionMode",
+          "params": [
+            "obj_type",
+            "arm_name",
+            "vel_ratio",
+            "acc_ratio"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "StartTrajectory",
+          "params": [
+            "obj_mask"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "SingleArm_MoveL_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 170
+        },
+        {
+          "name": "SingleArm_MoveL_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 77
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SingleArm_MoveL_ByIniConfig",
+        "SingleArm_MoveL_ByInputParams",
+        "main"
+      ],
+      "totalLines": 483,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_SingleArm_MultiSegmentMoveL.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_SingleArm_MultiSegmentMoveL.cpp",
+      "contentHash": "27a113a16b995bd6c5a6cdc18cde071cab80a544c2a538bfdf628964c61defa8",
+      "functions": [
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 64
+        },
+        {
+          "name": "PrepareArmPositionMode",
+          "params": [
+            "obj_type",
+            "arm_name",
+            "vel_ratio",
+            "acc_ratio"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "StartTrajectory",
+          "params": [
+            "obj_mask"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "SingleArm_MultiSegmentMoveL_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 207
+        },
+        {
+          "name": "SingleArm_MultiSegmentMoveL_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 114
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SingleArm_MultiSegmentMoveL_ByIniConfig",
+        "SingleArm_MultiSegmentMoveL_ByInputParams",
+        "main"
+      ],
+      "totalLines": 546,
+      "hasStructuralAnalysis": true
+    },
+    "C_EXAMPLE/example_kine_SkyeBody_BasicKinematics.cpp": {
+      "filePath": "C_EXAMPLE/example_kine_SkyeBody_BasicKinematics.cpp",
+      "contentHash": "23477b10a538d00c61ca164cc0d11bcd1517c836fcb5ed121f0ce9989f98dd2f",
+      "functions": [
+        {
+          "name": "PrintMatrix",
+          "params": [
+            "name",
+            "matrix"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "PrintJointPosition",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "PrintBodyJoints",
+          "params": [
+            "name",
+            "joints"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "PrintXYZABC",
+          "params": [
+            "name",
+            "xyzabc"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "CopyMatrix4x4",
+          "params": [
+            "src",
+            "dst"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "MultiplyMatrix4x4",
+          "params": [
+            "lhs",
+            "rhs",
+            "out"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "InvertRigidMatrix4x4",
+          "params": [
+            "input",
+            "output"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "ExtractTranslation",
+          "params": [
+            "matrix",
+            "position"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "CalcDistance3",
+          "params": [
+            "lhs",
+            "rhs"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "FillInverseKinematicsInput",
+          "params": [
+            "ik_params",
+            "ref_joints",
+            "target_pose"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "InitSingleArmByInputParams",
+          "params": [
+            "handle",
+            "robot_serial"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 63
+        },
+        {
+          "name": "DoSkyeBody_BasicKinematics",
+          "params": [
+            "handle"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 160
+        },
+        {
+          "name": "SkyeBody_BasicKinematics_ByIniConfig",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 69
+        },
+        {
+          "name": "SkyeBody_BasicKinematics_ByInputParams",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "L1Robot.h",
+          "specifiers": [
+            "L1Robot.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SkyeBody_BasicKinematics_ByIniConfig",
+        "SkyeBody_BasicKinematics_ByInputParams",
+        "main"
+      ],
+      "totalLines": 551,
       "hasStructuralAnalysis": true
     },
     "C_SDK/Common/FXCmplOpt.h": {
       "filePath": "C_SDK/Common/FXCmplOpt.h",
-      "contentHash": "815641a2d4ac447eae4a04b79727184c4e9cfe42d7a4d61e2fac24b02812c530",
+      "contentHash": "34397c64095df7ce99ede18eb53e42ef79691f58ba383845d4af9373b2f5369a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "C_SDK/Common/FXCommon.h": {
+      "filePath": "C_SDK/Common/FXCommon.h",
+      "contentHash": "f5b48795ba9990510ac42a123b57d163af253a56e083b91f3f7f857cc7367d7f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 676,
+      "hasStructuralAnalysis": true
+    },
+    "C_SDK/Common/FXErrorCode.h": {
+      "filePath": "C_SDK/Common/FXErrorCode.h",
+      "contentHash": "9b33aac54facb3bd20d6560a354997a1e470214251ced812c43a2fcce4f7e92a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 114,
+      "hasStructuralAnalysis": true
+    },
+    "C_SDK/Common/FXType.h": {
+      "filePath": "C_SDK/Common/FXType.h",
+      "contentHash": "9e46bdd2acbffd3a480e66ee3fd317e477c6cc7606a906c412a30e9a61e71946",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
       "totalLines": 55,
-      "hasStructuralAnalysis": true
-    },
-    "C_SDK/Common/FXCommon.h": {
-      "filePath": "C_SDK/Common/FXCommon.h",
-      "contentHash": "736f74ab8524bfe099b4533471159a4b73367450bbb81a80c119c242f28a1287",
-      "functions": [],
-      "classes": [],
-      "imports": [],
-      "exports": [],
-      "totalLines": 591,
-      "hasStructuralAnalysis": true
-    },
-    "C_SDK/Common/FXErrorCode.h": {
-      "filePath": "C_SDK/Common/FXErrorCode.h",
-      "contentHash": "8c6852affcfc971d6e6b79ad9c18bdd7dfa5e162db95a1c31e3f98e84116791a",
-      "functions": [],
-      "classes": [],
-      "imports": [],
-      "exports": [],
-      "totalLines": 108,
-      "hasStructuralAnalysis": true
-    },
-    "C_SDK/Common/FXType.h": {
-      "filePath": "C_SDK/Common/FXType.h",
-      "contentHash": "a3c50f6fe963f19882acc14ada3aa7d95c123723d5e4a053046f61ab274b8406",
-      "functions": [],
-      "classes": [],
-      "imports": [],
-      "exports": [],
-      "totalLines": 47,
       "hasStructuralAnalysis": true
     },
     "C_SDK/FileClient/FileOP.cpp": {
@@ -1105,7 +2153,7 @@
     },
     "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h": {
       "filePath": "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h",
-      "contentHash": "22c2f70cab151632943a1db735c126c876d9ace8fb64ae1ac5763ad6bff94948",
+      "contentHash": "b5fbbaf9aef3d568bb04649598e94b39428a234b1c465cbb6eca46370aa523a2",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -1115,7 +2163,7 @@
     },
     "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp": {
       "filePath": "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp",
-      "contentHash": "f1d632ff523920fa6f65df75543b2b70ace9576c7cbe4ad6ab0c70b6c9edc74e",
+      "contentHash": "00769f199e883558a29707e26999e717a8f5012749d296f5ef5697808b00b0b5",
       "functions": [
         {
           "name": "FX_Robot_Init_Type",
@@ -1543,9 +2591,9 @@
       "classes": [],
       "imports": [
         {
-          "source": "FxKinematics.h",
+          "source": "FXKinematics.h",
           "specifiers": [
-            "FxKinematics.h"
+            "FXKinematics.h"
           ]
         },
         {
@@ -1856,7 +2904,7 @@
     },
     "C_SDK/Kinematics/BaseMath/FXMatrix.cpp": {
       "filePath": "C_SDK/Kinematics/BaseMath/FXMatrix.cpp",
-      "contentHash": "bbb08f5068eaabe9d2bada6bfa62895039a2eaa105c0228a30090ccccc1e7244",
+      "contentHash": "d7cec461089c3622b64035e1e1a924fc84f280a4e57eff42e985b2531fb6b9fc",
       "functions": [
         {
           "name": "FX_Vect3Copy",
@@ -3785,7 +4833,7 @@
     },
     "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.cpp": {
       "filePath": "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.cpp",
-      "contentHash": "258d149d2de854c48b1df92939a64fc15334902d9837d27a30a2403b07c865a1",
+      "contentHash": "f8a56543a99ab1df6a4f3eee3bbc43571273500b7f33b7db9e3b033e2cbf9c53",
       "functions": [
         {
           "name": "strSplite",
@@ -3947,7 +4995,7 @@
         "OnCalLoadDynamic_7_MarvinCCS",
         "OnCalLoadDyn"
       ],
-      "totalLines": 1049,
+      "totalLines": 1061,
       "hasStructuralAnalysis": true
     },
     "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.h": {
@@ -4407,7 +5455,7 @@
     },
     "C_SDK/Kinematics/KineCommon/PointSet.cpp": {
       "filePath": "C_SDK/Kinematics/KineCommon/PointSet.cpp",
-      "contentHash": "0612b21f09e1ffd059e95d2144ed6df7deaaeb200c2526f101088ec413661d6e",
+      "contentHash": "e0d96302f3666b5913a6cf0474d9cbdc7414faf63fd20ab88a097a29625269da",
       "functions": [
         {
           "name": "CPointSet",
@@ -4676,7 +5724,7 @@
           ],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 43
+          "lineCount": 44
         },
         {
           "name": "OnGetValue",
@@ -4873,7 +5921,7 @@
           ],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 145
+          "lineCount": 144
         },
         {
           "name": "OnLoadExp",
@@ -4892,7 +5940,7 @@
           ],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 155
+          "lineCount": 154
         },
         {
           "name": "OnLoad",
@@ -4901,7 +5949,7 @@
           ],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 153
+          "lineCount": 152
         }
       ],
       "classes": [],
@@ -4989,7 +6037,7 @@
         "OnLoadFast",
         "OnLoad"
       ],
-      "totalLines": 2312,
+      "totalLines": 2310,
       "hasStructuralAnalysis": true
     },
     "C_SDK/Kinematics/KineCommon/PointSet.h": {
@@ -5004,7 +6052,7 @@
     },
     "C_SDK/Kinematics/L0KineMotion.cpp": {
       "filePath": "C_SDK/Kinematics/L0KineMotion.cpp",
-      "contentHash": "5dc190f05b0b0ac6b20bcadff5c493cfa24e084ca0954c31f657a9a7b96e5675",
+      "contentHash": "4130ae4bcf0819ab5378ccca595699aec9ccb38d9adbbe87f8a849997b4c5b12",
       "functions": [
         {
           "name": "copy_vect7",
@@ -5466,7 +6514,7 @@
     },
     "C_SDK/Kinematics/L0KineMotion.h": {
       "filePath": "C_SDK/Kinematics/L0KineMotion.h",
-      "contentHash": "470a6d2f3671c2be3f1543b9f84847b7156d5857ca50227b9ab0f444a5c0641e",
+      "contentHash": "270a3179ab1f35f38b4d4be4405c4e772ffd245760f47702c43f9103e9118c7b",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -5873,7 +6921,7 @@
     },
     "C_SDK/Kinematics/MotionPlanner/FXAxisPln.h": {
       "filePath": "C_SDK/Kinematics/MotionPlanner/FXAxisPln.h",
-      "contentHash": "03dfde138306f1c4e63ad1cce5958482e3267682d86d651dac1b6bde719c01b2",
+      "contentHash": "3fe279b13997d138eff31195ee631715b470db7de8dd3e8d6e442766bf2c21c6",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -5883,7 +6931,7 @@
     },
     "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.cpp": {
       "filePath": "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.cpp",
-      "contentHash": "04027de1649895a22e1fea539cbf9589bd7858069dbcb55df13553102c90ab25",
+      "contentHash": "e5e890951208f56d9c00f40c9ac5b344dcfa3930291b4e994fb32d85707eacb4",
       "functions": [
         {
           "name": "CFxPln",
@@ -6100,7 +7148,7 @@
     },
     "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.h": {
       "filePath": "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.h",
-      "contentHash": "1f51e357d3c5f19db17504acbad7485062702325e0d07de9f9300d4f196c8be6",
+      "contentHash": "5aa562b0243067ecec3c37337762290c7228604134b1300f97f264cfcd9da26c",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -6404,7 +7452,7 @@
     },
     "C_SDK/L0Control/L0Robot.cpp": {
       "filePath": "C_SDK/L0Control/L0Robot.cpp",
-      "contentHash": "84fdddec949d4112adccec27f64ccc1027c1e03ab0588167daa22162c086b8c6",
+      "contentHash": "599ba1b9dff921b1eff5c480448ccc722ab265bbe3cf2cd0afb1046f12fc664c",
       "functions": [
         {
           "name": "FX_L0_System_LocalLogOn",
@@ -6419,6 +7467,18 @@
           "returnType": "void",
           "exported": true,
           "lineCount": 5
+        },
+        {
+          "name": "FX_L0_System_RequestControl",
+          "params": [
+            "ip1",
+            "ip2",
+            "ip3",
+            "ip4"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
         },
         {
           "name": "FX_L0_System_Link",
@@ -6438,6 +7498,13 @@
           "returnType": "void",
           "exported": true,
           "lineCount": 4
+        },
+        {
+          "name": "FX_L0_System_GetLinkState",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
         },
         {
           "name": "FX_L0_System_Testconnect",
@@ -6482,29 +7549,22 @@
           "lineCount": 4
         },
         {
-          "name": "FX_L0_Communication_Clear",
+          "name": "FX_L0_System_SetPDCmdCycleTime",
           "params": [
-            "timeout"
+            "cycle_time"
           ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
-          "name": "FX_L0_Communication_Send",
-          "params": [],
-          "returnType": "int",
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "FX_L0_Communication_SendWaitResponse",
+          "name": "FX_L0_System_GetPDCmdCycleTime",
           "params": [
-            "time_out"
+            "cycle_time"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 4
+          "lineCount": 13
         },
         {
           "name": "FX_L0_Param_GetInt",
@@ -7115,7 +8175,9 @@
         },
         {
           "name": "FX_L0_Arm0_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
@@ -7123,7 +8185,18 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Arm0_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "int",
           "exported": true,
@@ -7132,6 +8205,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "int",
@@ -7141,6 +8215,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetJointTorCmd",
           "params": [
+            "thread_id",
             "joint_tor"
           ],
           "returnType": "int",
@@ -7150,6 +8225,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetForceCtrl",
           "params": [
+            "thread_id",
             "force_ctrl"
           ],
           "returnType": "int",
@@ -7159,7 +8235,18 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetTorqueCtrl",
           "params": [
+            "thread_id",
             "torque_ctrl"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Arm0_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "cmd_serial"
           ],
           "returnType": "int",
           "exported": true,
@@ -7168,6 +8255,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "int",
@@ -7177,6 +8265,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "int",
@@ -7186,6 +8275,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetJointK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7195,6 +8285,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetJointD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7204,6 +8295,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetCartK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7213,6 +8305,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetCartD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7222,6 +8315,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetToolK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7231,6 +8325,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetToolD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7240,6 +8335,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetImpType",
           "params": [
+            "thread_id",
             "imp_type"
           ],
           "returnType": "int",
@@ -7249,6 +8345,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetDragType",
           "params": [
+            "thread_id",
             "drag_type"
           ],
           "returnType": "int",
@@ -7258,6 +8355,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "int",
@@ -7267,6 +8365,7 @@
         {
           "name": "FX_L0_Arm0_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -7277,21 +8376,27 @@
         },
         {
           "name": "FX_L0_Arm0_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Arm0_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Arm1_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
@@ -7299,7 +8404,18 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Arm1_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "int",
           "exported": true,
@@ -7308,6 +8424,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "int",
@@ -7317,6 +8434,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetJointTorCmd",
           "params": [
+            "thread_id",
             "joint_tor"
           ],
           "returnType": "int",
@@ -7326,6 +8444,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetForceCtrl",
           "params": [
+            "thread_id",
             "force_ctrl"
           ],
           "returnType": "int",
@@ -7335,6 +8454,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetTorqueCtrl",
           "params": [
+            "thread_id",
             "torque_ctrl"
           ],
           "returnType": "int",
@@ -7344,6 +8464,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "int",
@@ -7353,6 +8474,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "int",
@@ -7362,6 +8484,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetJointK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7371,6 +8494,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetJointD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7380,6 +8504,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetCartK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7389,6 +8514,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetCartD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7398,6 +8524,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetToolK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "int",
@@ -7407,6 +8534,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetToolD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
@@ -7416,6 +8544,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetImpType",
           "params": [
+            "thread_id",
             "imp_type"
           ],
           "returnType": "int",
@@ -7425,7 +8554,18 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetDragType",
           "params": [
+            "thread_id",
             "drag_type"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Arm1_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "cmd_serial"
           ],
           "returnType": "int",
           "exported": true,
@@ -7434,6 +8574,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "int",
@@ -7443,6 +8584,7 @@
         {
           "name": "FX_L0_Arm1_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -7453,21 +8595,27 @@
         },
         {
           "name": "FX_L0_Arm1_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Arm1_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Head_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
@@ -7475,7 +8623,18 @@
         {
           "name": "FX_L0_Head_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Head_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "int",
           "exported": true,
@@ -7484,6 +8643,7 @@
         {
           "name": "FX_L0_Head_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "int",
@@ -7493,6 +8653,7 @@
         {
           "name": "FX_L0_Head_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "int",
@@ -7502,6 +8663,7 @@
         {
           "name": "FX_L0_Head_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "int",
@@ -7510,7 +8672,9 @@
         },
         {
           "name": "FX_L0_Body_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
@@ -7518,7 +8682,18 @@
         {
           "name": "FX_L0_Body_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Body_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "int",
           "exported": true,
@@ -7527,6 +8702,7 @@
         {
           "name": "FX_L0_Body_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "int",
@@ -7536,6 +8712,7 @@
         {
           "name": "FX_L0_Body_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "int",
@@ -7545,6 +8722,7 @@
         {
           "name": "FX_L0_Body_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "int",
@@ -7554,6 +8732,7 @@
         {
           "name": "FX_L0_Body_Runtime_SetPDP",
           "params": [
+            "thread_id",
             "p"
           ],
           "returnType": "int",
@@ -7563,7 +8742,18 @@
         {
           "name": "FX_L0_Body_Runtime_SetPDD",
           "params": [
+            "thread_id",
             "d"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Body_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "cmd_serial"
           ],
           "returnType": "int",
           "exported": true,
@@ -7572,6 +8762,7 @@
         {
           "name": "FX_L0_Body_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "int",
@@ -7581,6 +8772,7 @@
         {
           "name": "FX_L0_Body_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -7591,21 +8783,27 @@
         },
         {
           "name": "FX_L0_Body_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Body_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Lift_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
@@ -7613,7 +8811,18 @@
         {
           "name": "FX_L0_Lift_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Lift_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "int",
           "exported": true,
@@ -7622,6 +8831,7 @@
         {
           "name": "FX_L0_Lift_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "int",
@@ -7631,6 +8841,7 @@
         {
           "name": "FX_L0_Lift_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "int",
@@ -7640,6 +8851,7 @@
         {
           "name": "FX_L0_Lift_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "int",
@@ -7649,6 +8861,7 @@
         {
           "name": "FX_L0_Lift_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "int",
@@ -7658,6 +8871,7 @@
         {
           "name": "FX_L0_Lift_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -7668,17 +8882,121 @@
         },
         {
           "name": "FX_L0_Lift_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "FX_L0_Lift_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "int",
           "exported": true,
           "lineCount": 4
+        },
+        {
+          "name": "FX_L0_Hand0_Runtime_SetCmdAction",
+          "params": [
+            "thread_id",
+            "action_type"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "FX_L0_Hand0_Runtime_SetCmdPos",
+          "params": [
+            "thread_id",
+            "pos"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand0_Runtime_SetCmdP",
+          "params": [
+            "thread_id",
+            "p"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand0_Runtime_SetCmdD",
+          "params": [
+            "thread_id",
+            "d"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand0_Runtime_SetCmdMaxTor",
+          "params": [
+            "thread_id",
+            "max_tor"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand1_Runtime_SetCmdAction",
+          "params": [
+            "thread_id",
+            "action_type"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "FX_L0_Hand1_Runtime_SetCmdPos",
+          "params": [
+            "thread_id",
+            "pos"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand1_Runtime_SetCmdP",
+          "params": [
+            "thread_id",
+            "p"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand1_Runtime_SetCmdD",
+          "params": [
+            "thread_id",
+            "d"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "FX_L0_Hand1_Runtime_SetCmdMaxTor",
+          "params": [
+            "thread_id",
+            "max_tor"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 20
         }
       ],
       "classes": [],
@@ -7705,17 +9023,18 @@
       "exports": [
         "FX_L0_System_LocalLogOn",
         "FX_L0_System_LocalLogOff",
+        "FX_L0_System_RequestControl",
         "FX_L0_System_Link",
         "FX_L0_System_Unlink",
+        "FX_L0_System_GetLinkState",
         "FX_L0_System_Testconnect",
         "FX_L0_System_CheckVersion",
         "FX_L0_System_GetControllerVersion",
         "FX_L0_System_GetSdkVersion",
         "FX_L0_System_Reboot",
         "FX_L0_System_Update",
-        "FX_L0_Communication_Clear",
-        "FX_L0_Communication_Send",
-        "FX_L0_Communication_SendWaitResponse",
+        "FX_L0_System_SetPDCmdCycleTime",
+        "FX_L0_System_GetPDCmdCycleTime",
         "FX_L0_Param_GetInt",
         "FX_L0_Param_GetFloat",
         "FX_L0_Param_GetString",
@@ -7784,10 +9103,12 @@
         "FX_L0_Lift_Config_DisableSoftLimit",
         "FX_L0_Arm0_Runtime_EmergencyStop",
         "FX_L0_Arm0_Runtime_SetState",
+        "FX_L0_Arm0_Runtime_SetTag",
         "FX_L0_Arm0_Runtime_SetJointPosCmd",
         "FX_L0_Arm0_Runtime_SetJointTorCmd",
         "FX_L0_Arm0_Runtime_SetForceCtrl",
         "FX_L0_Arm0_Runtime_SetTorqueCtrl",
+        "FX_L0_Arm0_Runtime_SetCmdPDSerial",
         "FX_L0_Arm0_Runtime_SetVelRatio",
         "FX_L0_Arm0_Runtime_SetAccRatio",
         "FX_L0_Arm0_Runtime_SetJointK",
@@ -7804,6 +9125,7 @@
         "FX_L0_Arm0_Runtime_StopTraj",
         "FX_L0_Arm1_Runtime_EmergencyStop",
         "FX_L0_Arm1_Runtime_SetState",
+        "FX_L0_Arm1_Runtime_SetTag",
         "FX_L0_Arm1_Runtime_SetJointPosCmd",
         "FX_L0_Arm1_Runtime_SetJointTorCmd",
         "FX_L0_Arm1_Runtime_SetForceCtrl",
@@ -7818,64 +9140,91 @@
         "FX_L0_Arm1_Runtime_SetToolD",
         "FX_L0_Arm1_Runtime_SetImpType",
         "FX_L0_Arm1_Runtime_SetDragType",
+        "FX_L0_Arm1_Runtime_SetCmdPDSerial",
         "FX_L0_Arm1_Runtime_InitTraj",
         "FX_L0_Arm1_Runtime_SetTraj",
         "FX_L0_Arm1_Runtime_RunTraj",
         "FX_L0_Arm1_Runtime_StopTraj",
         "FX_L0_Head_Runtime_EmergencyStop",
         "FX_L0_Head_Runtime_SetState",
+        "FX_L0_Head_Runtime_SetTag",
         "FX_L0_Head_Runtime_SetJointPosCmd",
         "FX_L0_Head_Runtime_SetVelRatio",
         "FX_L0_Head_Runtime_SetAccRatio",
         "FX_L0_Body_Runtime_EmergencyStop",
         "FX_L0_Body_Runtime_SetState",
+        "FX_L0_Body_Runtime_SetTag",
         "FX_L0_Body_Runtime_SetJointPosCmd",
         "FX_L0_Body_Runtime_SetVelRatio",
         "FX_L0_Body_Runtime_SetAccRatio",
         "FX_L0_Body_Runtime_SetPDP",
         "FX_L0_Body_Runtime_SetPDD",
+        "FX_L0_Body_Runtime_SetCmdPDSerial",
         "FX_L0_Body_Runtime_InitTraj",
         "FX_L0_Body_Runtime_SetTraj",
         "FX_L0_Body_Runtime_RunTraj",
         "FX_L0_Body_Runtime_StopTraj",
         "FX_L0_Lift_Runtime_EmergencyStop",
         "FX_L0_Lift_Runtime_SetState",
+        "FX_L0_Lift_Runtime_SetTag",
         "FX_L0_Lift_Runtime_SetJointPosCmd",
         "FX_L0_Lift_Runtime_SetVelRatio",
         "FX_L0_Lift_Runtime_SetAccRatio",
         "FX_L0_Lift_Runtime_InitTraj",
         "FX_L0_Lift_Runtime_SetTraj",
         "FX_L0_Lift_Runtime_RunTraj",
-        "FX_L0_Lift_Runtime_StopTraj"
+        "FX_L0_Lift_Runtime_StopTraj",
+        "FX_L0_Hand0_Runtime_SetCmdAction",
+        "FX_L0_Hand0_Runtime_SetCmdPos",
+        "FX_L0_Hand0_Runtime_SetCmdP",
+        "FX_L0_Hand0_Runtime_SetCmdD",
+        "FX_L0_Hand0_Runtime_SetCmdMaxTor",
+        "FX_L0_Hand1_Runtime_SetCmdAction",
+        "FX_L0_Hand1_Runtime_SetCmdPos",
+        "FX_L0_Hand1_Runtime_SetCmdP",
+        "FX_L0_Hand1_Runtime_SetCmdD",
+        "FX_L0_Hand1_Runtime_SetCmdMaxTor"
       ],
-      "totalLines": 809,
+      "totalLines": 1062,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/L0Robot.h": {
       "filePath": "C_SDK/L0Control/L0Robot.h",
-      "contentHash": "97bae16cddd646352f5ee31e9e4763e4de3bb15e45bc948c3b73d0dcbbb8da4f",
+      "contentHash": "b4e18d047a282a5b56ac183b9208f563621edbfdbb45ed85d6bf4d4c367eda92",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 1276,
+      "totalLines": 1532,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/RobotCtrl.cpp": {
       "filePath": "C_SDK/L0Control/RobotCtrl.cpp",
-      "contentHash": "8ec9c6edfa5f3374d30a78c3f2c7aa31b37994b306d5ca8d4d2cb0b3058d2d97",
+      "contentHash": "51ef5327d31bb8261c805a1c99dcee3ce5e5adef9d75cd695adbea219b05ffe4",
       "functions": [
         {
           "name": "RobotCtrl",
           "params": [],
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "~RobotCtrl",
           "params": [],
           "exported": true,
-          "lineCount": 3
+          "lineCount": 4
+        },
+        {
+          "name": "RequestControl",
+          "params": [
+            "ip1",
+            "ip2",
+            "ip3",
+            "ip4"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 16
         },
         {
           "name": "Link",
@@ -7887,14 +9236,14 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 79
+          "lineCount": 83
         },
         {
           "name": "Unlink",
           "params": [],
           "returnType": "FX_VOID",
           "exported": true,
-          "lineCount": 17
+          "lineCount": 19
         },
         {
           "name": "TestLink",
@@ -7911,50 +9260,32 @@
           "lineCount": 5
         },
         {
+          "name": "GetLinkState",
+          "params": [],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
           "name": "OnLocalLogOn",
           "params": [],
           "returnType": "FX_VOID",
           "exported": true,
-          "lineCount": 4
+          "lineCount": 5
         },
         {
           "name": "OnLocalLogOff",
           "params": [],
           "returnType": "FX_VOID",
           "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "ClearSend",
-          "params": [
-            "timeout"
-          ],
-          "returnType": "FX_BOOL",
-          "exported": true,
-          "lineCount": 23
-        },
-        {
-          "name": "SetSend",
-          "params": [],
-          "returnType": "FX_BOOL",
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "WaitSend",
-          "params": [
-            "timeout"
-          ],
-          "returnType": "FX_INT32",
-          "exported": true,
-          "lineCount": 45
+          "lineCount": 5
         },
         {
           "name": "System_GetControllerVersion",
           "params": [],
           "returnType": "FX_INT32",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 25
         },
         {
           "name": "System_GetSdkVersion",
@@ -7968,21 +9299,39 @@
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 36
+          "lineCount": 33
         },
         {
           "name": "System_Reboot",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 17
         },
         {
           "name": "System_Update",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 17
+        },
+        {
+          "name": "System_SetPDCmdCycleTime",
+          "params": [
+            "cycle_time"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "System_GetPDCmdCycleTime",
+          "params": [
+            "cycle_time"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 26
         },
         {
           "name": "Para_GetInt",
@@ -7992,7 +9341,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 27
         },
         {
           "name": "Para_GetFloat",
@@ -8002,7 +9351,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 27
         },
         {
           "name": "Para_GetString",
@@ -8012,7 +9361,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 31
+          "lineCount": 28
         },
         {
           "name": "Para_SetInt",
@@ -8022,7 +9371,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 23
         },
         {
           "name": "Para_SetFloat",
@@ -8032,14 +9381,14 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 23
         },
         {
           "name": "Para_Save",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Terminal_ClearData",
@@ -8105,7 +9454,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 32
         },
         {
           "name": "Arm1_State_GetServoErrorCode",
@@ -8115,7 +9464,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Head_State_GetServoErrorCode",
@@ -8125,7 +9474,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Body_State_GetServoErrorCode",
@@ -8135,7 +9484,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Lift_State_GetServoErrorCode",
@@ -8145,7 +9494,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Arm0_State_GetServoVersion",
@@ -8155,7 +9504,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 33
         },
         {
           "name": "Arm1_State_GetServoVersion",
@@ -8165,7 +9514,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 33
         },
         {
           "name": "Head_State_GetServoVersion",
@@ -8175,7 +9524,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 33
         },
         {
           "name": "Body_State_GetServoVersion",
@@ -8185,7 +9534,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 34
+          "lineCount": 33
         },
         {
           "name": "Arm0_State_GetSensorVersion",
@@ -8195,7 +9544,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Arm1_State_GetSensorVersion",
@@ -8205,7 +9554,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Body_State_GetSensorVersion",
@@ -8215,7 +9564,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Arm0_State_GetSensorSerial",
@@ -8225,7 +9574,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Arm1_State_GetSensorSerial",
@@ -8235,7 +9584,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Body_State_GetSensorSerial",
@@ -8245,7 +9594,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 33
+          "lineCount": 32
         },
         {
           "name": "Arm0_State_GetPhyscialState",
@@ -8254,7 +9603,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 26
         },
         {
           "name": "Arm1_State_GetPhyscialState",
@@ -8263,7 +9612,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 26
         },
         {
           "name": "Head_State_GetPhyscialState",
@@ -8272,7 +9621,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 26
         },
         {
           "name": "Body_State_GetPhyscialState",
@@ -8281,7 +9630,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 26
         },
         {
           "name": "Lift_State_GetPhyscialState",
@@ -8290,7 +9639,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 28
+          "lineCount": 26
         },
         {
           "name": "Arm0_Config_SetBrakeLock",
@@ -8299,7 +9648,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_SetBrakeUnlock",
@@ -8308,7 +9657,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_ResetEncSingleTurn",
@@ -8317,7 +9666,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_ClearEncError",
@@ -8326,7 +9675,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_ResetEncMultiTurn",
@@ -8335,7 +9684,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_DisableSoftLimit",
@@ -8344,7 +9693,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_Config_SetSensorOffset",
@@ -8354,7 +9703,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 27
+          "lineCount": 26
         },
         {
           "name": "Arm1_Config_SetBrakeLock",
@@ -8363,7 +9712,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_SetBrakeUnlock",
@@ -8372,7 +9721,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_ResetEncSingleTurn",
@@ -8381,7 +9730,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_ClearEncError",
@@ -8390,7 +9739,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_ResetEncMultiTurn",
@@ -8399,7 +9748,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_DisableSoftLimit",
@@ -8408,7 +9757,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm1_Config_SetSensorOffset",
@@ -8418,7 +9767,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 27
+          "lineCount": 26
         },
         {
           "name": "Head_Config_SetBrakeLock",
@@ -8427,7 +9776,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Head_Config_SetBrakeUnlock",
@@ -8436,7 +9785,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Head_Config_ResetEncSingleTurn",
@@ -8445,7 +9794,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Head_Config_ClearEncError",
@@ -8454,7 +9803,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Head_Config_ResetEncMultiTurn",
@@ -8463,7 +9812,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Head_Config_DisableSoftLimit",
@@ -8472,7 +9821,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_SetBrakeLock",
@@ -8481,7 +9830,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_SetBrakeUnlock",
@@ -8490,7 +9839,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_ResetEncSingleTurn",
@@ -8499,7 +9848,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_ClearEncError",
@@ -8508,7 +9857,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_ResetEncMultiTurn",
@@ -8517,7 +9866,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_DisableSoftLimit",
@@ -8526,7 +9875,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Body_Config_SetSensorOffset",
@@ -8536,7 +9885,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 27
+          "lineCount": 26
         },
         {
           "name": "Lift_Config_ResetEncOffset",
@@ -8545,7 +9894,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Lift_Config_DisableSoftLimit",
@@ -8554,46 +9903,48 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 23
+          "lineCount": 21
         },
         {
           "name": "Arm0_State_Reset",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "Arm1_State_Reset",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "Head_State_Reset",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "Body_State_Reset",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "Lift_State_Reset",
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 22
+          "lineCount": 20
         },
         {
           "name": "Arm0_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -8601,7 +9952,18 @@
         {
           "name": "Arm0_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Arm0_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -8610,6 +9972,7 @@
         {
           "name": "Arm0_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "FX_BOOL",
@@ -8619,6 +9982,7 @@
         {
           "name": "Arm0_Runtime_SetJointTorCmd",
           "params": [
+            "thread_id",
             "joint_tor"
           ],
           "returnType": "FX_BOOL",
@@ -8628,6 +9992,7 @@
         {
           "name": "Arm0_Runtime_SetForceCtrl",
           "params": [
+            "thread_id",
             "force_ctrl"
           ],
           "returnType": "FX_BOOL",
@@ -8637,6 +10002,7 @@
         {
           "name": "Arm0_Runtime_SetTorqueCtrl",
           "params": [
+            "thread_id",
             "torque_ctrl"
           ],
           "returnType": "FX_BOOL",
@@ -8646,6 +10012,7 @@
         {
           "name": "Arm0_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8655,6 +10022,7 @@
         {
           "name": "Arm0_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8664,6 +10032,7 @@
         {
           "name": "Arm0_Runtime_SetJointK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8673,6 +10042,7 @@
         {
           "name": "Arm0_Runtime_SetJointD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8682,6 +10052,7 @@
         {
           "name": "Arm0_Runtime_SetCartK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8691,6 +10062,7 @@
         {
           "name": "Arm0_Runtime_SetCartD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8700,6 +10072,7 @@
         {
           "name": "Arm0_Runtime_SetToolK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8709,6 +10082,7 @@
         {
           "name": "Arm0_Runtime_SetToolD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8718,6 +10092,7 @@
         {
           "name": "Arm0_Runtime_SetImpType",
           "params": [
+            "thread_id",
             "imp_type"
           ],
           "returnType": "FX_BOOL",
@@ -8727,6 +10102,7 @@
         {
           "name": "Arm0_Runtime_SetDragType",
           "params": [
+            "thread_id",
             "drag_type"
           ],
           "returnType": "FX_BOOL",
@@ -8734,8 +10110,19 @@
           "lineCount": 8
         },
         {
+          "name": "Arm0_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "serial"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
           "name": "Arm0_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "FX_BOOL",
@@ -8745,6 +10132,7 @@
         {
           "name": "Arm0_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -8755,21 +10143,27 @@
         },
         {
           "name": "Arm0_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Arm0_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Arm1_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -8777,7 +10171,18 @@
         {
           "name": "Arm1_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Arm1_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -8786,6 +10191,7 @@
         {
           "name": "Arm1_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "FX_BOOL",
@@ -8795,6 +10201,7 @@
         {
           "name": "Arm1_Runtime_SetJointTorCmd",
           "params": [
+            "thread_id",
             "joint_tor"
           ],
           "returnType": "FX_BOOL",
@@ -8804,6 +10211,7 @@
         {
           "name": "Arm1_Runtime_SetForceCtrl",
           "params": [
+            "thread_id",
             "force_ctrl"
           ],
           "returnType": "FX_BOOL",
@@ -8813,6 +10221,7 @@
         {
           "name": "Arm1_Runtime_SetTorqueCtrl",
           "params": [
+            "thread_id",
             "torque_ctrl"
           ],
           "returnType": "FX_BOOL",
@@ -8822,6 +10231,7 @@
         {
           "name": "Arm1_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8831,6 +10241,7 @@
         {
           "name": "Arm1_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8840,6 +10251,7 @@
         {
           "name": "Arm1_Runtime_SetJointK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8849,6 +10261,7 @@
         {
           "name": "Arm1_Runtime_SetJointD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8858,6 +10271,7 @@
         {
           "name": "Arm1_Runtime_SetCartK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8867,6 +10281,7 @@
         {
           "name": "Arm1_Runtime_SetCartD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8876,6 +10291,7 @@
         {
           "name": "Arm1_Runtime_SetToolK",
           "params": [
+            "thread_id",
             "k"
           ],
           "returnType": "FX_BOOL",
@@ -8885,6 +10301,7 @@
         {
           "name": "Arm1_Runtime_SetToolD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "FX_BOOL",
@@ -8894,6 +10311,7 @@
         {
           "name": "Arm1_Runtime_SetImpType",
           "params": [
+            "thread_id",
             "imp_type"
           ],
           "returnType": "FX_BOOL",
@@ -8903,6 +10321,7 @@
         {
           "name": "Arm1_Runtime_SetDragType",
           "params": [
+            "thread_id",
             "drag_type"
           ],
           "returnType": "FX_BOOL",
@@ -8910,8 +10329,19 @@
           "lineCount": 8
         },
         {
+          "name": "Arm1_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "serial"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
           "name": "Arm1_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "FX_BOOL",
@@ -8921,6 +10351,7 @@
         {
           "name": "Arm1_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -8931,21 +10362,27 @@
         },
         {
           "name": "Arm1_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Arm1_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Head_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -8953,7 +10390,18 @@
         {
           "name": "Head_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Head_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -8962,6 +10410,7 @@
         {
           "name": "Head_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "FX_BOOL",
@@ -8971,6 +10420,7 @@
         {
           "name": "Head_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8980,6 +10430,7 @@
         {
           "name": "Head_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -8988,7 +10439,9 @@
         },
         {
           "name": "Body_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -8996,7 +10449,18 @@
         {
           "name": "Body_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Body_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -9005,6 +10469,7 @@
         {
           "name": "Body_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "FX_BOOL",
@@ -9014,6 +10479,7 @@
         {
           "name": "Body_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -9023,6 +10489,7 @@
         {
           "name": "Body_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -9032,6 +10499,7 @@
         {
           "name": "Body_Runtime_SetPDP",
           "params": [
+            "thread_id",
             "p"
           ],
           "returnType": "FX_BOOL",
@@ -9041,7 +10509,18 @@
         {
           "name": "Body_Runtime_SetPDD",
           "params": [
+            "thread_id",
             "d"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Body_Runtime_SetCmdPDSerial",
+          "params": [
+            "thread_id",
+            "serial"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -9050,6 +10529,7 @@
         {
           "name": "Body_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "FX_BOOL",
@@ -9059,6 +10539,7 @@
         {
           "name": "Body_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -9069,21 +10550,27 @@
         },
         {
           "name": "Body_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Body_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Lift_Runtime_EmergencyStop",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -9091,7 +10578,18 @@
         {
           "name": "Lift_Runtime_SetState",
           "params": [
+            "thread_id",
             "state"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Lift_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "tag"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
@@ -9100,6 +10598,7 @@
         {
           "name": "Lift_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "joint_pos"
           ],
           "returnType": "FX_BOOL",
@@ -9109,6 +10608,7 @@
         {
           "name": "Lift_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "vel_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -9118,6 +10618,7 @@
         {
           "name": "Lift_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "acc_ratio"
           ],
           "returnType": "FX_BOOL",
@@ -9127,6 +10628,7 @@
         {
           "name": "Lift_Runtime_InitTraj",
           "params": [
+            "thread_id",
             "point_num"
           ],
           "returnType": "FX_BOOL",
@@ -9136,6 +10638,7 @@
         {
           "name": "Lift_Runtime_SetTraj",
           "params": [
+            "thread_id",
             "serial",
             "point_num",
             "point_data"
@@ -9146,14 +10649,118 @@
         },
         {
           "name": "Lift_Runtime_RunTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
         },
         {
           "name": "Lift_Runtime_StopTraj",
-          "params": [],
+          "params": [
+            "thread_id"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand0_Runtime_SetCmdAction",
+          "params": [
+            "thread_id",
+            "action_type"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand0_Runtime_SetCmdPos",
+          "params": [
+            "thread_id",
+            "pos"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand0_Runtime_SetCmdP",
+          "params": [
+            "thread_id",
+            "p"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand0_Runtime_SetCmdD",
+          "params": [
+            "thread_id",
+            "d"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand0_Runtime_SetCmdMaxTor",
+          "params": [
+            "thread_id",
+            "max_tor"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand1_Runtime_SetCmdAction",
+          "params": [
+            "thread_id",
+            "action_type"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand1_Runtime_SetCmdPos",
+          "params": [
+            "thread_id",
+            "pos"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand1_Runtime_SetCmdP",
+          "params": [
+            "thread_id",
+            "p"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand1_Runtime_SetCmdD",
+          "params": [
+            "thread_id",
+            "d"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Hand1_Runtime_SetCmdMaxTor",
+          "params": [
+            "thread_id",
+            "max_tor"
+          ],
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 4
@@ -9170,14 +10777,21 @@
           "params": [],
           "returnType": "FX_VOID",
           "exported": true,
-          "lineCount": 66
+          "lineCount": 67
+        },
+        {
+          "name": "DoBeat",
+          "params": [],
+          "returnType": "FX_VOID",
+          "exported": true,
+          "lineCount": 15
         },
         {
           "name": "DoSend",
           "params": [],
           "returnType": "FX_VOID",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 62
         },
         {
           "name": "WaitOpReturn",
@@ -9192,65 +10806,83 @@
         {
           "name": "SetIns",
           "params": [
-            "ins"
+            "thread_id",
+            "cmd"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 36
+          "lineCount": 53
         },
         {
           "name": "SetState",
           "params": [
-            "ins",
+            "thread_id",
+            "cmd",
             "cmd_state"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 42
+          "lineCount": 61
+        },
+        {
+          "name": "SetByte",
+          "params": [
+            "thread_id",
+            "cmd",
+            "num",
+            "pdata"
+          ],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 72
         },
         {
           "name": "SetInt",
           "params": [
-            "ins",
+            "thread_id",
+            "cmd",
             "num",
             "pdata"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 43
+          "lineCount": 71
         },
         {
           "name": "SetShortInt",
           "params": [
-            "ins",
+            "thread_id",
+            "cmd",
             "num",
             "pdata"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 42
+          "lineCount": 70
         },
         {
           "name": "SetFLoat",
           "params": [
-            "ins",
+            "thread_id",
+            "cmd",
             "num",
             "pdata"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 41
+          "lineCount": 72
         },
         {
           "name": "SetRawData",
           "params": [
-            "ins",
+            "thread_id",
+            "cmd",
             "num",
             "pdata"
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 41
+          "lineCount": 69
         }
       ],
       "classes": [],
@@ -9265,20 +10897,21 @@
       "exports": [
         "RobotCtrl",
         "~RobotCtrl",
+        "RequestControl",
         "Link",
         "Unlink",
         "TestLink",
         "IsLinked",
+        "GetLinkState",
         "OnLocalLogOn",
         "OnLocalLogOff",
-        "ClearSend",
-        "SetSend",
-        "WaitSend",
         "System_GetControllerVersion",
         "System_GetSdkVersion",
         "System_CheckVersion",
         "System_Reboot",
         "System_Update",
+        "System_SetPDCmdCycleTime",
+        "System_GetPDCmdCycleTime",
         "Para_GetInt",
         "Para_GetFloat",
         "Para_GetString",
@@ -9347,6 +10980,7 @@
         "Lift_State_Reset",
         "Arm0_Runtime_EmergencyStop",
         "Arm0_Runtime_SetState",
+        "Arm0_Runtime_SetTag",
         "Arm0_Runtime_SetJointPosCmd",
         "Arm0_Runtime_SetJointTorCmd",
         "Arm0_Runtime_SetForceCtrl",
@@ -9361,12 +10995,14 @@
         "Arm0_Runtime_SetToolD",
         "Arm0_Runtime_SetImpType",
         "Arm0_Runtime_SetDragType",
+        "Arm0_Runtime_SetCmdPDSerial",
         "Arm0_Runtime_InitTraj",
         "Arm0_Runtime_SetTraj",
         "Arm0_Runtime_RunTraj",
         "Arm0_Runtime_StopTraj",
         "Arm1_Runtime_EmergencyStop",
         "Arm1_Runtime_SetState",
+        "Arm1_Runtime_SetTag",
         "Arm1_Runtime_SetJointPosCmd",
         "Arm1_Runtime_SetJointTorCmd",
         "Arm1_Runtime_SetForceCtrl",
@@ -9381,28 +11017,33 @@
         "Arm1_Runtime_SetToolD",
         "Arm1_Runtime_SetImpType",
         "Arm1_Runtime_SetDragType",
+        "Arm1_Runtime_SetCmdPDSerial",
         "Arm1_Runtime_InitTraj",
         "Arm1_Runtime_SetTraj",
         "Arm1_Runtime_RunTraj",
         "Arm1_Runtime_StopTraj",
         "Head_Runtime_EmergencyStop",
         "Head_Runtime_SetState",
+        "Head_Runtime_SetTag",
         "Head_Runtime_SetJointPosCmd",
         "Head_Runtime_SetVelRatio",
         "Head_Runtime_SetAccRatio",
         "Body_Runtime_EmergencyStop",
         "Body_Runtime_SetState",
+        "Body_Runtime_SetTag",
         "Body_Runtime_SetJointPosCmd",
         "Body_Runtime_SetVelRatio",
         "Body_Runtime_SetAccRatio",
         "Body_Runtime_SetPDP",
         "Body_Runtime_SetPDD",
+        "Body_Runtime_SetCmdPDSerial",
         "Body_Runtime_InitTraj",
         "Body_Runtime_SetTraj",
         "Body_Runtime_RunTraj",
         "Body_Runtime_StopTraj",
         "Lift_Runtime_EmergencyStop",
         "Lift_Runtime_SetState",
+        "Lift_Runtime_SetTag",
         "Lift_Runtime_SetJointPosCmd",
         "Lift_Runtime_SetVelRatio",
         "Lift_Runtime_SetAccRatio",
@@ -9410,43 +11051,55 @@
         "Lift_Runtime_SetTraj",
         "Lift_Runtime_RunTraj",
         "Lift_Runtime_StopTraj",
+        "Hand0_Runtime_SetCmdAction",
+        "Hand0_Runtime_SetCmdPos",
+        "Hand0_Runtime_SetCmdP",
+        "Hand0_Runtime_SetCmdD",
+        "Hand0_Runtime_SetCmdMaxTor",
+        "Hand1_Runtime_SetCmdAction",
+        "Hand1_Runtime_SetCmdPos",
+        "Hand1_Runtime_SetCmdP",
+        "Hand1_Runtime_SetCmdD",
+        "Hand1_Runtime_SetCmdMaxTor",
         "DoCnt",
         "DoRecv",
+        "DoBeat",
         "DoSend",
         "WaitOpReturn",
         "SetIns",
         "SetState",
+        "SetByte",
         "SetInt",
         "SetShortInt",
         "SetFLoat",
         "SetRawData"
       ],
-      "totalLines": 3066,
+      "totalLines": 3329,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/RobotCtrl.h": {
       "filePath": "C_SDK/L0Control/RobotCtrl.h",
-      "contentHash": "89eed0d45a1cd472340ad13ccd0c05faf22db5499a720b7f5f6ab6838007a033",
+      "contentHash": "63dd7649e5ac7f131f0a5e33e98d828ec3a3230aa792e8ecf8479feb6fc8c114",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 291,
+      "totalLines": 308,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/UdpCommon.h": {
       "filePath": "C_SDK/L0Control/UdpCommon.h",
-      "contentHash": "5ded2884863b9e3f738e649f2394740c9f8ea92804bdbd781ae1c0c4a493eef3",
+      "contentHash": "16055b0ffc4d827e0c3b36f24df0b2b89d26be30c72f5d5ee7cc33ef6d4adc8c",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 198,
+      "totalLines": 220,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/Utility.cpp": {
       "filePath": "C_SDK/L0Control/Utility.cpp",
-      "contentHash": "7359b95dd2cca59c4f69e6474d8008a9840b41ce2c57a322780265f5b74d089d",
+      "contentHash": "4e31b035decad93c923a9e16c7789bddfd697397214b8b4dcb1fed8e20dc13f4",
       "functions": [
         {
           "name": "CUtility",
@@ -9520,7 +11173,7 @@
           "params": [],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 39
+          "lineCount": 48
         },
         {
           "name": "OnSendLink",
@@ -9528,6 +11181,20 @@
           "returnType": "FX_BOOL",
           "exported": true,
           "lineCount": 18
+        },
+        {
+          "name": "OnRequestCtrl",
+          "params": [],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "OnSendBeat",
+          "params": [],
+          "returnType": "FX_BOOL",
+          "exported": true,
+          "lineCount": 15
         },
         {
           "name": "CACB",
@@ -9556,7 +11223,7 @@
           ],
           "returnType": "FX_BOOL",
           "exported": true,
-          "lineCount": 110
+          "lineCount": 109
         },
         {
           "name": "ReadBuf",
@@ -9567,6 +11234,16 @@
           "returnType": "FX_INT32",
           "exported": true,
           "lineCount": 60
+        },
+        {
+          "name": "PeekBuf",
+          "params": [
+            "data_ptr",
+            "size_int"
+          ],
+          "returnType": "FX_INT32",
+          "exported": true,
+          "lineCount": 56
         },
         {
           "name": "Empty",
@@ -9597,29 +11274,32 @@
         "OnSendRaw",
         "OnSend",
         "OnSendLink",
+        "OnRequestCtrl",
+        "OnSendBeat",
         "CACB",
         "~CACB",
         "OnGetStoreNum",
         "WriteBuf",
         "ReadBuf",
+        "PeekBuf",
         "Empty"
       ],
-      "totalLines": 495,
+      "totalLines": 622,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L0Control/Utility.h": {
       "filePath": "C_SDK/L0Control/Utility.h",
-      "contentHash": "75b283c4c2f1de874df8d9ca89e635b86b4e59a4a827f5790a27c1942c6b7f05",
+      "contentHash": "e371c4c91122582bd4538ef6fe9d8199ca2cb8786140e63062050256dc2c3fd0",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 87,
+      "totalLines": 90,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L1Robot/L1Robot.cpp": {
       "filePath": "C_SDK/L1Robot/L1Robot.cpp",
-      "contentHash": "95e3fb1a43f62bc235c2582cd3ff892fe9256a086084ca5d5e6b437bd1e090c3",
+      "contentHash": "661aea1ec97553cae1494c81a98e153e179ac492c9212dd8722823d78f0cb526",
       "functions": [
         {
           "name": "_FX_DEBG",
@@ -9658,6 +11338,60 @@
           "lineCount": 14
         },
         {
+          "name": "_FX_GetDataTypeSize",
+          "params": [
+            "type"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "_FX_GetUserDataTypeSize",
+          "params": [
+            "type"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "_FX_TypeConver",
+          "params": [
+            "sp",
+            "src_type",
+            "dp",
+            "dst_type"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "_FX_GetRTDataPointer",
+          "params": [
+            "name",
+            "sub",
+            "data_ptrptr",
+            "data_type_ptr"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_FX_GetSGDataPointer",
+          "params": [
+            "name",
+            "sub",
+            "data_ptrptr",
+            "data_type_ptr"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
           "name": "FX_L1_System_Link",
           "params": [
             "ip1",
@@ -9668,7 +11402,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 122
+          "lineCount": 129
         },
         {
           "name": "FX_L1_System_Unlink",
@@ -9676,6 +11410,13 @@
           "returnType": "void",
           "exported": true,
           "lineCount": 6
+        },
+        {
+          "name": "FX_L1_System_GetLinkState",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
         },
         {
           "name": "FX_L1_System_SetLogLevel",
@@ -9698,7 +11439,7 @@
           "params": [],
           "returnType": "int",
           "exported": true,
-          "lineCount": 14
+          "lineCount": 15
         },
         {
           "name": "FX_L1_System_GetSDKVersion",
@@ -9712,7 +11453,7 @@
           "params": [],
           "returnType": "int",
           "exported": true,
-          "lineCount": 62
+          "lineCount": 63
         },
         {
           "name": "FX_L1_System_Update",
@@ -9722,7 +11463,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 31
+          "lineCount": 32
         },
         {
           "name": "FX_L1_System_SendFile",
@@ -9745,31 +11486,6 @@
           "lineCount": 14
         },
         {
-          "name": "FX_L1_Comm_Clear",
-          "params": [
-            "timeout"
-          ],
-          "returnType": "int",
-          "exported": true,
-          "lineCount": 12
-        },
-        {
-          "name": "FX_L1_Comm_Send",
-          "params": [],
-          "returnType": "int",
-          "exported": true,
-          "lineCount": 12
-        },
-        {
-          "name": "FX_L1_Comm_SendAndWait",
-          "params": [
-            "timeout"
-          ],
-          "returnType": "int",
-          "exported": true,
-          "lineCount": 13
-        },
-        {
           "name": "FX_L1_Fbk_GetCtrlObjDof",
           "params": [
             "obj_type"
@@ -9784,9 +11500,9 @@
             "obj_type",
             "version"
           ],
-          "returnType": "void",
+          "returnType": "int",
           "exported": true,
-          "lineCount": 94
+          "lineCount": 101
         },
         {
           "name": "FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial",
@@ -9795,9 +11511,9 @@
             "version",
             "serial"
           ],
-          "returnType": "void",
+          "returnType": "int",
           "exported": true,
-          "lineCount": 92
+          "lineCount": 101
         },
         {
           "name": "FX_L1_Fbk_GetCtrlObjPhysicalState",
@@ -9823,7 +11539,44 @@
           ],
           "returnType": "FXStateType",
           "exported": true,
-          "lineCount": 245
+          "lineCount": 255
+        },
+        {
+          "name": "FX_L1_Fbk_RegisterUserDataSet",
+          "params": [
+            "name",
+            "user_data_type",
+            "sub",
+            "data_num"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "FX_L1_Fbk_ResetUserDataSet",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "FX_L1_Fbk_GetUserData",
+          "params": [
+            "data_ptr"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "FX_L1_Fbk_CheckUserDataSet",
+          "params": [
+            "user_data_len"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
         },
         {
           "name": "FX_L1_State_GetServoErrorCode",
@@ -9833,7 +11586,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 76
+          "lineCount": 77
         },
         {
           "name": "FX_L1_State_ResetError",
@@ -9844,7 +11597,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 99
+          "lineCount": 106
         },
         {
           "name": "FX_L1_State_SwitchToIdle",
@@ -9854,7 +11607,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 132
+          "lineCount": 129
         },
         {
           "name": "FX_L1_State_SwitchToPositionMode",
@@ -9866,7 +11619,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 239
+          "lineCount": 229
         },
         {
           "name": "FX_L1_State_SwitchToImpJointMode",
@@ -9880,7 +11633,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 202
+          "lineCount": 175
         },
         {
           "name": "FX_L1_State_SwitchToImpCartMode",
@@ -9894,7 +11647,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 177
+          "lineCount": 162
         },
         {
           "name": "FX_L1_State_SwitchToImpForceMode",
@@ -9906,7 +11659,21 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 176
+          "lineCount": 152
+        },
+        {
+          "name": "FX_L1_State_SwitchToPDMode",
+          "params": [
+            "obj_type",
+            "timeout",
+            "vel_ratio",
+            "acc_ratio",
+            "k",
+            "d"
+          ],
+          "returnType": "FX_L1_SDK_API",
+          "exported": true,
+          "lineCount": 188
         },
         {
           "name": "FX_L1_State_SwitchToDragJoint",
@@ -9918,7 +11685,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 160
+          "lineCount": 144
         },
         {
           "name": "FX_L1_State_SwitchToDragCartX",
@@ -9930,7 +11697,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 160
+          "lineCount": 144
         },
         {
           "name": "FX_L1_State_SwitchToDragCartY",
@@ -9942,7 +11709,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 160
+          "lineCount": 144
         },
         {
           "name": "FX_L1_State_SwitchToDragCartZ",
@@ -9954,7 +11721,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 160
+          "lineCount": 144
         },
         {
           "name": "FX_L1_State_SwitchToDragCartR",
@@ -9966,7 +11733,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 160
+          "lineCount": 144
         },
         {
           "name": "FX_L1_State_SwitchToCollaborativeRelease",
@@ -9976,7 +11743,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 108
+          "lineCount": 102
         },
         {
           "name": "FX_L1_Param_SetInt32",
@@ -9986,7 +11753,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 20
+          "lineCount": 21
         },
         {
           "name": "FX_L1_Param_SetFloat",
@@ -9996,7 +11763,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 20
+          "lineCount": 21
         },
         {
           "name": "FX_L1_Param_GetInt32",
@@ -10006,7 +11773,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 16
         },
         {
           "name": "FX_L1_Param_GetFloat",
@@ -10016,7 +11783,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 16
         },
         {
           "name": "FX_L1_Param_GetString",
@@ -10026,7 +11793,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 16
         },
         {
           "name": "FX_L1_Terminal_ClearData",
@@ -10041,24 +11808,28 @@
           "name": "FX_L1_Terminal_GetData",
           "params": [
             "terminal_type",
+            "timeout",
             "chn_type",
-            "data"
+            "data",
+            "receving_time"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 83
         },
         {
           "name": "FX_L1_Terminal_SetData",
           "params": [
             "terminal_type",
             "chn_type",
+            "timeout",
             "data",
-            "data_len"
+            "data_len",
+            "sending_time"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 12
+          "lineCount": 49
         },
         {
           "name": "FX_L1_Config_SetBrakeLock",
@@ -10068,7 +11839,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 82
+          "lineCount": 86
         },
         {
           "name": "FX_L1_Config_SetBrakeUnlock",
@@ -10078,7 +11849,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 82
+          "lineCount": 86
         },
         {
           "name": "FX_L1_Config_ResetEncOffset",
@@ -10088,7 +11859,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 124
+          "lineCount": 156
         },
         {
           "name": "FX_L1_Config_ClearEncError",
@@ -10098,7 +11869,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 82
+          "lineCount": 86
         },
         {
           "name": "FX_L1_Config_ResetAxisSensorOffset",
@@ -10108,7 +11879,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 141
+          "lineCount": 145
         },
         {
           "name": "FX_L1_Config_ResetSensorOffset",
@@ -10117,7 +11888,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 146
+          "lineCount": 149
         },
         {
           "name": "FX_L1_Config_DisableSoftLimit",
@@ -10127,7 +11898,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 100
+          "lineCount": 105
         },
         {
           "name": "FX_L1_Config_SetTraj",
@@ -10138,216 +11909,332 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 202
+          "lineCount": 155
+        },
+        {
+          "name": "FX_L1_Config_SetPDCmdCycleTime",
+          "params": [
+            "cycle_time"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "FX_L1_Config_GetPDCmdCycleTime",
+          "params": [
+            "cycle_time"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 14
         },
         {
           "name": "FX_L1_Runtime_EmergencyStop",
           "params": [
+            "thread_id",
             "obj_mask"
           ],
           "returnType": "unsigned int",
           "exported": true,
-          "lineCount": 41
+          "lineCount": 47
+        },
+        {
+          "name": "FX_L1_Runtime_SetTag",
+          "params": [
+            "thread_id",
+            "obj_type",
+            "tag"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 63
         },
         {
           "name": "FX_L1_Runtime_SetJointPosCmd",
           "params": [
+            "thread_id",
             "obj_type",
             "pos_cmd"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 57
+          "lineCount": 63
+        },
+        {
+          "name": "FX_L1_Runtime_SetJointPosPDCmd",
+          "params": [
+            "thread_id",
+            "obj_type",
+            "pos_cmd"
+          ],
+          "returnType": "FX_L1_SDK_API",
+          "exported": true,
+          "lineCount": 75
         },
         {
           "name": "FX_L1_Runtime_SetForceCtrl",
           "params": [
+            "thread_id",
             "obj_type",
             "force_ctrl"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 36
         },
         {
           "name": "FX_L1_Runtime_SetTorqueCtrl",
           "params": [
+            "thread_id",
             "obj_type",
             "torque_ctrl"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 36
         },
         {
           "name": "FX_L1_Runtime_SetVelRatio",
           "params": [
+            "thread_id",
             "obj_type",
             "vel_ratio"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 66
+          "lineCount": 72
         },
         {
           "name": "FX_L1_Runtime_SetAccRatio",
           "params": [
+            "thread_id",
             "obj_type",
             "acc_ratio"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 66
+          "lineCount": 72
         },
         {
           "name": "FX_L1_Runtime_SetSpeedRatio",
           "params": [
+            "thread_id",
             "obj_type",
             "vel_ratio",
             "acc_ratio"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 75
+          "lineCount": 81
         },
         {
           "name": "FX_L1_Runtime_SetJointK",
           "params": [
+            "thread_id",
             "obj_type",
             "k"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 38
+          "lineCount": 44
         },
         {
           "name": "FX_L1_Runtime_SetJointD",
           "params": [
+            "thread_id",
             "obj_type",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 38
+          "lineCount": 44
         },
         {
           "name": "FX_L1_Runtime_SetJointKD",
           "params": [
+            "thread_id",
             "obj_type",
             "k",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 42
+          "lineCount": 48
         },
         {
           "name": "FX_L1_Runtime_SetCartK",
           "params": [
+            "thread_id",
             "obj_type",
             "k"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 38
+          "lineCount": 44
         },
         {
           "name": "FX_L1_Runtime_SetCartD",
           "params": [
+            "thread_id",
             "obj_type",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 38
+          "lineCount": 44
         },
         {
           "name": "FX_L1_Runtime_SetCartKD",
           "params": [
+            "thread_id",
             "obj_type",
             "k",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 42
+          "lineCount": 48
         },
         {
           "name": "FX_L1_Runtime_SetToolK",
           "params": [
+            "thread_id",
             "obj_type",
             "k"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 36
         },
         {
           "name": "FX_L1_Runtime_SetToolD",
           "params": [
+            "thread_id",
             "obj_type",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 36
         },
         {
           "name": "FX_L1_Runtime_SetToolKD",
           "params": [
+            "thread_id",
             "obj_type",
             "k",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 30
+          "lineCount": 36
         },
         {
           "name": "FX_L1_Runtime_SetBodyPDP",
           "params": [
+            "thread_id",
             "p"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 17
+          "lineCount": 23
         },
         {
           "name": "FX_L1_Runtime_SetBodyPDD",
           "params": [
+            "thread_id",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 17
+          "lineCount": 23
         },
         {
           "name": "FX_L1_Runtime_SetBodyPD",
           "params": [
+            "thread_id",
             "p",
             "d"
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 21
+          "lineCount": 27
         },
         {
           "name": "FX_L1_Runtime_RunTraj",
           "params": [
+            "thread_id",
             "obj_mask"
           ],
           "returnType": "unsigned int",
           "exported": true,
-          "lineCount": 20
+          "lineCount": 26
         },
         {
           "name": "FX_L1_Runtime_StopTraj",
           "params": [
+            "thread_id",
             "obj_mask"
           ],
           "returnType": "unsigned int",
           "exported": true,
-          "lineCount": 20
+          "lineCount": 26
+        },
+        {
+          "name": "FX_L1_Runtime_SetHandAction",
+          "params": [
+            "thread_id",
+            "hand_type",
+            "hand_action"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "FX_L1_Runtime_SetHandPos",
+          "params": [
+            "thread_id",
+            "hand_type",
+            "pos"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "FX_L1_Runtime_SetHandP",
+          "params": [
+            "thread_id",
+            "hand_type",
+            "p"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "FX_L1_Runtime_SetHandD",
+          "params": [
+            "thread_id",
+            "hand_type",
+            "d"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "FX_L1_Runtime_SetHandMaxTor",
+          "params": [
+            "thread_id",
+            "hand_type",
+            "max_tor"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 36
         },
         {
           "name": "_FX_MapMotionRetToFuncRet",
@@ -10355,7 +12242,7 @@
             "motion_ret"
           ],
           "returnType": "int",
-          "exported": false,
+          "exported": true,
           "lineCount": 36
         },
         {
@@ -10697,15 +12584,33 @@
           ]
         },
         {
+          "source": "SampleOffsetTable.h",
+          "specifiers": [
+            "SampleOffsetTable.h"
+          ]
+        },
+        {
           "source": "cassert",
           "specifiers": [
             "cassert"
           ]
         },
         {
+          "source": "cstdarg",
+          "specifiers": [
+            "cstdarg"
+          ]
+        },
+        {
           "source": "math.h",
           "specifiers": [
             "math.h"
+          ]
+        },
+        {
+          "source": "mutex",
+          "specifiers": [
+            "mutex"
           ]
         }
       ],
@@ -10714,8 +12619,14 @@
         "_FX_INFO",
         "_FX_WARN",
         "_FX_ERRO",
+        "_FX_GetDataTypeSize",
+        "_FX_GetUserDataTypeSize",
+        "_FX_TypeConver",
+        "_FX_GetRTDataPointer",
+        "_FX_GetSGDataPointer",
         "FX_L1_System_Link",
         "FX_L1_System_Unlink",
+        "FX_L1_System_GetLinkState",
         "FX_L1_System_SetLogLevel",
         "FX_L1_System_GetLogLevel",
         "FX_L1_System_GetControllerVersion",
@@ -10724,15 +12635,16 @@
         "FX_L1_System_Update",
         "FX_L1_System_SendFile",
         "FX_L1_System_RecvFile",
-        "FX_L1_Comm_Clear",
-        "FX_L1_Comm_Send",
-        "FX_L1_Comm_SendAndWait",
         "FX_L1_Fbk_GetCtrlObjDof",
         "FX_L1_Fbk_GetCtrlObjServoVersion",
         "FX_L1_Fbk_GetCtrlObjSensorVersionAndSerial",
         "FX_L1_Fbk_GetCtrlObjPhysicalState",
         "FX_L1_Fbk_GetRobotType",
         "FX_L1_Fbk_CurrentState",
+        "FX_L1_Fbk_RegisterUserDataSet",
+        "FX_L1_Fbk_ResetUserDataSet",
+        "FX_L1_Fbk_GetUserData",
+        "FX_L1_Fbk_CheckUserDataSet",
         "FX_L1_State_GetServoErrorCode",
         "FX_L1_State_ResetError",
         "FX_L1_State_SwitchToIdle",
@@ -10740,6 +12652,7 @@
         "FX_L1_State_SwitchToImpJointMode",
         "FX_L1_State_SwitchToImpCartMode",
         "FX_L1_State_SwitchToImpForceMode",
+        "FX_L1_State_SwitchToPDMode",
         "FX_L1_State_SwitchToDragJoint",
         "FX_L1_State_SwitchToDragCartX",
         "FX_L1_State_SwitchToDragCartY",
@@ -10762,8 +12675,12 @@
         "FX_L1_Config_ResetSensorOffset",
         "FX_L1_Config_DisableSoftLimit",
         "FX_L1_Config_SetTraj",
+        "FX_L1_Config_SetPDCmdCycleTime",
+        "FX_L1_Config_GetPDCmdCycleTime",
         "FX_L1_Runtime_EmergencyStop",
+        "FX_L1_Runtime_SetTag",
         "FX_L1_Runtime_SetJointPosCmd",
+        "FX_L1_Runtime_SetJointPosPDCmd",
         "FX_L1_Runtime_SetForceCtrl",
         "FX_L1_Runtime_SetTorqueCtrl",
         "FX_L1_Runtime_SetVelRatio",
@@ -10783,6 +12700,12 @@
         "FX_L1_Runtime_SetBodyPD",
         "FX_L1_Runtime_RunTraj",
         "FX_L1_Runtime_StopTraj",
+        "FX_L1_Runtime_SetHandAction",
+        "FX_L1_Runtime_SetHandPos",
+        "FX_L1_Runtime_SetHandP",
+        "FX_L1_Runtime_SetHandD",
+        "FX_L1_Runtime_SetHandMaxTor",
+        "_FX_MapMotionRetToFuncRet",
         "FX_L1_Kinematics_Create",
         "FX_L1_Kinematics_Destroy",
         "FX_L1_Kinematics_SetLogLevel",
@@ -10808,853 +12731,104 @@
         "FX_L1_XYZABC2Matrix",
         "FX_L1_Matrix2XYZABC"
       ],
-      "totalLines": 5461,
+      "totalLines": 6365,
       "hasStructuralAnalysis": true
     },
     "C_SDK/L1Robot/L1Robot.h": {
       "filePath": "C_SDK/L1Robot/L1Robot.h",
-      "contentHash": "5b7b12be3b27cf1fec91ab376a471665cd3a836527ec153284123cf56d9f6d88",
+      "contentHash": "14e26fa32427bf3400b6fb999836baa8b53b1927479e60ba69f3148f0b0a2db2",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 1327,
+      "totalLines": 1502,
       "hasStructuralAnalysis": true
     },
-    "C_SDK/make_dll_cmd.txt": {
-      "filePath": "C_SDK/make_dll_cmd.txt",
-      "contentHash": "20d90ce5f5683de90755cc7885caf2fd11ba705d077ae9a136df8945ec9093ed",
+    "C_SDK/L1Robot/SampleOffsetTable.h": {
+      "filePath": "C_SDK/L1Robot/SampleOffsetTable.h",
+      "contentHash": "51c0c7ff8247086f1f65941d34827b43fdb40113191d836ae3c7ab797e577fa5",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 2,
+      "totalLines": 227,
+      "hasStructuralAnalysis": true
+    },
+    "C_SDK/libGentoSDK.dll": {
+      "filePath": "C_SDK/libGentoSDK.dll",
+      "contentHash": "3d9eaec9171a752a29f871efba68001a9134c301089aac82cc601844e44ea9c1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 881,
       "hasStructuralAnalysis": false
     },
-    "FX_PLATFORM/setup.py": {
-      "filePath": "FX_PLATFORM/setup.py",
-      "contentHash": "3c6efe1382118a78db7288096d79699cadb1c465bdc5e7a53646d294f64c9f19",
+    "FXPlatform.exe": {
+      "filePath": "FXPlatform.exe",
+      "contentHash": "34bf8f0c75f54a231d14d23bd62f6162aadda61193547212220c6ecbb961e6ed",
       "functions": [],
       "classes": [],
-      "imports": [
-        {
-          "source": "PyInstaller.__main__",
-          "specifiers": [
-            "PyInstaller.__main__"
-          ]
-        },
-        {
-          "source": "shutil",
-          "specifiers": [
-            "shutil"
-          ]
-        },
-        {
-          "source": "os",
-          "specifiers": [
-            "os"
-          ]
-        },
-        {
-          "source": "sys",
-          "specifiers": [
-            "sys"
-          ]
-        }
-      ],
+      "imports": [],
       "exports": [],
-      "totalLines": 64,
+      "totalLines": 46439,
+      "hasStructuralAnalysis": false
+    },
+    "GentoPlatform-V1004天机机器人上位机软件操作手册20260625.pptx": {
+      "filePath": "GentoPlatform-V1004天机机器人上位机软件操作手册20260625.pptx",
+      "contentHash": "8d95088642a634789f2881b1f0b8611a560b3472eff7f31ffd980d63c9bf43da",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 61974,
+      "hasStructuralAnalysis": false
+    },
+    "linux_auto_compile_compitable.sh": {
+      "filePath": "linux_auto_compile_compitable.sh",
+      "contentHash": "ecdff50b62022b83230617c89e2160874be530e4336dc5b29d801af077944fe0",
+      "functions": [
+        {
+          "name": "do_compile",
+          "params": [],
+          "exported": false,
+          "lineCount": 65
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 144,
       "hasStructuralAnalysis": true
     },
-    "FX_PLATFORM/UI.py": {
-      "filePath": "FX_PLATFORM/UI.py",
-      "contentHash": "3fd4c7731fbd47442dc61672ba5108016105fdb59ff436a2eb0b18815e4c81be",
+    "linux_auto_compile.sh": {
+      "filePath": "linux_auto_compile.sh",
+      "contentHash": "ccde2689a6dbc832d505f10893e9b84a00e8bd6927b7ee3caaa128096afc459b",
       "functions": [],
-      "classes": [
-        {
-          "name": "App",
-          "methods": [
-            "__init__",
-            "create_main_content",
-            "update_vertical_scrollbar",
-            "update_horizontal_scrollbar",
-            "scroll_horizontally",
-            "on_mousewheel",
-            "on_shift_mousewheel",
-            "on_horizontal_mousewheel",
-            "create_separator",
-            "create_left_arm_components",
-            "create_right_arm_components",
-            "create_body_components",
-            "create_head_components",
-            "create_lift_components",
-            "create_control_components",
-            "create_status_bar",
-            "init_kd_variables",
-            "kine_initial",
-            "toggle_connection",
-            "_reset_ui_after_disconnect",
-            "update_version_control",
-            "refresh_params_from_realtime_data",
-            "update_data",
-            "update_ui",
-            "on_mode_selected",
-            "update_time",
-            "on_mousewheel",
-            "on_menu_click",
-            "on_close",
-            "vel_acc_set",
-            "reset_error",
-            "idle_state",
-            "cr_state",
-            "position_state",
-            "get_current_pos",
-            "add_pos",
-            "delete_pos",
-            "update_comboboxes",
-            "_set_combo_selection",
-            "is_duplicate",
-            "run_pos",
-            "validate_point",
-            "tools_dialog",
-            "tools_set",
-            "eef_dialog",
-            "is_duplicate_command",
-            "add_eef_command",
-            "update_combo_eef",
-            "send_data_eef",
-            "delete_eef_command",
-            "receive_data_eef",
-            "imu_settings",
-            "create_floating_base_tab",
-            "on_selection_change",
-            "update_selection_lists",
-            "apply_mutual_exclusion",
-            "disable_axis_options",
-            "main_function",
-            "get_abc_calculation",
-            "display_result",
-            "show_more_features",
-            "sensor_decoder_dialog",
-            "servo_sensor_version_dialog",
-            "planning_dialog",
-            "pln_get_cur_joints",
-            "pln_get_cur_joints_as_ref",
-            "pln_get_cur_joints_as_linear_ref",
-            "pln_get_cur_joints_linear",
-            "pln_syn_get_cur_joints",
-            "clear_joint_inputs",
-            "pln_run_joint_to_joint",
-            "clear_linear_inputs",
-            "pln_run_joint_to_joints_linear",
-            "pln_get_cur_xyzabc",
-            "pln_syn_get_cur_xyzabc",
-            "clear_linear_cart_inputs",
-            "pln_run_cartesian_linear",
-            "is_duplicate_xyzabc",
-            "add_multi_seg_point",
-            "clear_multi_segment_inputs",
-            "pln_run_multi_segment_linear",
-            "clear_syn_inputs",
-            "pln_run_syn",
-            "stop_motion",
-            "disable_soft_limit",
-            "clear_sensor_offset",
-            "clear_motor_as_zero",
-            "clear_motor_error",
-            "file_client_dialog",
-            "_send_file_to_robot",
-            "_receive_file_from_robot",
-            "Estop",
-            "show_impedance_dialog",
-            "joint_kd_set",
-            "cart_kd_set",
-            "load_default_param",
-            "load_default_body_pd",
-            "load_default_tools",
-            "save_param",
-            "load_param",
-            "force_torque_set",
-            "_obj_name_to_type",
-            "_obj_name_to_mask",
-            "jointImp_state",
-            "cartImp_state",
-            "forceImp_state",
-            "drag_state",
-            "error_get",
-            "release_brake",
-            "brake",
-            "system_update_dialog",
-            "load_file",
-            "compare_parameters_dialog",
-            "load_template",
-            "load_target",
-            "parse_text_to_structure",
-            "refresh_comparison",
-            "compare_structures",
-            "display_report",
-            "clear_report",
-            "save_target",
-            "get_ini",
-            "update_ini",
-            "choose_system_pkg",
-            "choose_config_pkg",
-            "update_sys"
-          ],
-          "properties": [],
-          "exported": true,
-          "lineCount": 5664
-        }
-      ],
-      "imports": [
-        {
-          "source": "tkinter",
-          "specifiers": [
-            "tk"
-          ]
-        },
-        {
-          "source": "tkinter",
-          "specifiers": [
-            "messagebox",
-            "ttk",
-            "scrolledtext",
-            "filedialog",
-            "simpledialog"
-          ]
-        },
-        {
-          "source": "threading",
-          "specifiers": [
-            "threading"
-          ]
-        },
-        {
-          "source": "time",
-          "specifiers": [
-            "time"
-          ]
-        },
-        {
-          "source": "queue",
-          "specifiers": [
-            "queue"
-          ]
-        },
-        {
-          "source": "os",
-          "specifiers": [
-            "os"
-          ]
-        },
-        {
-          "source": "math",
-          "specifiers": [
-            "math"
-          ]
-        },
-        {
-          "source": "sys",
-          "specifiers": [
-            "sys"
-          ]
-        },
-        {
-          "source": "ast",
-          "specifiers": [
-            "ast"
-          ]
-        },
-        {
-          "source": "difflib",
-          "specifiers": [
-            "difflib"
-          ]
-        },
-        {
-          "source": "pathlib",
-          "specifiers": [
-            "Path"
-          ]
-        },
-        {
-          "source": "PYTHON_SDK.GentoRobot",
-          "specifiers": [
-            "GentoRobot",
-            "RobotDataManager",
-            "ArmsSynchronousPlanningParams",
-            "error_dict",
-            "FXObjType",
-            "FXLogMask",
-            "FXObjMask",
-            "FXTerminalType",
-            "state_map"
-          ]
-        }
-      ],
-      "exports": [
-        "App"
-      ],
-      "totalLines": 5704,
-      "hasStructuralAnalysis": true
-    },
-    "PYTHON_SDK/GentoRobot.py": {
-      "filePath": "PYTHON_SDK/GentoRobot.py",
-      "contentHash": "e37c24352f7638d4a3a5fcc3e3fa378ac1d76d3a2d13de3644140fd485dadc52",
-      "functions": [],
-      "classes": [
-        {
-          "name": "FXObjType",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "FXObjMask",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "FXLogMask",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "FXChnType",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 5
-        },
-        {
-          "name": "FXTerminalType",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 4
-        },
-        {
-          "name": "StateCtr",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "ARM_OUT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 12
-        },
-        {
-          "name": "ARM_IN",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "ARM_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "HEAD_OUT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "HEAD_IN",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "HEAD_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "BODY_OUT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "BODY_IN",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "BODY_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "LIFT_OUT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "LIFT_IN",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 3
-        },
-        {
-          "name": "LIFT_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "HAND_OUT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "HAND_IN",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "HAND_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "ROBOT_RT",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 12
-        },
-        {
-          "name": "ARM_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 15
-        },
-        {
-          "name": "ARM_GET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "ARM_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "HEAD_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "HEAD_GET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "HEAD_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "BODY_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "BODY_GET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "BODY_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "LIFT_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 8
-        },
-        {
-          "name": "LIFT_GET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "LIFT_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 6
-        },
-        {
-          "name": "HAND_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 7
-        },
-        {
-          "name": "HAND_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 5
-        },
-        {
-          "name": "OP_SET",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "ROBOT_SG",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 11
-        },
-        {
-          "name": "FX_InvKineSolverParams",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 22
-        },
-        {
-          "name": "ArmsSynchronousPlanningParams",
-          "methods": [],
-          "properties": [],
-          "exported": true,
-          "lineCount": 20
-        },
-        {
-          "name": "SwitchableLock",
-          "methods": [
-            "__init__",
-            "enable",
-            "disable",
-            "__enter__",
-            "__exit__"
-          ],
-          "properties": [],
-          "exported": true,
-          "lineCount": 18
-        },
-        {
-          "name": "GentoRobot",
-          "methods": [
-            "__init__",
-            "_init_funcs",
-            "rt",
-            "sg",
-            "get_rt_dict",
-            "get_sg_dict",
-            "enable_lock",
-            "disable_lock",
-            "get_sdk_version",
-            "get_controller_version",
-            "set_log_level",
-            "get_log_level",
-            "link",
-            "unlink",
-            "reboot",
-            "system_update",
-            "send_file",
-            "recv_file",
-            "comm_clear",
-            "comm_send",
-            "comm_send_and_wait",
-            "get_ctrl_obj_dof",
-            "get_ctrl_obj_servo_version",
-            "get_ctrl_obj_sensor_version_and_serial",
-            "get_ctrl_obj_physical_state",
-            "current_state",
-            "get_robot_type",
-            "get_servo_error_codes",
-            "reset_error",
-            "emergency_stop",
-            "switch_to_idle",
-            "switch_to_position_mode",
-            "switch_to_imp_joint_mode",
-            "switch_to_imp_cart_mode",
-            "switch_to_imp_force_mode",
-            "switch_to_drag_joint",
-            "switch_to_drag_cart_x",
-            "switch_to_drag_cart_y",
-            "switch_to_drag_cart_z",
-            "switch_to_drag_cart_r",
-            "switch_to_collab_release",
-            "param_set_int",
-            "param_set_float",
-            "param_get_int",
-            "param_get_float",
-            "terminal_clear",
-            "terminal_get",
-            "terminal_set",
-            "config_brake_lock",
-            "config_brake_unlock",
-            "config_reset_enc_offset",
-            "config_clear_enc_error",
-            "config_disable_soft_limit",
-            "config_clear_axis_sensor_offset",
-            "config_clear_sensor_offset",
-            "config_set_traj",
-            "runtime_set_joint_pos_cmd",
-            "runtime_set_force_ctrl",
-            "runtime_set_torque_ctrl",
-            "runtime_set_vel_ratio",
-            "runtime_set_acc_ratio",
-            "runtime_set_speed_ratio",
-            "runtime_set_joint_k",
-            "runtime_set_joint_d",
-            "runtime_set_joint_kd",
-            "runtime_set_cart_k",
-            "runtime_set_cart_d",
-            "runtime_set_cart_kd",
-            "runtime_set_tool_k",
-            "runtime_set_tool_d",
-            "runtime_set_tool_kd",
-            "runtime_set_body_pdp",
-            "runtime_set_body_pdd",
-            "runtime_set_body_pd",
-            "runtime_run_traj",
-            "runtime_stop_traj",
-            "_ensure_kin_handle",
-            "_destroy_kin_handle",
-            "kine_log_level",
-            "init_single_arm_manual",
-            "init_single_arm_config",
-            "set_tool",
-            "remove_tool",
-            "convert_to_8x8_matrix",
-            "distance3",
-            "invert_rigid_matrix4x4",
-            "matrix_multiply",
-            "forward_kinematics",
-            "jacobian",
-            "inverse_kinematics",
-            "set_skye_body_condition",
-            "skye_body_forward_kinematics",
-            "skye_body_inverse_kinematics",
-            "skye_body_inverse_kinematics_with_ref",
-            "plan_joints",
-            "plan_linear",
-            "plan_linear_keep_joints",
-            "plan_linear_multi_points_set_start",
-            "plan_linear_multi_points_set_next",
-            "plan_linear_multi_points_get_points",
-            "plan_linear_synchronous",
-            "dynamics_identification",
-            "xyzabc2matrix",
-            "mat4x4_to_mat1x16",
-            "matrix2xyzabc",
-            "cleanup",
-            "_get_operate_error_msg",
-            "_operate_check",
-            "_get_kinematics_error_msg",
-            "_kinematics_check"
-          ],
-          "properties": [],
-          "exported": true,
-          "lineCount": 2285
-        },
-        {
-          "name": "RobotDataManager",
-          "methods": [
-            "__init__",
-            "_fetch_rt",
-            "_fetch_sg",
-            "latest_rt",
-            "latest_sg",
-            "stop"
-          ],
-          "properties": [],
-          "exported": true,
-          "lineCount": 59
-        }
-      ],
-      "imports": [
-        {
-          "source": "ctypes",
-          "specifiers": [
-            "ctypes"
-          ]
-        },
-        {
-          "source": "ctypes",
-          "specifiers": [
-            "*"
-          ]
-        },
-        {
-          "source": "threading",
-          "specifiers": [
-            "threading"
-          ]
-        },
-        {
-          "source": "os",
-          "specifiers": [
-            "os"
-          ]
-        },
-        {
-          "source": "inspect",
-          "specifiers": [
-            "inspect"
-          ]
-        },
-        {
-          "source": "typing",
-          "specifiers": [
-            "Optional",
-            "Union",
-            "Sequence",
-            "List",
-            "Tuple"
-          ]
-        },
-        {
-          "source": "time",
-          "specifiers": [
-            "time"
-          ]
-        },
-        {
-          "source": "math",
-          "specifiers": [
-            "math"
-          ]
-        },
-        {
-          "source": "threading",
-          "specifiers": [
-            "threading"
-          ]
-        }
-      ],
-      "exports": [
-        "FXObjType",
-        "FXObjMask",
-        "FXLogMask",
-        "FXChnType",
-        "FXTerminalType",
-        "StateCtr",
-        "ARM_OUT",
-        "ARM_IN",
-        "ARM_RT",
-        "HEAD_OUT",
-        "HEAD_IN",
-        "HEAD_RT",
-        "BODY_OUT",
-        "BODY_IN",
-        "BODY_RT",
-        "LIFT_OUT",
-        "LIFT_IN",
-        "LIFT_RT",
-        "HAND_OUT",
-        "HAND_IN",
-        "HAND_RT",
-        "ROBOT_RT",
-        "ARM_SET",
-        "ARM_GET",
-        "ARM_SG",
-        "HEAD_SET",
-        "HEAD_GET",
-        "HEAD_SG",
-        "BODY_SET",
-        "BODY_GET",
-        "BODY_SG",
-        "LIFT_SET",
-        "LIFT_GET",
-        "LIFT_SG",
-        "HAND_SET",
-        "HAND_SG",
-        "OP_SET",
-        "ROBOT_SG",
-        "FX_InvKineSolverParams",
-        "ArmsSynchronousPlanningParams",
-        "SwitchableLock",
-        "GentoRobot",
-        "RobotDataManager"
-      ],
-      "totalLines": 3011,
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 91,
       "hasStructuralAnalysis": true
     },
     "README.md": {
       "filePath": "README.md",
-      "contentHash": "44e10dafa6c3e78214c907c4935d3f8656cb937b8c41689e520c9590bc2169d4",
+      "contentHash": "8110ee188ab33ba3f03fe6fdbe9ffa3653e97f176148c01411fa5d3dc6714771",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3,
+      "totalLines": 568,
       "hasStructuralAnalysis": true
     },
     "win_auto_compile.bat": {
       "filePath": "win_auto_compile.bat",
-      "contentHash": "c36770eb55ee378edde7024fb3fe5e9a3a400a76c9ff59f8740a1d6685dbb2b8",
+      "contentHash": "31c1807a02d8113608c6bda7abdf645d236863ad600a8bfe02c2657cef57dc66",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 12,
+      "totalLines": 76,
       "hasStructuralAnalysis": false
     }
   }

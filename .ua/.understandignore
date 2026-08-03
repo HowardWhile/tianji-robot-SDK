@@ -10,6 +10,11 @@
 # Understand-Anything generated data (avoid analyzing the graph itself).
 .ua/
 
+# C/C++ learning scope: omit Python bindings, Python examples, and the FX UI.
+PYTHON_SDK/
+PYTHON_EXAMPLE/
+FX_PLATFORM/
+
 # --- From .gitignore (uncomment to exclude) ---
 
 # *.exe

@@ -1,16 +1,55 @@
 {
-  "name": "00040200",
-  "description": "GENTO_SDK 是一個 GENTO 軟體開發套件專案。",
+  "name": "tianji-robot-SDK",
+  "description": "天机机器人 C/C++ SDK，提供分层控制、运动学与轨迹规划、文件传输，以及可直接编译运行的 C++ 示例与跨平台建置脚本。此圖譜僅涵蓋 C/C++ 學習範圍及其必要文件，已排除 Python bindings、Python 範例與 FX 上位機。",
   "languages": [
     "batch",
     "c",
     "cpp",
+    "dll",
+    "exe",
     "markdown",
-    "python",
-    "txt"
+    "pptx",
+    "shell",
+    "so"
   ],
   "frameworks": [],
   "files": [
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/build_linux.sh",
+      "language": "shell",
+      "sizeLines": 32,
+      "fileCategory": "script"
+    },
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/build_windows.bat",
+      "language": "batch",
+      "sizeLines": 34,
+      "fileCategory": "script"
+    },
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/libGentoSDK.dll",
+      "language": "dll",
+      "sizeLines": 880,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/libGentoSDKPY.so",
+      "language": "so",
+      "sizeLines": 4502,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/test_link.cpp",
+      "language": "cpp",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE_USE_DLL_SO/test_link.exe",
+      "language": "exe",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
     {
       "path": "C_EXAMPLE/example_basic_AccessParameter.cpp",
       "language": "cpp",
@@ -26,7 +65,7 @@
     {
       "path": "C_EXAMPLE/example_basic_DragCartX.cpp",
       "language": "cpp",
-      "sizeLines": 253,
+      "sizeLines": 126,
       "fileCategory": "code"
     },
     {
@@ -44,7 +83,7 @@
     {
       "path": "C_EXAMPLE/example_basic_Emergency.cpp",
       "language": "cpp",
-      "sizeLines": 217,
+      "sizeLines": 196,
       "fileCategory": "code"
     },
     {
@@ -54,21 +93,39 @@
       "fileCategory": "code"
     },
     {
+      "path": "C_EXAMPLE/example_basic_Hand.cpp",
+      "language": "cpp",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
       "path": "C_EXAMPLE/example_basic_ImpJoint.cpp",
       "language": "cpp",
-      "sizeLines": 177,
+      "sizeLines": 173,
       "fileCategory": "code"
     },
     {
       "path": "C_EXAMPLE/example_basic_LinkSystem.cpp",
       "language": "cpp",
-      "sizeLines": 60,
+      "sizeLines": 100,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_MultiThread.cpp",
+      "language": "cpp",
+      "sizeLines": 312,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_PD.cpp",
+      "language": "cpp",
+      "sizeLines": 1204,
       "fileCategory": "code"
     },
     {
       "path": "C_EXAMPLE/example_basic_Position.cpp",
       "language": "cpp",
-      "sizeLines": 157,
+      "sizeLines": 153,
       "fileCategory": "code"
     },
     {
@@ -80,37 +137,91 @@
     {
       "path": "C_EXAMPLE/example_basic_ResetError.cpp",
       "language": "cpp",
-      "sizeLines": 161,
+      "sizeLines": 159,
       "fileCategory": "code"
     },
     {
       "path": "C_EXAMPLE/example_basic_ResetSensor.cpp",
       "language": "cpp",
-      "sizeLines": 181,
+      "sizeLines": 179,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_SampleData.cpp",
+      "language": "cpp",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_Terminal.cpp",
+      "language": "cpp",
+      "sizeLines": 203,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_DualArm_BasicKinematics.cpp",
+      "language": "cpp",
+      "sizeLines": 449,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_DualArm_MoveJ.cpp",
+      "language": "cpp",
+      "sizeLines": 509,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_DualArm_SynchronousMoveL.cpp",
+      "language": "cpp",
+      "sizeLines": 542,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_SingleArm_MoveL_KeepJ.cpp",
+      "language": "cpp",
+      "sizeLines": 434,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_SingleArm_MoveL.cpp",
+      "language": "cpp",
+      "sizeLines": 482,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_SingleArm_MultiSegmentMoveL.cpp",
+      "language": "cpp",
+      "sizeLines": 545,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_kine_SkyeBody_BasicKinematics.cpp",
+      "language": "cpp",
+      "sizeLines": 550,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/Common/FXCmplOpt.h",
       "language": "c",
-      "sizeLines": 54,
+      "sizeLines": 56,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/Common/FXCommon.h",
       "language": "c",
-      "sizeLines": 590,
+      "sizeLines": 675,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/Common/FXErrorCode.h",
       "language": "c",
-      "sizeLines": 107,
+      "sizeLines": 113,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/Common/FXType.h",
       "language": "c",
-      "sizeLines": 46,
+      "sizeLines": 54,
       "fileCategory": "code"
     },
     {
@@ -236,7 +347,7 @@
     {
       "path": "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.cpp",
       "language": "cpp",
-      "sizeLines": 1048,
+      "sizeLines": 1060,
       "fileCategory": "code"
     },
     {
@@ -284,7 +395,7 @@
     {
       "path": "C_SDK/Kinematics/KineCommon/PointSet.cpp",
       "language": "cpp",
-      "sizeLines": 2311,
+      "sizeLines": 2309,
       "fileCategory": "code"
     },
     {
@@ -356,98 +467,116 @@
     {
       "path": "C_SDK/L0Control/L0Robot.cpp",
       "language": "cpp",
-      "sizeLines": 808,
+      "sizeLines": 1061,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/L0Robot.h",
       "language": "c",
-      "sizeLines": 1275,
+      "sizeLines": 1531,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/RobotCtrl.cpp",
       "language": "cpp",
-      "sizeLines": 3065,
+      "sizeLines": 3328,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/RobotCtrl.h",
       "language": "c",
-      "sizeLines": 290,
+      "sizeLines": 307,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/UdpCommon.h",
       "language": "c",
-      "sizeLines": 197,
+      "sizeLines": 219,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/Utility.cpp",
       "language": "cpp",
-      "sizeLines": 494,
+      "sizeLines": 621,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L0Control/Utility.h",
       "language": "c",
-      "sizeLines": 86,
+      "sizeLines": 89,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L1Robot/L1Robot.cpp",
       "language": "cpp",
-      "sizeLines": 5460,
+      "sizeLines": 6364,
       "fileCategory": "code"
     },
     {
       "path": "C_SDK/L1Robot/L1Robot.h",
       "language": "c",
-      "sizeLines": 1326,
+      "sizeLines": 1501,
       "fileCategory": "code"
     },
     {
-      "path": "C_SDK/make_dll_cmd.txt",
-      "language": "txt",
-      "sizeLines": 1,
-      "fileCategory": "docs"
-    },
-    {
-      "path": "FX_PLATFORM/setup.py",
-      "language": "python",
-      "sizeLines": 63,
+      "path": "C_SDK/L1Robot/SampleOffsetTable.h",
+      "language": "c",
+      "sizeLines": 226,
       "fileCategory": "code"
     },
     {
-      "path": "FX_PLATFORM/UI.py",
-      "language": "python",
-      "sizeLines": 5703,
+      "path": "C_SDK/libGentoSDK.dll",
+      "language": "dll",
+      "sizeLines": 880,
       "fileCategory": "code"
     },
     {
-      "path": "PYTHON_SDK/GentoRobot.py",
-      "language": "python",
-      "sizeLines": 3010,
+      "path": "FXPlatform.exe",
+      "language": "exe",
+      "sizeLines": 46438,
       "fileCategory": "code"
+    },
+    {
+      "path": "GentoPlatform-V1004天机机器人上位机软件操作手册20260625.pptx",
+      "language": "pptx",
+      "sizeLines": 61973,
+      "fileCategory": "code"
+    },
+    {
+      "path": "linux_auto_compile_compitable.sh",
+      "language": "shell",
+      "sizeLines": 143,
+      "fileCategory": "script"
+    },
+    {
+      "path": "linux_auto_compile.sh",
+      "language": "shell",
+      "sizeLines": 90,
+      "fileCategory": "script"
     },
     {
       "path": "README.md",
       "language": "markdown",
-      "sizeLines": 2,
+      "sizeLines": 567,
       "fileCategory": "docs"
     },
     {
       "path": "win_auto_compile.bat",
       "language": "batch",
-      "sizeLines": 11,
+      "sizeLines": 75,
       "fileCategory": "script"
     }
   ],
-  "totalFiles": 72,
-  "filteredByIgnore": 7,
+  "totalFiles": 92,
+  "filteredByIgnore": 33,
   "estimatedComplexity": "moderate",
   "importMap": {
+    "C_EXAMPLE_USE_DLL_SO/build_linux.sh": [],
+    "C_EXAMPLE_USE_DLL_SO/build_windows.bat": [],
+    "C_EXAMPLE_USE_DLL_SO/libGentoSDK.dll": [],
+    "C_EXAMPLE_USE_DLL_SO/libGentoSDKPY.so": [],
+    "C_EXAMPLE_USE_DLL_SO/test_link.cpp": [],
+    "C_EXAMPLE_USE_DLL_SO/test_link.exe": [],
     "C_EXAMPLE/example_basic_AccessParameter.cpp": [],
     "C_EXAMPLE/example_basic_Brake.cpp": [],
     "C_EXAMPLE/example_basic_DragCartX.cpp": [],
@@ -455,12 +584,24 @@
     "C_EXAMPLE/example_basic_DragJoint2ImpCart.cpp": [],
     "C_EXAMPLE/example_basic_Emergency.cpp": [],
     "C_EXAMPLE/example_basic_FileTransfer.cpp": [],
+    "C_EXAMPLE/example_basic_Hand.cpp": [],
     "C_EXAMPLE/example_basic_ImpJoint.cpp": [],
     "C_EXAMPLE/example_basic_LinkSystem.cpp": [],
+    "C_EXAMPLE/example_basic_MultiThread.cpp": [],
+    "C_EXAMPLE/example_basic_PD.cpp": [],
     "C_EXAMPLE/example_basic_Position.cpp": [],
     "C_EXAMPLE/example_basic_ResetEncoder.cpp": [],
     "C_EXAMPLE/example_basic_ResetError.cpp": [],
     "C_EXAMPLE/example_basic_ResetSensor.cpp": [],
+    "C_EXAMPLE/example_basic_SampleData.cpp": [],
+    "C_EXAMPLE/example_basic_Terminal.cpp": [],
+    "C_EXAMPLE/example_kine_DualArm_BasicKinematics.cpp": [],
+    "C_EXAMPLE/example_kine_DualArm_MoveJ.cpp": [],
+    "C_EXAMPLE/example_kine_DualArm_SynchronousMoveL.cpp": [],
+    "C_EXAMPLE/example_kine_SingleArm_MoveL_KeepJ.cpp": [],
+    "C_EXAMPLE/example_kine_SingleArm_MoveL.cpp": [],
+    "C_EXAMPLE/example_kine_SingleArm_MultiSegmentMoveL.cpp": [],
+    "C_EXAMPLE/example_kine_SkyeBody_BasicKinematics.cpp": [],
     "C_SDK/Common/FXCmplOpt.h": [],
     "C_SDK/Common/FXCommon.h": [],
     "C_SDK/Common/FXErrorCode.h": [],
@@ -491,7 +632,9 @@
       "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h"
     ],
     "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h": [],
-    "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp": [],
+    "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp": [
+      "C_SDK/Kinematics/ArmKinematics/FXKinematics.h"
+    ],
     "C_SDK/Kinematics/ArmKinematics/FXKinematics.h": [],
     "C_SDK/Kinematics/BaseMath/FXMath.cpp": [
       "C_SDK/Kinematics/BaseMath/FXMath.h"
@@ -560,15 +703,16 @@
     ],
     "C_SDK/L0Control/Utility.h": [],
     "C_SDK/L1Robot/L1Robot.cpp": [
-      "C_SDK/L1Robot/L1Robot.h"
+      "C_SDK/L1Robot/L1Robot.h",
+      "C_SDK/L1Robot/SampleOffsetTable.h"
     ],
     "C_SDK/L1Robot/L1Robot.h": [],
-    "C_SDK/make_dll_cmd.txt": [],
-    "FX_PLATFORM/setup.py": [],
-    "FX_PLATFORM/UI.py": [
-      "PYTHON_SDK/GentoRobot.py"
-    ],
-    "PYTHON_SDK/GentoRobot.py": [],
+    "C_SDK/L1Robot/SampleOffsetTable.h": [],
+    "C_SDK/libGentoSDK.dll": [],
+    "FXPlatform.exe": [],
+    "GentoPlatform-V1004天机机器人上位机软件操作手册20260625.pptx": [],
+    "linux_auto_compile_compitable.sh": [],
+    "linux_auto_compile.sh": [],
     "README.md": [],
     "win_auto_compile.bat": []
   }
