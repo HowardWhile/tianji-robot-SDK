@@ -9,3 +9,9 @@ C_SDK/libGentoSDK.dll
 my_test/
 html/
 FX_PLATFORM/dd.py
+
+# Understand Anything generated analysis artifacts.
+/.ua/.trash-*/
+/.ua/intermediate/*
+!/.ua/intermediate/scan-result.json
+/.ua/tmp/

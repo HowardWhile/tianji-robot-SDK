@@ -1,0 +1,575 @@
+{
+  "name": "00040200",
+  "description": "GENTO_SDK 是一個 GENTO 軟體開發套件專案。",
+  "languages": [
+    "batch",
+    "c",
+    "cpp",
+    "markdown",
+    "python",
+    "txt"
+  ],
+  "frameworks": [],
+  "files": [
+    {
+      "path": "C_EXAMPLE/example_basic_AccessParameter.cpp",
+      "language": "cpp",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_Brake.cpp",
+      "language": "cpp",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_DragCartX.cpp",
+      "language": "cpp",
+      "sizeLines": 253,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_DragJoint.cpp",
+      "language": "cpp",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_DragJoint2ImpCart.cpp",
+      "language": "cpp",
+      "sizeLines": 162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_Emergency.cpp",
+      "language": "cpp",
+      "sizeLines": 217,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_FileTransfer.cpp",
+      "language": "cpp",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_ImpJoint.cpp",
+      "language": "cpp",
+      "sizeLines": 177,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_LinkSystem.cpp",
+      "language": "cpp",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_Position.cpp",
+      "language": "cpp",
+      "sizeLines": 157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_ResetEncoder.cpp",
+      "language": "cpp",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_ResetError.cpp",
+      "language": "cpp",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_EXAMPLE/example_basic_ResetSensor.cpp",
+      "language": "cpp",
+      "sizeLines": 181,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Common/FXCmplOpt.h",
+      "language": "c",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Common/FXCommon.h",
+      "language": "c",
+      "sizeLines": 590,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Common/FXErrorCode.h",
+      "language": "c",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Common/FXType.h",
+      "language": "c",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/FileOP.cpp",
+      "language": "cpp",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/FileOP.h",
+      "language": "c",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/FXFileClient.cpp",
+      "language": "cpp",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/FXFileClient.h",
+      "language": "c",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/netdef.h",
+      "language": "c",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/Parser.cpp",
+      "language": "cpp",
+      "sizeLines": 283,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/Parser.h",
+      "language": "c",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/TCPAgent.cpp",
+      "language": "cpp",
+      "sizeLines": 285,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/TCPAgent.h",
+      "language": "c",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/TCPFileClient.cpp",
+      "language": "cpp",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/FileClient/TCPFileClient.h",
+      "language": "c",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.cpp",
+      "language": "cpp",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h",
+      "language": "c",
+      "sizeLines": 121,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp",
+      "language": "cpp",
+      "sizeLines": 3218,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/ArmKinematics/FXKinematics.h",
+      "language": "c",
+      "sizeLines": 263,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/BaseMath/FXMath.cpp",
+      "language": "cpp",
+      "sizeLines": 408,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/BaseMath/FXMath.h",
+      "language": "c",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/BaseMath/FxMathType.h",
+      "language": "c",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/BaseMath/FXMatrix.cpp",
+      "language": "cpp",
+      "sizeLines": 3746,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/BaseMath/FXMatrix.h",
+      "language": "c",
+      "sizeLines": 216,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.cpp",
+      "language": "cpp",
+      "sizeLines": 1048,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.h",
+      "language": "c",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXDG.cpp",
+      "language": "cpp",
+      "sizeLines": 227,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXDG.h",
+      "language": "c",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXEnviroment.cpp",
+      "language": "cpp",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXEnviroment.h",
+      "language": "c",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXLog.cpp",
+      "language": "cpp",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/FXLog.h",
+      "language": "c",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/PointSet.cpp",
+      "language": "cpp",
+      "sizeLines": 2311,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/KineCommon/PointSet.h",
+      "language": "c",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/L0KineMotion.cpp",
+      "language": "cpp",
+      "sizeLines": 757,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/L0KineMotion.h",
+      "language": "c",
+      "sizeLines": 508,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXAxisPln.cpp",
+      "language": "cpp",
+      "sizeLines": 3012,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXAxisPln.h",
+      "language": "c",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.cpp",
+      "language": "cpp",
+      "sizeLines": 426,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.h",
+      "language": "c",
+      "sizeLines": 182,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.cpp",
+      "language": "cpp",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.h",
+      "language": "c",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/SkyeBodyKinematics/FXSkyeBodyKinematics.cpp",
+      "language": "cpp",
+      "sizeLines": 431,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/Kinematics/SkyeBodyKinematics/FXSkyeBodyKinematics.h",
+      "language": "c",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/L0Robot.cpp",
+      "language": "cpp",
+      "sizeLines": 808,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/L0Robot.h",
+      "language": "c",
+      "sizeLines": 1275,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/RobotCtrl.cpp",
+      "language": "cpp",
+      "sizeLines": 3065,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/RobotCtrl.h",
+      "language": "c",
+      "sizeLines": 290,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/UdpCommon.h",
+      "language": "c",
+      "sizeLines": 197,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/Utility.cpp",
+      "language": "cpp",
+      "sizeLines": 494,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L0Control/Utility.h",
+      "language": "c",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L1Robot/L1Robot.cpp",
+      "language": "cpp",
+      "sizeLines": 5460,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/L1Robot/L1Robot.h",
+      "language": "c",
+      "sizeLines": 1326,
+      "fileCategory": "code"
+    },
+    {
+      "path": "C_SDK/make_dll_cmd.txt",
+      "language": "txt",
+      "sizeLines": 1,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "FX_PLATFORM/setup.py",
+      "language": "python",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "FX_PLATFORM/UI.py",
+      "language": "python",
+      "sizeLines": 5703,
+      "fileCategory": "code"
+    },
+    {
+      "path": "PYTHON_SDK/GentoRobot.py",
+      "language": "python",
+      "sizeLines": 3010,
+      "fileCategory": "code"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 2,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "win_auto_compile.bat",
+      "language": "batch",
+      "sizeLines": 11,
+      "fileCategory": "script"
+    }
+  ],
+  "totalFiles": 72,
+  "filteredByIgnore": 7,
+  "estimatedComplexity": "moderate",
+  "importMap": {
+    "C_EXAMPLE/example_basic_AccessParameter.cpp": [],
+    "C_EXAMPLE/example_basic_Brake.cpp": [],
+    "C_EXAMPLE/example_basic_DragCartX.cpp": [],
+    "C_EXAMPLE/example_basic_DragJoint.cpp": [],
+    "C_EXAMPLE/example_basic_DragJoint2ImpCart.cpp": [],
+    "C_EXAMPLE/example_basic_Emergency.cpp": [],
+    "C_EXAMPLE/example_basic_FileTransfer.cpp": [],
+    "C_EXAMPLE/example_basic_ImpJoint.cpp": [],
+    "C_EXAMPLE/example_basic_LinkSystem.cpp": [],
+    "C_EXAMPLE/example_basic_Position.cpp": [],
+    "C_EXAMPLE/example_basic_ResetEncoder.cpp": [],
+    "C_EXAMPLE/example_basic_ResetError.cpp": [],
+    "C_EXAMPLE/example_basic_ResetSensor.cpp": [],
+    "C_SDK/Common/FXCmplOpt.h": [],
+    "C_SDK/Common/FXCommon.h": [],
+    "C_SDK/Common/FXErrorCode.h": [],
+    "C_SDK/Common/FXType.h": [],
+    "C_SDK/FileClient/FileOP.cpp": [
+      "C_SDK/FileClient/FileOP.h"
+    ],
+    "C_SDK/FileClient/FileOP.h": [],
+    "C_SDK/FileClient/FXFileClient.cpp": [
+      "C_SDK/FileClient/FXFileClient.h",
+      "C_SDK/FileClient/TCPFileClient.h"
+    ],
+    "C_SDK/FileClient/FXFileClient.h": [],
+    "C_SDK/FileClient/netdef.h": [],
+    "C_SDK/FileClient/Parser.cpp": [
+      "C_SDK/FileClient/Parser.h"
+    ],
+    "C_SDK/FileClient/Parser.h": [],
+    "C_SDK/FileClient/TCPAgent.cpp": [
+      "C_SDK/FileClient/TCPAgent.h"
+    ],
+    "C_SDK/FileClient/TCPAgent.h": [],
+    "C_SDK/FileClient/TCPFileClient.cpp": [
+      "C_SDK/FileClient/TCPFileClient.h"
+    ],
+    "C_SDK/FileClient/TCPFileClient.h": [],
+    "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.cpp": [
+      "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h"
+    ],
+    "C_SDK/Kinematics/ArmKinematics/FXArmKinematics.h": [],
+    "C_SDK/Kinematics/ArmKinematics/FXKinematics.cpp": [],
+    "C_SDK/Kinematics/ArmKinematics/FXKinematics.h": [],
+    "C_SDK/Kinematics/BaseMath/FXMath.cpp": [
+      "C_SDK/Kinematics/BaseMath/FXMath.h"
+    ],
+    "C_SDK/Kinematics/BaseMath/FXMath.h": [],
+    "C_SDK/Kinematics/BaseMath/FxMathType.h": [],
+    "C_SDK/Kinematics/BaseMath/FXMatrix.cpp": [
+      "C_SDK/Kinematics/BaseMath/FXMatrix.h"
+    ],
+    "C_SDK/Kinematics/BaseMath/FXMatrix.h": [],
+    "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.cpp": [
+      "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.h",
+      "C_SDK/Kinematics/KineCommon/FXLog.h"
+    ],
+    "C_SDK/Kinematics/DynaIdent/FXDynaIndentification.h": [],
+    "C_SDK/Kinematics/KineCommon/FXDG.cpp": [
+      "C_SDK/Kinematics/KineCommon/FXDG.h"
+    ],
+    "C_SDK/Kinematics/KineCommon/FXDG.h": [],
+    "C_SDK/Kinematics/KineCommon/FXEnviroment.cpp": [
+      "C_SDK/Kinematics/KineCommon/FXEnviroment.h",
+      "C_SDK/Kinematics/KineCommon/FXLog.h"
+    ],
+    "C_SDK/Kinematics/KineCommon/FXEnviroment.h": [],
+    "C_SDK/Kinematics/KineCommon/FXLog.cpp": [
+      "C_SDK/Kinematics/KineCommon/FXLog.h"
+    ],
+    "C_SDK/Kinematics/KineCommon/FXLog.h": [],
+    "C_SDK/Kinematics/KineCommon/PointSet.cpp": [
+      "C_SDK/Kinematics/KineCommon/PointSet.h"
+    ],
+    "C_SDK/Kinematics/KineCommon/PointSet.h": [],
+    "C_SDK/Kinematics/L0KineMotion.cpp": [
+      "C_SDK/Kinematics/KineCommon/FXLog.h",
+      "C_SDK/Kinematics/L0KineMotion.h"
+    ],
+    "C_SDK/Kinematics/L0KineMotion.h": [],
+    "C_SDK/Kinematics/MotionPlanner/FXAxisPln.cpp": [
+      "C_SDK/Kinematics/MotionPlanner/FXAxisPln.h",
+      "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.h"
+    ],
+    "C_SDK/Kinematics/MotionPlanner/FXAxisPln.h": [],
+    "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.cpp": [
+      "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.h"
+    ],
+    "C_SDK/Kinematics/MotionPlanner/FXMotionPlanner.h": [],
+    "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.cpp": [
+      "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.h"
+    ],
+    "C_SDK/Kinematics/MotionPlanner/FXO3Polynorm.h": [],
+    "C_SDK/Kinematics/SkyeBodyKinematics/FXSkyeBodyKinematics.cpp": [
+      "C_SDK/Kinematics/SkyeBodyKinematics/FXSkyeBodyKinematics.h"
+    ],
+    "C_SDK/Kinematics/SkyeBodyKinematics/FXSkyeBodyKinematics.h": [],
+    "C_SDK/L0Control/L0Robot.cpp": [
+      "C_SDK/L0Control/L0Robot.h"
+    ],
+    "C_SDK/L0Control/L0Robot.h": [],
+    "C_SDK/L0Control/RobotCtrl.cpp": [
+      "C_SDK/L0Control/RobotCtrl.h"
+    ],
+    "C_SDK/L0Control/RobotCtrl.h": [],
+    "C_SDK/L0Control/UdpCommon.h": [],
+    "C_SDK/L0Control/Utility.cpp": [
+      "C_SDK/L0Control/Utility.h"
+    ],
+    "C_SDK/L0Control/Utility.h": [],
+    "C_SDK/L1Robot/L1Robot.cpp": [
+      "C_SDK/L1Robot/L1Robot.h"
+    ],
+    "C_SDK/L1Robot/L1Robot.h": [],
+    "C_SDK/make_dll_cmd.txt": [],
+    "FX_PLATFORM/setup.py": [],
+    "FX_PLATFORM/UI.py": [
+      "PYTHON_SDK/GentoRobot.py"
+    ],
+    "PYTHON_SDK/GentoRobot.py": [],
+    "README.md": [],
+    "win_auto_compile.bat": []
+  }
+}
