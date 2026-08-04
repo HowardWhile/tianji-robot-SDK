@@ -79,7 +79,6 @@ FX L1 Robot SDK 提供了一套高层 C API，用于控制、监控和编程 FX 
 | 4.4.1 | 2026-06-05 | 修复接口：FX_L1_Runtime_StopTraj|
 | 4.4.0 | 2026-05-29 | 增加连接状态接口：FX_L1_System_GetLinkState|
 | 4.3.0 | 2026-05-28 | 增加PD控制接口：FX_L1_Config_SetPDCmdCycleTime，FX_L1_Config_GetPDCmdCycleTime，FX_L1_State_SwitchToPDMode，FX_L1_Runtime_SetJointPosPDCmd；增加数据打标接口：FX_L1_Runtime_SetTag；增加灵巧手控制接口：FX_L1_Runtime_SetHandAction，FX_L1_Runtime_SetHandPos，FX_L1_Runtime_SetHandP，FX_L1_Runtime_SetHandD，FX_L1_Runtime_SetHandMaxTor
-|
 | 4.2.1 | 2026-05    | 新增 `FX_L1_Kinematics_PlanLinearMove_MultiPoints_*` 多段笛卡尔规划 API；改进逆运动学稳定性；修复 UDP 连接超时处理。 |
 | 4.2.0 | 2026-05    | 引入 Skye 机身运动学（`FX_L1_Kinematics_SkyeBody*`）；新增双臂同步规划（`FX_L1_Kinematics_ArmsSynchronousPlanning`）；新错误码 `FUNC_RET_KINE_PLAN_JOINT_LIMIT`、`FUNC_RET_KINE_SYNC_POINT_MISMATCH`。 |
 | 4.1.0 | 2026-04    | 新增力/力矩控制运行时 API（`FX_L1_Runtime_SetForceCtrl`、`SetTorqueCtrl`）；新状态 `FX_STATE_IMP_FORCE`。 |
