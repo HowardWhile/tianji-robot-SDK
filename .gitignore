@@ -15,3 +15,5 @@ FX_PLATFORM/dd.py
 /.ua/intermediate/*
 !/.ua/intermediate/scan-result.json
 /.ua/tmp/
+
+*.so
