@@ -8,6 +8,7 @@ set -uo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 SDK_DIR="$(cd -- "$SCRIPT_DIR/../C_SDK" && pwd)"
 BUILD_DIR="$SCRIPT_DIR/build"
+LOG_DIR="$SCRIPT_DIR/log"
 
 CXX="${CXX:-g++}"
 
@@ -59,6 +60,7 @@ if [[ ! -f "$SDK_LIBRARY" ]]; then
 fi
 
 mkdir -p "$BUILD_DIR"
+mkdir -p "$LOG_DIR"
 
 mapfile -d '' SOURCES < <(
     find "$SCRIPT_DIR" \
@@ -95,17 +97,20 @@ for source_file in "${SOURCES[@]}"; do
 
     echo "[$((SUCCESS_COUNT + FAILED_COUNT + 1))/${#SOURCES[@]}] Building $source_name"
 
+    log_file="$LOG_DIR/${target_name}.log"
+
     if "$CXX" \
         "$source_file" \
         "${INC_DIRS[@]}" \
         "${CXX_FLAGS[@]}" \
         "${LINK_FLAGS[@]}" \
-        -o "$target_file"; then
+        -o "$target_file" 2>&1 | tee "$log_file"; then
 
         echo "  OK: build/$target_name"
         ((SUCCESS_COUNT += 1))
     else
         echo "  FAILED: $source_name"
+        echo "  See log: $log_file"
         ((FAILED_COUNT += 1))
         FAILED_SOURCES+=("$source_name")
         rm -f -- "$target_file"

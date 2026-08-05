@@ -10,12 +10,13 @@ my_test/
 html/
 FX_PLATFORM/dd.py
 
-*.so
-build/
-
 # Understand Anything generated analysis artifacts.
 /.ua/.trash-*/
 /.ua/intermediate/*
 !/.ua/intermediate/scan-result.json
 /.ua/tmp/
 
+
+*.so
+build/
+log/
