@@ -164,26 +164,11 @@ static int StartTrajectory(unsigned int obj_mask)
     int err_code = 0;
     unsigned int started_mask = 0;
 
-    /* Clear the communication buffer so only the trajectory start request is sent in this cycle. */
-    err_code = FX_L1_Comm_Clear(20);
-    if (err_code != FUNC_RET_SUCCESS)
-    {
-        printf("Failed to clear communication before starting. Error code: %d\n", err_code);
-        return -1;
-    }
-
     /* Request runtime execution of the trajectory that has already been uploaded to the controller. */
-    started_mask = FX_L1_Runtime_RunTraj(obj_mask);
+    started_mask = FX_L1_Runtime_RunTraj(1, obj_mask);
     if ((started_mask & obj_mask) != obj_mask)
     {
         printf("Failed to run trajectory, returned mask = 0x%08x\n", started_mask);
-        return -1;
-    }
-
-    err_code = FX_L1_Comm_Send();
-    if (err_code != FUNC_RET_SUCCESS)
-    {
-        printf("Failed to send start command. Error code: %d\n", err_code);
         return -1;
     }
     return 0;
@@ -243,37 +228,23 @@ int SingleArm_MoveL_ByIniConfig()
     {
         goto WAIT_EXIT;
     }
-    
+
     /* Move to first target position. */
     printf("Arm0 is in STATE_POSITION state now\n");
     PrintJointPosition("Press any key to let arm0 move to first target position", arm0_start_joints);
     getchar();
 
-    if (FX_L1_Comm_Clear(500) != FUNC_RET_SUCCESS ||
-        FX_L1_Runtime_SetJointPosCmd(FX_OBJ_ARM0, arm0_start_joints) != FUNC_RET_SUCCESS ||
-        FX_L1_Comm_Send() != FUNC_RET_SUCCESS)
+    if (FX_L1_Runtime_SetJointPosCmd(1, FX_OBJ_ARM0, arm0_start_joints) != FUNC_RET_SUCCESS)
     {
         printf("Failed to set Arm0's target position\n");
         goto WAIT_EXIT;
     }
 
     /*Set global velocity ratio and acceleration ratio for motion planning. */
-    err_code = FX_L1_Comm_Clear(500);
-    if (err_code != FUNC_RET_SUCCESS)
-    {
-        printf("Communication clear buffer failed. Error code: %d\n", err_code);
-        goto WAIT_EXIT;
-    }
-    err_code = FX_L1_Runtime_SetSpeedRatio(FX_OBJ_ARM0, global_vel_, global_acc_);
+    err_code = FX_L1_Runtime_SetSpeedRatio(1, FX_OBJ_ARM0, global_vel_, global_acc_);
     if (err_code != FUNC_RET_SUCCESS)
     {
         printf("Failed to set Arm0 velocity ratio. Error code: %d\n", err_code);
-        goto WAIT_EXIT;
-    }
-    err_code = FX_L1_Comm_Send();   
-    if (err_code != FUNC_RET_SUCCESS)
-    {
-        printf("Failed to send communication command. Error code: %d\n", err_code);
         goto WAIT_EXIT;
     }
     SLEEP_MS(20);
@@ -299,7 +270,8 @@ int SingleArm_MoveL_ByIniConfig()
 
     /* Calculate forward kinematics for the start joints. */
     err_code = FX_L1_Kinematics_ForwardKinematics(handle, 0, arm0_start_joints, arm0_start_matrix);
-    if (err_code != FUNC_RET_SUCCESS)    {
+    if (err_code != FUNC_RET_SUCCESS)
+    {
         printf("Failed to solve ARM0 forward kinematics for the MoveL start pose. Error code: %d\n", err_code);
         goto WAIT_EXIT;
     }
@@ -310,12 +282,12 @@ int SingleArm_MoveL_ByIniConfig()
     {
         arm0_end_eyxabc[index] = arm0_start_xyzabc[index];
     }
-    arm0_end_eyxabc[2] -= 100.0;
+    arm0_end_eyxabc[2] -= 200.0;
     PrintXYZABC("Arm0 MoveL start pose", arm0_start_xyzabc);
     PrintXYZABC("Arm0 MoveL end pose", arm0_end_eyxabc);
 
     /* Plan the MoveL_KeepJ trajectories for Arm0. */
-    err_code = FX_L1_Kinematics_PlanLinearMove(handle, 0, arm0_start_xyzabc, arm0_end_eyxabc, arm0_start_joints, 100.0, 300.0, 50, arm0_planned_points, &point_num);
+    err_code = FX_L1_Kinematics_PlanLinearMove(handle, 0, arm0_start_xyzabc, arm0_end_eyxabc, arm0_start_joints, 10.0, 300.0, 50, arm0_planned_points, &point_num);
     if (err_code != FUNC_RET_SUCCESS)
     {
         printf("Failed to plan ARM0 MoveL trajectory. Error code: %d\n", err_code);
@@ -333,7 +305,7 @@ int SingleArm_MoveL_ByIniConfig()
         goto WAIT_EXIT;
     }
 
-   /* Run trajectory. */
+    /* Run trajectory. */
     printf("Press any key to start the planned MoveL_KeepJ trajectories\n");
     getchar();
     if (StartTrajectory(FX_OBJ_ARM0_FLAG) != 0)
@@ -343,8 +315,9 @@ int SingleArm_MoveL_ByIniConfig()
     printf("Arm0 MoveL_KeepJ trajectory started successfully\n");
 
     /* Wait for the trajectory to complete. */
-    do {
-        SLEEP_MS(2);    
+    do
+    {
+        SLEEP_MS(2);
     } while (sg_ptr->m_ARMS[0].m_ARM_GET.m_ARM_FBK_TrajState != 0);
     printf("Trajectory move done!\n");
 
@@ -389,7 +362,7 @@ int SingleArm_MoveL_ByInputParams()
     int point_num = 0;
     int err_code = 0;
     int index = 0;
-    int show_result_ = 1;  ///< Set to 1 to print the planned trajectory points
+    int show_result_ = 1; ///< Set to 1 to print the planned trajectory points
 
     FX_MotionHandle handle = 0;
     double arm0_start_joints[7] = {-17.470, -43.308, -11.804, -79.761, 10.700, -2.874, -9.134};
@@ -417,7 +390,8 @@ int SingleArm_MoveL_ByInputParams()
 
     /* Calculate forward kinematics for the start joints*/
     err_code = FX_L1_Kinematics_ForwardKinematics(handle, 0, arm0_start_joints, arm0_start_matrix);
-    if (err_code != FUNC_RET_SUCCESS)    {
+    if (err_code != FUNC_RET_SUCCESS)
+    {
         printf("Failed to solve ARM0 forward kinematics for the MoveL start pose. Error code: %d\n", err_code);
         goto WAIT_EXIT;
     }
@@ -479,5 +453,5 @@ int main(int argc, char **argv)
     (void)argv;
 
     return SingleArm_MoveL_ByIniConfig();
-    //return SingleArm_MoveL_ByInputParams();
+    // return SingleArm_MoveL_ByInputParams();
 }
