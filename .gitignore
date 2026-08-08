@@ -20,3 +20,4 @@ FX_PLATFORM/dd.py
 *.so
 build/
 log/
+FXPlatform

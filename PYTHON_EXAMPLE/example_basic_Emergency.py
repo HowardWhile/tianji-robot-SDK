@@ -75,11 +75,11 @@ def main():
         return
     print(f"Already in {target_state} state.")
     rt_dict = robot.get_rt_dict()
-    print(f"current state：{rt_dict["arms"][arm_idx]["state"]["cur"]}")
-    print(f"current joints:{rt_dict["arms"][arm_idx]["fb"]["fb_pos"]}")
+    print(f"current state：{rt_dict['arms'][arm_idx]['state']['cur']}")
+    print(f"current joints:{rt_dict['arms'][arm_idx]['fb']['fb_pos']}")
     sg_dict = robot.get_sg_dict()
-    print(f"current vel:{sg_dict["arms"][arm_idx]['set']["vel_ratio"]}")
-    print(f"current acc:{sg_dict["arms"][arm_idx]['set']["acc_ratio"]}")
+    print(f"current vel:{sg_dict['arms'][arm_idx]['set']['vel_ratio']}")
+    print(f"current acc:{sg_dict['arms'][arm_idx]['set']['acc_ratio']}")
 
 
     print(f"\n### 4/6. Run pos1 and pos2...")

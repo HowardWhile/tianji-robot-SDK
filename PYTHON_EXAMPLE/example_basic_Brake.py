@@ -59,7 +59,7 @@ def main():
             print(f"Switch to IDLE failed. Error msg: {robot._get_operate_error_msg(ret)}")
             return
         rt_dict = robot.get_rt_dict()
-        print(f"current state：{rt_dict["arms"][arm_idx]["state"]["cur"]}")
+        print(f"current state：{rt_dict['arms'][arm_idx]['state']['cur']}")
 
     print(f"\n### 4/6. Unlock all brakes...")
     input("Press Enter key to unlock all brakes of arm0, please hold the arm carefully or it will drop!")

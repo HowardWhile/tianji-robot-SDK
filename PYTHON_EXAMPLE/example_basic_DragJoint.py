@@ -72,11 +72,11 @@ def main():
     print(f"Already in {target_state} state.")
     rt_dict = robot.get_rt_dict()
     sg_dict = robot.get_sg_dict()
-    print(f"current state：{rt_dict["arms"][arm_idx]["state"]["cur"]}")
-    print(f"current drag type：{rt_dict["arms"][arm_idx]["cmd"]["drag_type"]}")
-    print(f"current k:{sg_dict["arms"][arm_idx]['set']["joint_k"]}")
-    print(f"current d:{sg_dict["arms"][arm_idx]['set']["joint_d"]}")
-    print(f"current joints:{rt_dict["arms"][arm_idx]["fb"]["fb_pos"]}")
+    print(f"current state：{rt_dict['arms'][arm_idx]['state']['cur']}")
+    print(f"current drag type：{rt_dict['arms'][arm_idx]['cmd']['drag_type']}")
+    print(f"current k:{sg_dict['arms'][arm_idx]['set']['joint_k']}")
+    print(f"current d:{sg_dict['arms'][arm_idx]['set']['joint_d']}")
+    print(f"current joints:{rt_dict['arms'][arm_idx]['fb']['fb_pos']}")
 
 
     print(f"\n### 4/6. Arm0 is in STATE_DRAG_JOINT state now, please press the drag button on Arm0's terminal to drag the arm...")
