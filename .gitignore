@@ -1,0 +1,26 @@
+.vs/
+.idea/
+.vscode/
+*.pyc
+__pycache__/
+C_EXAMPLE/*.exe
+C_SDK/libGentoSDKPY.dll
+C_SDK/libGentoSDK.dll
+my_test/
+html/
+FX_PLATFORM/dd.py
+
+# Understand Anything generated analysis artifacts.
+/.ua/.trash-*/
+/.ua/intermediate/*
+!/.ua/intermediate/scan-result.json
+/.ua/tmp/
+
+.codegraph/
+
+*.AppImage
+
+*.so
+build/
+log/
+FXPlatform
