@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Download the latest prebuilt Gento SDK for the current Linux architecture.
+# Download the v4.5.0 prebuilt Gento SDK for the current Linux architecture.
 set -euo pipefail
 
 REPOSITORY="HowardWhile/tianji-robot-SDK"
+RELEASE_TAG="v4.5.0"
 INSTALL_DIR="$HOME/.local/lib/fiibot"
-API_URL="https://api.github.com/repos/${REPOSITORY}/releases/latest"
+API_URL="https://api.github.com/repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}"
 
 die() {
     echo "[ERROR] $*" >&2
@@ -30,9 +31,9 @@ esac
 metadata_file="$(mktemp)"
 trap 'rm -f "$metadata_file"' EXIT
 
-echo "[INFO] Detecting the latest release for ${architecture}..."
+echo "[INFO] Detecting release ${RELEASE_TAG} for ${architecture}..."
 wget -qO "$metadata_file" "$API_URL" \
-    || die "Could not fetch the latest-release metadata from GitHub."
+    || die "Could not fetch release ${RELEASE_TAG} metadata from GitHub."
 
 # Releases publish libraries as libGentoSDK-<architecture>.so.  Accept common
 # architecture spellings so future release assets can use equivalent names.
@@ -42,7 +43,7 @@ asset_url="$({
         | head -n 1
 } || true)"
 
-[ -n "$asset_url" ] || die "No libGentoSDK .so asset for ${architecture} was found in the latest release."
+[ -n "$asset_url" ] || die "No libGentoSDK .so asset for ${architecture} was found in release ${RELEASE_TAG}."
 
 asset_name="${asset_url##*/}"
 case "$asset_name" in
