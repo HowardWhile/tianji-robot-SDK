@@ -4,7 +4,7 @@ set -euo pipefail
 
 REPOSITORY="HowardWhile/tianji-robot-SDK"
 RELEASE_TAG="v4.7.1"
-INSTALL_DIR="$HOME/.local/lib/fiibot"
+INSTALL_DIR="/usr/lib/fiibot"
 API_URL="https://api.github.com/repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}"
 
 die() {
@@ -50,8 +50,7 @@ case "$asset_name" in
     *) die "Refusing unexpected release asset name: ${asset_name}" ;;
 esac
 
-mkdir -p "$INSTALL_DIR"
-temporary_library="$INSTALL_DIR/.${asset_name}.tmp.$$"
+temporary_library="$(mktemp)"
 trap 'rm -f "$metadata_file" "$temporary_library"' EXIT
 
 echo "[INFO] Downloading ${asset_name}..."
@@ -59,8 +58,15 @@ wget -q --show-progress -O "$temporary_library" "$asset_url" \
     || die "Failed to download ${asset_name}."
 [ -s "$temporary_library" ] || die "Downloaded library is empty."
 
-mv -f "$temporary_library" "$INSTALL_DIR/$asset_name"
-ln -sfn "$asset_name" "$INSTALL_DIR/libGentoSDK.so"
+install_command=()
+if [ "$(id -u)" -ne 0 ]; then
+    command -v sudo >/dev/null 2>&1 || die "sudo is required to install into $INSTALL_DIR."
+    install_command=(sudo)
+fi
+
+"${install_command[@]}" install -d -m 755 "$INSTALL_DIR"
+"${install_command[@]}" install -m 644 "$temporary_library" "$INSTALL_DIR/$asset_name"
+"${install_command[@]}" ln -sfnT "$asset_name" "$INSTALL_DIR/libGentoSDK.so"
 
 echo "[OK] Installed: $INSTALL_DIR/$asset_name"
 echo "[OK] Symlink:   $INSTALL_DIR/libGentoSDK.so -> $asset_name"
