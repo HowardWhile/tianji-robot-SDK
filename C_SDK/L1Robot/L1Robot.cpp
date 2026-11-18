@@ -7065,6 +7065,12 @@ int FX_L1_Runtime_SetAccRatio(unsigned int thread_id, FXObjType obj_type, double
     {
     case FX_OBJ_ARM0:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_ARMS[0].m_ARM_GET.m_ARM_FBK_LowSpdFlag != 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Arm0_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
@@ -7074,6 +7080,12 @@ int FX_L1_Runtime_SetAccRatio(unsigned int thread_id, FXObjType obj_type, double
     }
     case FX_OBJ_ARM1:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_ARMS[1].m_ARM_GET.m_ARM_FBK_LowSpdFlag != 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Arm1_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
@@ -7092,6 +7104,12 @@ int FX_L1_Runtime_SetAccRatio(unsigned int thread_id, FXObjType obj_type, double
     }
     case FX_OBJ_BODY:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_BODY.m_BODY_GET.m_BODY_FBK_LowSpdFlag!= 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Body_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
@@ -7130,10 +7148,17 @@ int FX_L1_Runtime_SetSpeedRatio(unsigned int thread_id, FXObjType obj_type, doub
         _FX_ERRO("%s: Link is not connected, reject operation", __FUNCTION__);
         return FUNC_RET_LINK_LOST;
     }
+    
     switch (obj_type)
     {
     case FX_OBJ_ARM0:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_ARMS[0].m_ARM_GET.m_ARM_FBK_LowSpdFlag != 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Arm0_Runtime_SetVelRatio(thread_id, vel_ratio) != 0 || FX_L0_Arm0_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
@@ -7143,6 +7168,12 @@ int FX_L1_Runtime_SetSpeedRatio(unsigned int thread_id, FXObjType obj_type, doub
     }
     case FX_OBJ_ARM1:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_ARMS[1].m_ARM_GET.m_ARM_FBK_LowSpdFlag != 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Arm1_Runtime_SetVelRatio(thread_id, vel_ratio) != 0 || FX_L0_Arm1_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
@@ -7161,6 +7192,12 @@ int FX_L1_Runtime_SetSpeedRatio(unsigned int thread_id, FXObjType obj_type, doub
     }
     case FX_OBJ_BODY:
     {
+        const ROBOT_SG *sg = FX_L0_GetRobotSG();
+        if (sg->m_BODY.m_BODY_GET.m_BODY_FBK_LowSpdFlag!= 1)
+        {
+            _FX_WARN("%s: %s is not allowed to do the operation, it is moving", __FUNCTION__, _FX_ObjType2Str(obj_type));
+            return FUNC_RET_INVALID_CONDITION;
+        }
         if (FX_L0_Body_Runtime_SetVelRatio(thread_id, vel_ratio) != 0 || FX_L0_Body_Runtime_SetAccRatio(thread_id, acc_ratio) != 0)
         {
             _FX_WARN("[Thread%u]%s: %s format command failed", thread_id, __FUNCTION__, _FX_ObjType2Str(obj_type));
