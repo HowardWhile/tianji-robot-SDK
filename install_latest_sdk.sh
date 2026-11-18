@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Download the v4.7.1 prebuilt Gento SDK for the current Linux architecture.
+# Download the v4.7.2 prebuilt Gento SDK for the current Linux architecture.
 set -euo pipefail
 
 REPOSITORY="HowardWhile/tianji-robot-SDK"
-RELEASE_TAG="v4.7.1"
+RELEASE_TAG="v4.7.2"
 INSTALL_DIR="/usr/lib/fiibot"
 API_URL="https://api.github.com/repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}"
 
