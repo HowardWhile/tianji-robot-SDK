@@ -132,7 +132,7 @@ build_arch() {
 
     # Safety check: confirm the output really targets ARM (catches accidental host-g++ use).
     local MACHINE
-    MACHINE=$(readelf -h libGentoSDKPY.so | awk '/Machine:/{print $2}')
+    MACHINE=$(LC_ALL=C readelf -h libGentoSDKPY.so | awk '/Machine:/{print $2}')
     echo "[*]  ELF Machine: ${MACHINE}"
     if [ "$MACHINE" != "$EXPECT_MACHINE" ]; then
         echo "[FAIL] Built binary is '${MACHINE}', expected '${EXPECT_MACHINE}'."
